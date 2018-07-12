@@ -2,7 +2,7 @@ import React from 'react'
 import Logo from '../../components/logo/logo'
 import { connect } from 'react-redux'
 import { register } from '../../redux/user.redux'
-
+import { Redirect } from 'react-router-dom'
 @connect(
     state=>state.user,
     {register}
@@ -41,6 +41,8 @@ class Register extends React.Component{
         let inputElemConfirmedPassword;
         return (
             <div>
+                {this.props.redirectTo? <Redirect to={this.props.redirectTo}/>:null}
+
                 <Logo></Logo>
                 <div className="container">
                     <h2>Register</h2>

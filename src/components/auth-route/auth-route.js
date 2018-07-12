@@ -35,7 +35,7 @@ class AuthRoute extends React.Component{
         // user info is completed?
     }
     render(){
-        return <p>place where judge jump</p>
+        return null;
     }
 
 }
