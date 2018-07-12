@@ -1,44 +1,70 @@
 import React from 'react'
 import Logo from '../../components/logo/logo'
+import { connect } from 'react-redux'
+import { login } from '../../redux/user.redux'
+import { Redirect } from 'react-router-dom'
+@connect(
+    state=>state.user,
+    { login }
+)
+
 class Login extends React.Component{
     constructor(props){
         super(props);
-        this.login = this.login.bind(this);
+        this.state = {
+            user:'',
+            password:''
+        }
+        this.handleLogin = this.handleLogin.bind(this);
         this.register = this.register.bind(this);
     }
 
-    login(){
-        this.props.history.push('/login')
+    handleLogin(){
+        this.props.login(this.state);
     }
     register(){
         this.props.history.push('/register')
     }
 
+    handleChange(key,val){
+        this.setState({
+            [key]:val
+        })
+    }
+
+
     render(){
+        let inputElemUser;
+        let inputElemPassword;
         return(
             <div>
+                {this.props.redirectTo? <Redirect to={this.props.redirectTo}/>:null}
+
                 <Logo></Logo>
                 <div className="container">
                     <h2>Login</h2>
 
                     <div>
+                        {this.props.msg?<p className='error-msg'>{this.props.msg}</p>:null}
+
                         <input
                             placeholder="Username"
                             className="form-control mb-3"
-                            value={null}
-                            onChange={null}
-                            ref={null}/>
+                            value={this.state.user}
+                            onChange={()=>this.handleChange('user',inputElemUser.value)}
+                            ref={node=> inputElemUser = node}/>
                         <input
                             placeholder="Password"
+                            type="password"
                             className="form-control mb-3"
-                            value={null}
-                            onChange={null}
-                            ref={null}/>
+                            value={this.state.password}
+                            onChange={()=>this.handleChange('password',inputElemPassword.value)}
+                            ref={node=> inputElemPassword = node}/>
                     </div>
 
 
                     <button
-                        onClick={this.login}
+                        onClick={this.handleLogin}
                         className="btn btn-primary" style={{marginRight: "5px"}}>Login</button>
 
                     <button

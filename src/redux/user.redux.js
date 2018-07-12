@@ -2,6 +2,7 @@ import axios from 'axios'
 import { getRedirectPath } from '../util'
 
 const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
+const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 const ERROR_MSG = 'ERROR_MSG';
 
 const initState={
@@ -18,6 +19,8 @@ export function user(state=initState, action){
     switch (action.type){
         case REGISTER_SUCCESS:
             return {...state, msg:'', redirectTo:getRedirectPath(action.payload) ,isAuth:true, ...action.payload}
+        case LOGIN_SUCCESS:
+            return {...state, msg:'', redirectTo:getRedirectPath(action.payload) ,isAuth:true, ...action.payload}
         case ERROR_MSG:
             return {...state, isAuth:false, msg:action.msg}
         default:
@@ -30,8 +33,32 @@ function registerSUCCESS(data){
     return {type: REGISTER_SUCCESS, payload: data}
 }
 
+function loginSUCCESS(data){
+    return {type: LOGIN_SUCCESS, payload: data}
+}
+
 function errorMsg(msg){
     return {msg, type:ERROR_MSG}
+}
+
+export function login({user, password}){
+    if(!user||!password){
+        return errorMsg('both user name and password are required!');
+    }
+
+    return dispatch=>{
+        axios.post('/user/login',{user, password})
+            .then(res=>{
+                if(res.status ==200&&res.data.code===0){
+                    dispatch(loginSUCCESS(res.data.data));
+                }
+                else{
+                    dispatch(errorMsg(res.data.msg));
+                    // the error message will be determined by backend.
+                }
+            });
+    }
+
 }
 
 export function register({user, password, confirmedPassword, status}){
