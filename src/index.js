@@ -21,12 +21,16 @@ const store = createStore(reducers, compose(
     window.devToolsExtension? window.devToolsExtension():f=>f
 ));
 
+function HR(){
+    return <h2>HR</h2>
+}
 
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
             <div>
                 <AuthRoute></AuthRoute>
+                <Route path='/hr' component={HR}></Route>
                 <Route path='/login' component={Login}></Route>
                 <Route path='/register' component={Register}></Route>
             </div>
