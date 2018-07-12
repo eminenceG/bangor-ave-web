@@ -1,7 +1,14 @@
 import React from 'react'
 import Logo from '../../components/logo/logo'
+import { connect } from 'react-redux'
+import { register } from '../../redux/user.redux'
 
-
+@connect(
+    state=>state.user,
+    {register}
+)
+// only pass state.user to register, so that other field will be updated to
+// register only when they are changed in the input field.
 
 class Register extends React.Component{
     constructor(props){
@@ -18,6 +25,7 @@ class Register extends React.Component{
 
     handleRegister(){
         console.log(this.state);
+        this.props.register(this.state);
     }
 
     handleChange(key,val){
@@ -38,6 +46,8 @@ class Register extends React.Component{
                     <h2>Register</h2>
 
                     <div>
+                        {this.props.msg?<p className='error-msg'>{this.props.msg}</p>:null}
+
                         <input
                             placeholder="Username"
                             className="form-control mb-3"

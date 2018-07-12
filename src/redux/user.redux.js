@@ -31,19 +31,19 @@ function errorMsg(msg){
     return {msg, type:ERROR_MSG}
 }
 
-export function register({user, pwd, confirmedPWD, status}){
-    if(!user||!pwd||!status){
+export function register({user, password, confirmedPassword, status}){
+    if(!user||!password||!status){
         return errorMsg('username and password must not be empty!');
     }
-    if(pwd!== confirmedPWD){
+    if(password!== confirmedPassword){
         return errorMsg('password and confirmed password must be the same!');
     }
 
     return dispatch=>{
-        axios.post('/user/register',{user, pwd, status})
+        axios.post('/user/register',{user, password, status})
             .then(res=>{
                 if(res.status ==200&&res.data.code===0){
-                    dispatch(registerSUCCESS({user, pwd, status}));
+                    dispatch(registerSUCCESS({user, password, status}));
                 }
                 else{
                     dispatch(errorMsg(res.data.msg));
