@@ -7,6 +7,8 @@ import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
 
 import Login from './containers/login/login'
 import Register from './containers/register/register'
+import HRProfile from './containers/HR-profile/HR-profile'
+
 import AuthRoute from './components/auth-route/auth-route'
 import reducers from './reducers/reducer'
 import './config/config'
@@ -31,6 +33,7 @@ ReactDOM.render(
             <div>
                 <AuthRoute></AuthRoute>
                 <Route path='/hr' component={HR}></Route>
+                <Route path='/hr-profile' component={HRProfile}></Route>
                 <Route path='/login' component={Login}></Route>
                 <Route path='/register' component={Register}></Route>
             </div>
