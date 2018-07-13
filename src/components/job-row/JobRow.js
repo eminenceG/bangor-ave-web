@@ -12,13 +12,14 @@ class JobRow extends React.Component{
         return (
             <tr>
                 <td>
-                    <Link to = {'#'}>
+                    <a href = {this.props.job.url}>
                         {this.props.job.position_title}
-                    </Link>
+                    </a>
 
                 </td>
                 <td>{this.props.job.organization_name}</td>
                 <td>{this.props.job.locations}</td>
+                <td>{this.props.job.minimum}~{this.props.job.maximum}</td>
 
             </tr>
             // this title will be converted into a link
