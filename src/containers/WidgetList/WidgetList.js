@@ -1,6 +1,11 @@
 import React from 'react'
 import JobServiceClient from '../../services/JobServiceClient'
-import WidgetRow from '../../components/widget/Widget'
+import OverviewWidget from '../../components/widget/OverviewWidget'
+import LocationWidget from '../../components/widget/LocationWidget'
+import DutiesWidget from '../../components/widget/DutiesWidget'
+import RequirementsWidget from '../../components/widget/RequirementsWidget'
+import {Link} from 'react-router-dom'
+
 
 
 class WidgetList extends React.Component{
@@ -12,9 +17,6 @@ class WidgetList extends React.Component{
         };
         this.jobService = JobServiceClient.instance;
         this.getJobDetailById = this.getJobDetailById.bind(this);
-
-
-
     }
 
     componentDidMount() {
@@ -40,13 +42,24 @@ class WidgetList extends React.Component{
 
 
         return(
-            <div className="container">
-                <h1>Job Detail</h1>
+            <div>
+                <div className="container-fluid" style={{backgroundColor:'#046b99', color:'white', padding:'25px'}}>
+                    {contentKey?<h1>{this.state.job.MatchedObjectDescriptor.PositionTitle}</h1>:null}
+                    {contentKey?<h5>{this.state.job.MatchedObjectDescriptor.OrganizationName}</h5>:null}
+                    {contentKey?<h4>{this.state.job.MatchedObjectDescriptor.DepartmentName}</h4>:null}
+                    {contentKey?<button className='btn-dark' style={{top:'15%',left:'90%', position:'absolute'}}><Link to={'/jobs'} style={{color:'white'}}>Go Back</Link></button>:null}
+                </div>
 
-                <ul className="list-group">
-                    {contentKey?contentKey.map(item=>(
-                        <WidgetRow key={item} title={item} value={this.state.job.MatchedObjectDescriptor[item]}/>)):null}
-                </ul>
+                <div className="container">
+                    <br/>
+                    <ul className="list-group">
+                        {contentKey?<OverviewWidget data={this.state.job.MatchedObjectDescriptor}/>:null}
+                        {contentKey?<LocationWidget data={this.state.job.MatchedObjectDescriptor}/>:null}
+                        {contentKey?<DutiesWidget data={this.state.job.MatchedObjectDescriptor}/>:null}
+                        {contentKey?<RequirementsWidget data={this.state.job.MatchedObjectDescriptor}/>:null}
+
+                    </ul>
+                </div>
             </div>
         )
     }

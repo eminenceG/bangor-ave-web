@@ -100,7 +100,6 @@ class Job extends React.Component{
                     <thead>
                     <tr>
                         <th>position_title</th>
-                        <th>job_id</th>
                         <th>organization_name</th>
                         <th>locations</th>
                         <th>salary</th>

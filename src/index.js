@@ -32,7 +32,7 @@ function HR(){
 ReactDOM.render(
 
         <BrowserRouter>
-            <div className="container">
+            <div className="container-fluid">
                 <Route path='/jobs' component={Job}></Route>
                 <Route path='/news' component={NewsComponent}/>
                 <Route path='/job/detail/:jobId' component={WidgetList}></Route>
