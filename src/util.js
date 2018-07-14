@@ -7,7 +7,7 @@ export function getRedirectPath({status, avatar}){
 
     let url = '/' + status;
     if(!avatar){
-        url += '-info'
+        url += '-profile'
     }
     return url;
 
