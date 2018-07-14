@@ -1,5 +1,6 @@
 let _singleton = Symbol();
-const HOST=`https://jobs.search.gov/jobs/search.json?query=nursing+jobs+in+ny`;
+const HOST=`https://data.usajobs.gov/api/search?JobCategoryCode=2210&ResultsPerPage=10`;
+
 
 class JobServiceClient {
     constructor(singletonToken){
@@ -11,12 +12,22 @@ class JobServiceClient {
     }
 
     getJobs(){
-        return fetch(HOST)
-            .then(function(response){
+        return fetch(HOST, {
+            headers:{
+                "User-Agent": "lincolnhuj@gmail.com",
+                "Authorization-Key": process.env.REACT_APP_AUTHORIZATION_KEY,
+                "Host": "data.usajobs.gov",
+                "Cache-Control": "no-cache"
+            }
+        }).then(function(response){
                 return response.json();
             });
 
     }
+
+    // getJobs(){
+    //     return fakeData;
+    // }
 
 }
 export default JobServiceClient;

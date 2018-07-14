@@ -20,10 +20,17 @@ class Job extends React.Component{
     componentDidMount() {
         console.log('getting data');
         this.jobService.getJobs()
-            .then(jobs => {
-                this.setState({ jobs : jobs });
+            .then(res => {
+                this.setState({ jobs : res.SearchResult.SearchResultItems });
                 console.log(this.state);
-            })
+            });
+
+        // this.jobService.getJobs();
+
+        // let res = this.jobService.getJobs()
+        // this.setState({ jobs : res.SearchResult.SearchResultItems });
+        // console.log(this.state);
+
     }
 
     renderJobs(){
@@ -31,7 +38,7 @@ class Job extends React.Component{
         if(this.state.jobs){
             jobs = this.state.jobs.map(
                 function(job){
-                    return <JobRow job={job} key={job.id}/>
+                    return <JobRow job={job.MatchedObjectDescriptor} key={job.MatchedObjectId}/>
                 }
             );
         }
