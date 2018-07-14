@@ -17,6 +17,7 @@ import './config/config'
 import './index.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
+import NewsComponent from "./containers/news/NewsComponent";
 const bootstrap = require('bootstrap');
 
 const store = createStore(reducers, compose(
@@ -33,6 +34,7 @@ ReactDOM.render(
         <BrowserRouter>
             <div className="container">
                 <Route path='/jobs' component={Job}></Route>
+                <Route path='/news' component={NewsComponent}/>
                 <Route path='/job/detail/:jobId' component={WidgetList}></Route>
             </div>
         </BrowserRouter>
