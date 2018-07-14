@@ -17,6 +17,7 @@ class JobRow extends React.Component{
                     </a>
 
                 </td>
+                <td>{this.props.job.PositionID}</td>
                 <td>{this.props.job.OrganizationName}</td>
                 <td>{this.props.job.PositionLocation[0].LocationName}</td>
                 <td>{this.props.job.PositionRemuneration[0].MinimumRange}~{this.props.job.PositionRemuneration[0].MaximumRange}</td>
