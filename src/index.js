@@ -9,6 +9,7 @@ import Login from './containers/login/login'
 import Register from './containers/register/register'
 import HRProfile from './containers/HR-profile/HR-profile'
 import Job from './containers/job/job'
+import WidgetList from './containers/WidgetList/WidgetList'
 import AuthRoute from './components/auth-route/auth-route'
 import reducers from './reducers/reducer'
 import './config/config'
@@ -32,6 +33,7 @@ ReactDOM.render(
         <BrowserRouter>
             <div className="container">
                 <Route path='/jobs' component={Job}></Route>
+                <Route path='/job/detail/:jobId' component={WidgetList}></Route>
             </div>
         </BrowserRouter>
         , document.getElementById('root'));
