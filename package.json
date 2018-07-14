@@ -99,7 +99,9 @@
     "presets": [
       "react-app"
     ],
-    "plugins": ["transform-decorators-legacy"]
+    "plugins": [
+      "transform-decorators-legacy"
+    ]
   },
   "eslintConfig": {
     "extends": "react-app"
