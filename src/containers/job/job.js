@@ -10,28 +10,35 @@ class Job extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            jobs:null
+            jobs:null,
+            keyword:'teacher'
         };
         this.jobService = JobServiceClient.instance;
+        this.keywordChanged = this.keywordChanged.bind(this);
     }
 
 
 
     componentDidMount() {
-        console.log('getting data');
-        this.jobService.getJobs()
-            .then(res => {
-                this.setState({ jobs : res.SearchResult.SearchResultItems });
-                console.log(this.state);
-            });
 
+        this.searchJobs();
         // this.jobService.getJobs();
-
-        // let res = this.jobService.getJobs()
+        //
+        // let res = this.jobService.getJobs();
         // this.setState({ jobs : res.SearchResult.SearchResultItems });
         // console.log(this.state);
 
     }
+
+    searchJobs(){
+        console.log('getting data');
+        this.jobService.getJobs(this.state.keyword)
+            .then(res => {
+                this.setState({ jobs : res.SearchResult.SearchResultItems });
+                console.log(this.state);
+            });
+    }
+
 
     renderJobs(){
         let jobs = null;
@@ -46,6 +53,13 @@ class Job extends React.Component{
         return jobs
     }
 
+    keywordChanged(event){
+        console.log(event.target.value);
+        this.setState({
+            keyword: event.target.value
+        })
+
+    }
 
 
     render(){
@@ -58,9 +72,11 @@ class Job extends React.Component{
                         </div>
                         <div className="collapse navbar-collapse" id="myNavbar">
                             <form className="input-group form-inline my-2 my-lg-0">
-                                <input onChange={null} className="form-control mr-sm-2" id="titleFld" placeholder="search job"/>
+                                <input onChange={this.keywordChanged} className="form-control mr-sm-2" id="titleFld" placeholder="search job"/>
                                 <button onClick={
-                                    null
+                                    () =>{
+                                        this.searchJobs();
+                                    }
                                 } className="btn btn-danger my-2 my-sm-0" type="button"><i className="fa fa-search"></i></button>
                             </form>
                         </div>
@@ -84,6 +100,7 @@ class Job extends React.Component{
                     <thead>
                     <tr>
                         <th>position_title</th>
+                        <th>job_id</th>
                         <th>organization_name</th>
                         <th>locations</th>
                         <th>salary</th>
