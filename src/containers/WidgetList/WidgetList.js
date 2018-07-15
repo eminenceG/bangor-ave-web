@@ -26,29 +26,30 @@ class WidgetList extends React.Component{
 
 
     getJobDetailById(){
-        console.log('getting data');
+        // console.log('getting data');
 
         this.jobService.getJobs(this.state.jobId)
             .then(res => {
                 this.setState({ job : res.SearchResult.SearchResultItems[0] });
-                console.log(this.state);
+                // console.log(this.state);
             });
 
         // this.setState({job: fakeData.SearchResult.SearchResultItems[0]});
     }
 
     render(){
+        document.body.style = 'background: white';
         let contentKey = this.state.job?Object.keys(this.state.job.MatchedObjectDescriptor):null;
-        console.log(contentKey);
+        // console.log(contentKey);
 
 
         return(
-            <div>
-                <div className="container-fluid" style={{backgroundColor:'#046b99', color:'white', padding:'25px'}}>
+            <div style={{position:'absolute', top:'0', width:'100%'}}>
+                <div style={{backgroundColor:'#046b99', color:'white', padding:'25px'}}>
                     {contentKey?<h1>{this.state.job.MatchedObjectDescriptor.PositionTitle}</h1>:null}
                     {contentKey?<h5>{this.state.job.MatchedObjectDescriptor.OrganizationName}</h5>:null}
                     {contentKey?<h4>{this.state.job.MatchedObjectDescriptor.DepartmentName}</h4>:null}
-                    {contentKey?<button className='btn-dark' style={{top:'15%',left:'90%', position:'absolute'}}><Link to={'/jobs'} style={{color:'white'}}>Go Back</Link></button>:null}
+                    {contentKey?<button className='btn-dark' style={{top:'8px',left:'90%', position:'absolute'}}><Link to={'/jobs'} style={{color:'white'}}>Go Back</Link></button>:null}
                 </div>
 
                 <div className="container">
@@ -63,9 +64,9 @@ class WidgetList extends React.Component{
 
                     <ul className="list-group" style={{marginTop: 100}}>
                     <li className='list-group-item'>
-                        <h1 style={{color:'#046b99'}}>News related to this job</h1>
+                        {contentKey?<h1 style={{color:'#046b99'}}>News related to this job location: {this.state.job.MatchedObjectDescriptor.PositionLocation[0].LocationName}</h1>:null}
                     </li>
-                    {contentKey?<NewsComponent keyword={this.state.job.MatchedObjectDescriptor.PositionTitle}/>:null}
+                    {contentKey?<NewsComponent keyword={this.state.job.MatchedObjectDescriptor.PositionLocation[0].LocationName}/>:null}
                     </ul>
                 </div>
             </div>

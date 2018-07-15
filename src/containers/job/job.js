@@ -11,7 +11,7 @@ class Job extends React.Component{
         super(props);
         this.state = {
             jobs:null,
-            keyword:'teacher'
+            keyword:''
         };
         this.jobService = JobServiceClient.instance;
         this.keywordChanged = this.keywordChanged.bind(this);
@@ -31,11 +31,11 @@ class Job extends React.Component{
     }
 
     searchJobs(){
-        console.log('getting data');
+        // console.log('getting data');
         this.jobService.getJobs(this.state.keyword)
             .then(res => {
                 this.setState({ jobs : res.SearchResult?res.SearchResult.SearchResultItems:null });
-                console.log(this.state);
+                // console.log(this.state);
             });
     }
 
@@ -54,7 +54,7 @@ class Job extends React.Component{
     }
 
     keywordChanged(event){
-        console.log(event.target.value);
+        // console.log(event.target.value);
         this.setState({
             keyword: event.target.value
         })
@@ -63,21 +63,25 @@ class Job extends React.Component{
 
 
     render(){
+        document.body.style = 'background: white';
+
         return(
             <div>
                 <nav className="navbar navbar-expand-md bg-dark fixed-top">
                     <div className="container-fluid">
                         <div className="navbar-header">
-                            <a className="navbar-brand" href="/jobs" style={{color : "#FFF"}}>Job List</a>
+                            <a className="navbar-brand" href="/" style={{color : "#FFF"}}>MINI LINKEDIN</a>
                         </div>
                         <div className="collapse navbar-collapse" id="myNavbar">
                             <form className="input-group form-inline my-2 my-lg-0">
-                                <input onChange={this.keywordChanged} className="form-control mr-sm-2" id="titleFld" placeholder="search job"/>
+                                <input id={"keyword"} onChange={this.keywordChanged} className="form-control mr-sm-2" id="titleFld" placeholder="search job"/>
                                 <button onClick={
                                     () =>{
                                         this.searchJobs();
                                     }
-                                } className="btn btn-danger my-2 my-sm-0" type="button"><i className="fa fa-search"></i></button>
+                                }
+                                id={"searchBtn"}
+                                className="btn btn-danger my-2 my-sm-0" type="button"><i className="fa fa-search"></i></button>
                             </form>
                         </div>
 

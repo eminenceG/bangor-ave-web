@@ -1,42 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware, compose } from 'redux'
-import thunk from 'redux-thunk'
-import { Provider } from 'react-redux'
-import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
-
-import Login from './containers/login/login'
-import Register from './containers/register/register'
-import HRProfile from './containers/HR-profile/HR-profile'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Job from './containers/job/job'
 import WidgetList from './containers/WidgetList/WidgetList'
-import AuthRoute from './components/auth-route/auth-route'
-import reducers from './reducers/reducer'
+import Home from './containers/homepage/homepage'
 import './config/config'
 
 import './index.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
-import NewsComponent from "./containers/news/NewsComponent";
 const bootstrap = require('bootstrap');
 
-const store = createStore(reducers, compose(
-    applyMiddleware(thunk),
-    window.devToolsExtension? window.devToolsExtension():f=>f
-));
 
-function HR(){
-    return <h2>HR</h2>
-}
-
+document.body.style = 'background: black;';
 ReactDOM.render(
-
+    <div>
         <BrowserRouter>
-            <div className="container-fluid">
+            <Switch>
+                <Route exact path='/' component={Home}/>
                 <Route path='/jobs' component={Job}/>
-                <Route path='/news' component={NewsComponent}/>
                 <Route path='/job/detail/:jobId' component={WidgetList}/>
-            </div>
+            </Switch>
         </BrowserRouter>
+    </div>
         , document.getElementById('root'));
 

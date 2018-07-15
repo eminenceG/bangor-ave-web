@@ -1,10 +1,6 @@
 import React from 'react';
 
 class DutiesWidget extends React.Component{
-    constructor(props){
-        super(props);
-    }
-
     render(){
         return (
             <div className="mb-3 list-group-item">
