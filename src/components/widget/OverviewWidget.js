@@ -10,7 +10,7 @@ class OverviewWidget extends React.Component{
             <div className="card mb-3 list-group-item">
                 <h1 style={{color:'#046b99'}}>Overview</h1>
                 <div className="container">
-                    <div class="row">
+                    <div className="row">
                         <div className="col-6">
                             <h3>Open & closing dates</h3>
                             <p>{this.props.data.PositionStartDate} to {this.props.data.PositionEndDate}</p>

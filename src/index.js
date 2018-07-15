@@ -33,9 +33,9 @@ ReactDOM.render(
 
         <BrowserRouter>
             <div className="container-fluid">
-                <Route path='/jobs' component={Job}></Route>
+                <Route path='/jobs' component={Job}/>
                 <Route path='/news' component={NewsComponent}/>
-                <Route path='/job/detail/:jobId' component={WidgetList}></Route>
+                <Route path='/job/detail/:jobId' component={WidgetList}/>
             </div>
         </BrowserRouter>
         , document.getElementById('root'));

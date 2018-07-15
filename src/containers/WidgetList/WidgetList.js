@@ -5,6 +5,7 @@ import LocationWidget from '../../components/widget/LocationWidget'
 import DutiesWidget from '../../components/widget/DutiesWidget'
 import RequirementsWidget from '../../components/widget/RequirementsWidget'
 import {Link} from 'react-router-dom'
+import NewsComponent from "../news/NewsComponent";
 
 
 
@@ -58,6 +59,13 @@ class WidgetList extends React.Component{
                         {contentKey?<DutiesWidget data={this.state.job.MatchedObjectDescriptor}/>:null}
                         {contentKey?<RequirementsWidget data={this.state.job.MatchedObjectDescriptor}/>:null}
 
+                    </ul>
+
+                    <ul className="list-group" style={{marginTop: 100}}>
+                    <li className='list-group-item'>
+                        <h1 style={{color:'#046b99'}}>News related to this job</h1>
+                    </li>
+                    {contentKey?<NewsComponent keyword={this.state.job.MatchedObjectDescriptor.PositionTitle}/>:null}
                     </ul>
                 </div>
             </div>
