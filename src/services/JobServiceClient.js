@@ -12,7 +12,6 @@ class JobServiceClient {
     }
 
     getJobs(keyword){
-        console.log(keyword);
         return fetch(HOST + 'Keyword=' + keyword, {
             headers:{
                 "User-Agent": "lincolnhuj@gmail.com",

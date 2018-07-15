@@ -34,7 +34,7 @@ class Job extends React.Component{
         console.log('getting data');
         this.jobService.getJobs(this.state.keyword)
             .then(res => {
-                this.setState({ jobs : res.SearchResult.SearchResultItems });
+                this.setState({ jobs : res.SearchResult?res.SearchResult.SearchResultItems:null });
                 console.log(this.state);
             });
     }
