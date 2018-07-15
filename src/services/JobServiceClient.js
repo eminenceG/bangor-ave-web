@@ -1,5 +1,6 @@
 let _singleton = Symbol();
 const HOST=`https://data.usajobs.gov/api/search?`;
+const API_KEY = process.env.REACT_APP_AUTHORIZATION_KEY.split("_BANGOR_")[0];
 
 class JobServiceClient {
     constructor(singletonToken){
@@ -12,11 +13,10 @@ class JobServiceClient {
 
     getJobs(keyword){
         console.log(keyword);
-
         return fetch(HOST + 'Keyword=' + keyword, {
             headers:{
                 "User-Agent": "lincolnhuj@gmail.com",
-                "Authorization-Key": process.env.REACT_APP_AUTHORIZATION_KEY,
+                "Authorization-Key": API_KEY,
                 "Host": "data.usajobs.gov",
                 "Cache-Control": "no-cache"
             }

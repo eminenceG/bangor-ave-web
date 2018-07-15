@@ -1,6 +1,7 @@
 let _singleton = Symbol();
-
-const NEWS = 'https://newsapi.org/v2/everything?q=KEYWORD&apiKey=c5204ccbccdf4decb919161f77721ac9';
+// const NEWS = 'https://newsapi.org/v2/everything?q=KEYWORD&apiKey=c5204ccbccdf4decb919161f77721ac9';
+const API_KEY = process.env.REACT_APP_AUTHORIZATION_KEY.split("_BANGOR_")[1];
+const NEWS_URL = 'https://newsapi.org/v2/everything?q=KEYWORD&apiKey=' + API_KEY;
 
 class NewsServiceClient {
     constructor(singletonToken) {
@@ -15,9 +16,8 @@ class NewsServiceClient {
         return this[_singleton];
     }
 
-    getTweets(keyword) {
-        console.log(NEWS.replace('KEYWORD', keyword));
-        return fetch(NEWS.replace('KEYWORD', keyword))
+    getNews(keyword) {
+        return fetch(NEWS_URL.replace('KEYWORD', keyword))
             .then(response => response.json());
     }
 
