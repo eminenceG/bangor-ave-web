@@ -2,11 +2,6 @@ import React from 'react'
 
 
 export default class NewsRowComponent extends React.Component {
-
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         const article = this.props.article;
         return(
@@ -15,6 +10,7 @@ export default class NewsRowComponent extends React.Component {
                 <div className="row">
                     <div className="col-4">
                         <img
+                            alt={article.urlToImage}
                             style={{width: 200}}
                             src={article.urlToImage}/>
                     </div>

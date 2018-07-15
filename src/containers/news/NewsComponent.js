@@ -56,7 +56,7 @@ export default class NewsComponent extends React.Component{
             keyword = keywords[i] + " " + keyword;
             if(keyword.split(" ").length > 2) break;
         }
-        console.log('keyword: ', keyword, keywords);
+        // console.log('keyword: ', keyword, keywords);
         if(keyword.length === 0) keyword = 'jobs';
 
         this.newsService

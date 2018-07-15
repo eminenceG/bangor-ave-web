@@ -13,7 +13,6 @@ For this assignment we only focus on front end interface to interact with APIs. 
 |route | Functions |
 |----|:----:|
 | ```/jobs```| Search jobs; Show top 10 results|
-| ```/news```| Search news; Show a list of results|
 |```/job/detail/:jobId```| Show job detail, news related to the organization and map of job location |
 
 Other features such as login, register, user profiles are not included in this release.

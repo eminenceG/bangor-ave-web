@@ -1,10 +1,6 @@
 import React from 'react';
 
 class RequirementsWidget extends React.Component{
-    constructor(props){
-        super(props);
-    }
-
     render(){
         return (
             <div className="card mb-3 list-group-item">
