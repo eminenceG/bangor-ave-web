@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom'
 class Home extends React.Component{
 
     render(){
+        document.body.style = 'background: black;';
         return(
             <div>
                 {this.props.redirectTo? <Redirect to={this.props.redirectTo}/>:null}

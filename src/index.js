@@ -6,6 +6,7 @@ import WidgetList from './containers/WidgetList/WidgetList'
 import Home from './containers/homepage/homepage'
 import LoginContainer from './containers/login/login'
 import RegisterContainer from './containers/register/register'
+import HRProfileContainer from './containers/HR-profile/HR-profile'
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import {userReducer} from './reducers/reducer';
@@ -23,7 +24,6 @@ let store = createStore(userReducer, compose(
     window.devToolsExtension? window.devToolsExtension():f=>f
 ));
 
-document.body.style = 'background: black;';
 ReactDOM.render(
     <div>
         <Provider store = {store}>
@@ -33,6 +33,7 @@ ReactDOM.render(
                     <Route path='/jobs' component={Job}/>
                     <Route path='/login' component={LoginContainer}/>
                     <Route path='/register' component={RegisterContainer}/>
+                    <Route path='/HR-profile' component={HRProfileContainer}/>
                     <Route path='/job/detail/:jobId' component={WidgetList}/>
                 </Switch>
             </BrowserRouter>

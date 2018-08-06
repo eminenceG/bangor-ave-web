@@ -31,6 +31,7 @@ class Login extends React.Component{
 
 
     render(){
+        document.body.style = 'background: white;';
         let inputElemUser;
         let inputElemPassword;
         return(
