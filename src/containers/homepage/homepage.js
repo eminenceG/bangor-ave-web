@@ -19,6 +19,16 @@ class Home extends React.Component{
                                     Start searching jobs
                                 </Link>
                             </button>
+                            <button className="btn btn-primary">
+                                <Link to = {`/login`} style={{color:'white'}}>
+                                    login
+                                </Link>
+                            </button>
+                            <button className="btn btn-success">
+                                <Link to = {`/register`} style={{color:'white'}}>
+                                    register
+                                </Link>
+                            </button>
                         </div>
                     </div>
                 </div>

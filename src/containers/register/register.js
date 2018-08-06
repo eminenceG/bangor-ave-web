@@ -1,12 +1,9 @@
 import React from 'react'
 import Logo from '../../components/logo/logo'
 import { connect } from 'react-redux'
-import { register } from '../../redux/user.redux'
+import * as actions from "../../actions";
 import { Redirect } from 'react-router-dom'
-@connect(
-    state=>state.user,
-    {register}
-)
+
 // only pass state.user to register, so that other field will be updated to
 // register only when they are changed in the input field.
 
@@ -24,7 +21,6 @@ class Register extends React.Component{
     }
 
     handleRegister(){
-        console.log(this.state);
         this.props.register(this.state);
     }
 
@@ -95,4 +91,15 @@ class Register extends React.Component{
 
 }
 
-export default Register;
+const stateToPropertiesMapper = (state) =>(
+    state
+)
+
+const dispatcherToPropsMapper = dispatch =>({
+    register: (userInfo) => actions.register(dispatch, userInfo)
+
+})
+
+const RegisterContainer = connect(stateToPropertiesMapper,dispatcherToPropsMapper)(Register)
+
+export default RegisterContainer;
