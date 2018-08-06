@@ -1,12 +1,9 @@
 import React from 'react'
 import Logo from '../../components/logo/logo'
 import { connect } from 'react-redux'
-import { login } from '../../redux/user.redux'
+import * as actions from "../../actions";
 import { Redirect } from 'react-router-dom'
-@connect(
-    state=>state.user,
-    { login }
-)
+
 
 class Login extends React.Component{
     constructor(props){
@@ -78,4 +75,17 @@ class Login extends React.Component{
 
 }
 
-export default Login;
+const stateToPropertiesMapper = (state) =>(
+    state
+)
+
+const dispatcherToPropsMapper = dispatch =>({
+    login: (userInfo) => actions.login(dispatch, userInfo)
+
+})
+
+
+
+const LoginContainer = connect(stateToPropertiesMapper,dispatcherToPropsMapper)(Login)
+
+export default LoginContainer;
