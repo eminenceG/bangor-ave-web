@@ -14,7 +14,9 @@ class Job extends React.Component{
             keyword:''
         };
         this.jobService = JobServiceClient.instance;
+        this.searchJobs = this.searchJobs.bind(this);
         this.keywordChanged = this.keywordChanged.bind(this);
+        this.handleKeyPress = this.handleKeyPress.bind(this);
     }
 
 
@@ -37,6 +39,13 @@ class Job extends React.Component{
                 this.setState({ jobs : res.SearchResult?res.SearchResult.SearchResultItems:null });
                 // console.log(this.state);
             });
+    }
+
+    handleKeyPress = (event) => {
+        if(event.key == 'Enter'){
+            event.preventDefault();
+            this.searchJobs()
+        }
     }
 
 
@@ -74,14 +83,17 @@ class Job extends React.Component{
                         </div>
                         <div className="collapse navbar-collapse" id="myNavbar">
                             <form className="input-group form-inline my-2 my-lg-0">
-                                <input id={"keyword"} onChange={this.keywordChanged} className="form-control mr-sm-2" id="titleFld" placeholder="search job"/>
-                                <button onClick={
-                                    () =>{
-                                        this.searchJobs();
-                                    }
-                                }
-                                id={"searchBtn"}
-                                className="btn btn-danger my-2 my-sm-0" type="button"><i className="fa fa-search"></i></button>
+                                <input
+                                    id={"keyword"}
+                                    onChange={this.keywordChanged}
+                                    onKeyPress={this.handleKeyPress}
+                                    className="form-control mr-sm-2"
+                                    id="titleFld"
+                                    placeholder="search job"/>
+                                <button
+                                    onClick={this.searchJobs}
+                                    id={"searchBtn"}
+                                    className="btn btn-danger my-2 my-sm-0" type="button"><i className="fa fa-search"></i></button>
                             </form>
                         </div>
 
@@ -113,7 +125,7 @@ class Job extends React.Component{
                     </tr>
                     </thead>
                     <tbody>
-                        {this.renderJobs()}
+                    {this.renderJobs()}
                     </tbody>
                 </table>
 
