@@ -1,7 +1,9 @@
 import React from 'react';
 import AvatarSelector from '../../components/avatar-selector/avatar-selector';
 import '../../index.css'
-
+import {connect} from 'react-redux';
+import * as actions from "../../actions";
+import { Redirect } from 'react-router-dom';
 
 class HRProfile extends React.Component{
     constructor(props){
@@ -23,11 +25,9 @@ class HRProfile extends React.Component{
     }
 
     selectAvatar(imageName){
-        console.log(imageName);
         this.setState({
             avatar: imageName
         });
-        console.log(this.state);
     }
 
     render(){
@@ -36,8 +36,12 @@ class HRProfile extends React.Component{
         let inputElemCompany;
         let inputElemMoney;
         let inputElemPosDesc;
+        console.log(this.props);
+        //this.props.redirectTo&&this.props.redirectTo!=this.props.location.pathname
+        // only redirect when current location is different from target url.
         return(
                 <div>
+                    {this.props.redirectTo? <Redirect to = {this.props.redirectTo}></Redirect>:null}
                     <nav className="navbar navbar-expand-md bg-dark fixed-top">
                         <div className="container-fluid">
                             <div className="navbar-header">
@@ -81,7 +85,10 @@ class HRProfile extends React.Component{
                             value={this.state.posDesc}
                             onChange={()=>this.onChange('posDesc',inputElemPosDesc.value)}
                             ref={node=> inputElemPosDesc = node}/>
-                        <button className="btn btn-primary">Save</button>
+                        <button className="btn btn-primary"
+                                onClick={()=>{
+                                    this.props.update(this.state);
+                                }}>Save</button>
                     </div>
                 </div>
             )
@@ -89,4 +96,18 @@ class HRProfile extends React.Component{
     }
 }
 
-export default HRProfile;
+
+const stateToPropertiesMapper = (state) =>(
+    state
+)
+
+const dispatcherToPropsMapper = dispatch =>({
+    update: (userInfo) => actions.updateProfile(dispatch, userInfo)
+
+})
+
+
+
+const HRProfileContainer = connect(stateToPropertiesMapper,dispatcherToPropsMapper)(HRProfile)
+
+export default HRProfileContainer;

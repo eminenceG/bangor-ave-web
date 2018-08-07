@@ -20,6 +20,8 @@ export const userReducer = (state = initState, action) => {
             return {...state, msg:'', redirectTo:getRedirectPath(action.payload) , ...action.payload};
 
         case constants.LOAD_DATA:
+            console.log('loading data...');
+            console.log({...state, ...action.payload});
             return {...state, ...action.payload};
 
         case constants.ERROR_MSG:
