@@ -1,12 +1,8 @@
 import * as constants from "../constants";
 import axios from 'axios'
 
-function registerSUCCESS(data){
-    return {type: constants.REGISTER_SUCCESS, payload: data}
-}
-
-function loginSUCCESS(data){
-    return {type: constants.LOGIN_SUCCESS, payload: data}
+function authSUCCESS(data){
+    return {type: constants.AUTH_SUCCESS, payload: data}
 }
 
 function errorMsg(msg){
@@ -17,15 +13,34 @@ export function loadData(userinfo){
     return {type: constants.LOAD_DATA, payload: userinfo}
 }
 
+export function updateProfile(dispatch, data){
+    return axios(constants.HOST + '/user/updateProfile',{
+            method:'withCredentials: true',
+            data:data,
+            withCredentials: true} )
+        .then(res=>{
+            if(res.status == 200 && res.data.code === 0){
+                return dispatch(authSUCCESS(res.data.data));
+            } else {
+                return dispatch(errorMsg(res.data.msg));
+            }
+        })
+
+}
+
 export const login = (dispatch, {user, password}) => {
     if(!user||!password){
         return errorMsg('both user name and password are required!');
     }
 
-    return axios.post(constants.HOST + '/user/login',{user, password})
+    return axios(constants.HOST + '/user/login',{
+            method:'post',
+            data:{user, password},
+            withCredentials: true
+        })
             .then(res=>{
                 if(res.status ==200&&res.data.code===0){
-                    return dispatch(loginSUCCESS(res.data.data));
+                    return dispatch(authSUCCESS(res.data.data));
                 }
                 else{
                     return dispatch(errorMsg(res.data.msg));
@@ -43,10 +58,14 @@ export const register = (dispatch,{user, password, confirmedPassword, status}) =
         return errorMsg('password and confirmed password must be the same!');
     }
 
-    return axios.post(constants.HOST +'/user/register',{user, password, status})
+    return axios(constants.HOST +'/user/register',{
+            method:'post',
+            data:{user, password, status},
+            withCredentials: true
+        })
             .then(res=>{
                 if(res.status ==200&&res.data.code===0){ // code 0 means login success
-                    return dispatch(registerSUCCESS({user, password, status}));
+                    return dispatch(authSUCCESS({user, password, status}));
                 }
                 else{
                     return dispatch(errorMsg(res.data.msg));
