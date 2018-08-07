@@ -14,6 +14,7 @@ class Job extends React.Component{
             keyword:''
         };
         this.jobService = JobServiceClient.instance;
+        this.searchJobs = this.searchJobs.bind(this);
         this.keywordChanged = this.keywordChanged.bind(this);
         this.handleKeyPress = this.handleKeyPress.bind(this);
     }
@@ -32,7 +33,7 @@ class Job extends React.Component{
     }
 
     searchJobs(){
-        console.log('getting data');
+        // console.log('getting data');
         this.jobService.getJobs(this.state.keyword)
             .then(res => {
                 this.setState({ jobs : res.SearchResult?res.SearchResult.SearchResultItems:null });
@@ -42,6 +43,7 @@ class Job extends React.Component{
 
     handleKeyPress = (event) => {
       if(event.key == 'Enter'){
+        event.preventDefault();
         this.searchJobs()
       }
     }
@@ -89,10 +91,7 @@ class Job extends React.Component{
                                   id="titleFld" 
                                   placeholder="search job"/>
                                 <button 
-                                  onClick={ () =>{
-                                    this.searchJobs();
-                                  }}
-                                  
+                                  onClick={this.searchJobs}
                                   id={"searchBtn"}
                                   className="btn btn-danger my-2 my-sm-0" type="button"><i className="fa fa-search"></i></button>
                             </form>
