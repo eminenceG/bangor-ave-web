@@ -125,7 +125,7 @@ class Job extends React.Component{
                     </tr>
                     </thead>
                     <tbody>
-                        {this.renderJobs()}
+                    {this.renderJobs()}
                     </tbody>
                 </table>
 

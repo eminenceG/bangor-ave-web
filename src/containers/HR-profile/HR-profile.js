@@ -4,7 +4,7 @@ import '../../index.css'
 import {connect} from 'react-redux';
 import * as actions from "../../actions";
 import { Redirect } from 'react-router-dom';
-
+import AuthRouteContainer from '../../components/auth-route/auth-route'
 class HRProfile extends React.Component{
     constructor(props){
         super(props);
@@ -37,11 +37,13 @@ class HRProfile extends React.Component{
         let inputElemMoney;
         let inputElemPosDesc;
         console.log(this.props);
+        console.log(this.state);
         //this.props.redirectTo&&this.props.redirectTo!=this.props.location.pathname
         // only redirect when current location is different from target url.
         return(
                 <div>
-                    {this.props.redirectTo? <Redirect to = {this.props.redirectTo}></Redirect>:null}
+                    <AuthRouteContainer></AuthRouteContainer>
+                    {this.props.redirectTo&&this.props.redirectTo!=this.props.location.pathname? <Redirect to = {this.props.redirectTo}></Redirect>:null}
                     <nav className="navbar navbar-expand-md bg-dark fixed-top">
                         <div className="container-fluid">
                             <div className="navbar-header">

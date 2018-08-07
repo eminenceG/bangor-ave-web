@@ -21,10 +21,10 @@ class AuthRoute extends React.Component{
                 if(res.status===200){
                     if(res.data.code===0){
                         //with login info
-                        console.log('code 200. going to load data');
                         this.props.loadData(res.data.data);
                     }
                     else{
+                        this.props.authFAIL();
                         this.props.history.push('/login'); // without login info, force redirect to login page.
                     }
 
@@ -47,7 +47,8 @@ class AuthRoute extends React.Component{
 }
 
 const dispatcherToPropsMapper = dispatch =>({
-    loadData: (data) => actions.loadData(dispatch, data)
+    loadData: (data) => actions.loadData(dispatch, data),
+    authFAIL: () => actions.authFAIL(dispatch)
 })
 
 const AuthRouteContainer = connect(null,dispatcherToPropsMapper)(AuthRoute)
