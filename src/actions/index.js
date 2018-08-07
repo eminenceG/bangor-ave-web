@@ -5,6 +5,10 @@ function authSUCCESS(data){
     return {type: constants.AUTH_SUCCESS, payload: data}
 }
 
+export function authFAIL(dispatch){
+    return dispatch({type:constants.AUTH_FAIL});
+}
+
 function errorMsg(msg){
     return {msg, type:constants.ERROR_MSG}
 }
