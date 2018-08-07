@@ -31,6 +31,7 @@ class Register extends React.Component{
     }
 
     render(){
+        document.body.style = 'background: white;';
         let selectElem;
         let inputElemUser;
         let inputElemPassword;

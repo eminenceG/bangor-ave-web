@@ -7,7 +7,6 @@ import axios from 'axios'
 import { getRedirectPath } from '../util'
 const initState={
     redirectTo: '',
-    isAuth:false,
     msg:'',
     user:'',
     status:''
@@ -17,10 +16,9 @@ const initState={
 export const userReducer = (state = initState, action) => {
 
     switch(action.type){
-        case constants.REGISTER_SUCCESS:
-            return {...state, msg:'', redirectTo:getRedirectPath(action.payload) ,isAuth:true, ...action.payload};
-        case constants.LOGIN_SUCCESS:
-            return {...state, msg:'', redirectTo:getRedirectPath(action.payload) ,isAuth:true, ...action.payload};
+        case constants.AUTH_SUCCESS:
+            return {...state, msg:'', redirectTo:getRedirectPath(action.payload) , ...action.payload};
+
         case constants.LOAD_DATA:
             return {...state, ...action.payload};
 

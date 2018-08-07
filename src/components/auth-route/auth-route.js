@@ -2,11 +2,9 @@ import React from 'react'
 import axios from 'axios'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { loadData } from '../../redux/user.redux'
-
+import * as actions from "../../actions";
+import * as constants from "../../constants";
 @withRouter
-@connect(null,{ loadData })
-
 class AuthRoute extends React.Component{
 
     componentDidMount(){
@@ -16,7 +14,9 @@ class AuthRoute extends React.Component{
             return null;
         }
         // get user information
-        axios.get('/user/info')
+        axios(constants.HOST + '/user/info',{
+                withCredentials: true
+            })
             .then(res=>{
                 if(res.status===200){
                     if(res.data.code===0){
@@ -45,4 +45,10 @@ class AuthRoute extends React.Component{
 
 }
 
-export default AuthRoute;
+const dispatcherToPropsMapper = dispatch =>({
+    loadData: (data) => actions.loadData(dispatch, data)
+})
+
+const AuthRouteContainer = connect(null,dispatcherToPropsMapper)(AuthRoute)
+
+export default AuthRouteContainer;

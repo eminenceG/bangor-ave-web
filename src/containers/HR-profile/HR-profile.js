@@ -13,6 +13,7 @@ class HRProfile extends React.Component{
             posDesc: ''
         };
         this.onChange = this.onChange.bind(this);
+        this.selectAvatar = this.selectAvatar.bind(this);
     }
 
     onChange(key, val){
@@ -21,7 +22,16 @@ class HRProfile extends React.Component{
         })
     }
 
+    selectAvatar(imageName){
+        console.log(imageName);
+        this.setState({
+            avatar: imageName
+        });
+        console.log(this.state);
+    }
+
     render(){
+        document.body.style = 'background: white;';
         let inputElemTitle;
         let inputElemCompany;
         let inputElemMoney;
@@ -35,9 +45,15 @@ class HRProfile extends React.Component{
                             </div>
                         </div>
                     </nav>
+                    <br/>
+                    <br/>
+                    <br/>
 
                     <div className="container">
-                        <AvatarSelector></AvatarSelector>
+                        <AvatarSelector
+                            selectAvatar={this.selectAvatar}
+                        ></AvatarSelector>
+                        <br/>
                         <input
                             placeholder="Hiring Position"
                             className="form-control mb-3"
@@ -59,14 +75,14 @@ class HRProfile extends React.Component{
                             onChange={()=>this.onChange('money',inputElemMoney.value)}
                             ref={node=> inputElemMoney = node}/>
 
-                        <input
+                        <textarea
                             placeholder="Position requirement"
                             className="form-control mb-3"
                             value={this.state.posDesc}
                             onChange={()=>this.onChange('posDesc',inputElemPosDesc.value)}
                             ref={node=> inputElemPosDesc = node}/>
+                        <button className="btn btn-primary">Save</button>
                     </div>
-
                 </div>
             )
 
