@@ -15,6 +15,13 @@ body {
   border-radius: 0;
 }
 
+.stick-footer {
+  z-index: 10;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
 body { padding-top: 20px; }
 @media screen and (max-width: 768px) {
   body { padding-top: 0px; }
