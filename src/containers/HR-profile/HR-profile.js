@@ -9,6 +9,7 @@ class HRProfile extends React.Component{
     constructor(props){
         super(props);
         this.state = {
+            avatar:null,
             title: '',
             company: '',
             money: '',
@@ -16,6 +17,19 @@ class HRProfile extends React.Component{
         };
         this.onChange = this.onChange.bind(this);
         this.selectAvatar = this.selectAvatar.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps){
+        console.log(nextProps);
+        this.setState({
+            avatar: nextProps.avatar,
+            title: nextProps.title,
+            company: nextProps.company,
+            money: nextProps.money,
+            posDesc: nextProps.posDesc
+        });
+        console.log(this.state);
+
     }
 
     onChange(key, val){
@@ -57,7 +71,7 @@ class HRProfile extends React.Component{
 
                     <div className="container">
                         <AvatarSelector
-                            selectAvatar={this.selectAvatar}
+                            selectAvatar={this.selectAvatar} avatar = {this.state.avatar}
                         ></AvatarSelector>
                         <br/>
                         <input
