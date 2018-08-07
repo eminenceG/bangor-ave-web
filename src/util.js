@@ -6,9 +6,10 @@ export function getRedirectPath({status, avatar}){
 // user.avatar /hr-info /applicant-info /company-manager-info /employee-info /customer-representative-info
 
     let url = '/' + status;
-    if(!avatar){
+    // if(!avatar){
         url += '-profile'
-    }
+    // }
+    console.log(url);
     return url;
 
 }

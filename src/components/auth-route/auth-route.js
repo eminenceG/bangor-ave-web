@@ -21,6 +21,7 @@ class AuthRoute extends React.Component{
                 if(res.status===200){
                     if(res.data.code===0){
                         //with login info
+                        console.log('code 200. going to load data');
                         this.props.loadData(res.data.data);
                     }
                     else{
@@ -28,7 +29,7 @@ class AuthRoute extends React.Component{
                     }
 
 
-                    console.log(res.data);
+                    // console.log(res.data);
                 }
             });
         // logged in?

@@ -9,13 +9,16 @@ function errorMsg(msg){
     return {msg, type:constants.ERROR_MSG}
 }
 
-export function loadData(userinfo){
-    return {type: constants.LOAD_DATA, payload: userinfo}
+export function loadData(dispatch, userinfo){
+    console.log('dispatched to loaddata');
+    console.log(userinfo);
+    return dispatch({type: constants.LOAD_DATA, payload: userinfo});
 }
 
 export function updateProfile(dispatch, data){
+    console.log(data);
     return axios(constants.HOST + '/user/updateProfile',{
-            method:'withCredentials: true',
+            method:'post',
             data:data,
             withCredentials: true} )
         .then(res=>{
