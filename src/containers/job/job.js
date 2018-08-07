@@ -42,10 +42,10 @@ class Job extends React.Component{
     }
 
     handleKeyPress = (event) => {
-        if(event.key == 'Enter'){
-            event.preventDefault();
-            this.searchJobs()
-        }
+      if(event.key == 'Enter'){
+        event.preventDefault();
+        this.searchJobs()
+      }
     }
 
 
@@ -83,17 +83,17 @@ class Job extends React.Component{
                         </div>
                         <div className="collapse navbar-collapse" id="myNavbar">
                             <form className="input-group form-inline my-2 my-lg-0">
-                                <input
-                                    id={"keyword"}
-                                    onChange={this.keywordChanged}
-                                    onKeyPress={this.handleKeyPress}
-                                    className="form-control mr-sm-2"
-                                    id="titleFld"
-                                    placeholder="search job"/>
-                                <button
-                                    onClick={this.searchJobs}
-                                    id={"searchBtn"}
-                                    className="btn btn-danger my-2 my-sm-0" type="button"><i className="fa fa-search"></i></button>
+                                <input 
+                                  id={"keyword"} 
+                                  onChange={this.keywordChanged}
+                                  onKeyPress={this.handleKeyPress}
+                                  className="form-control mr-sm-2" 
+                                  id="titleFld" 
+                                  placeholder="search job"/>
+                                <button 
+                                  onClick={this.searchJobs}
+                                  id={"searchBtn"}
+                                  className="btn btn-danger my-2 my-sm-0" type="button"><i className="fa fa-search"></i></button>
                             </form>
                         </div>
 
