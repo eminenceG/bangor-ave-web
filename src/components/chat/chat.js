@@ -1,6 +1,6 @@
 import React from 'react'
-import io from 'socket.io-client'
 import * as constants from "../../constants";
+import io from 'socket.io-client'
 const socket = io(constants.HOST);
 
 export default class Chat extends React.Component {
