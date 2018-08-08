@@ -14,8 +14,8 @@ function errorMsg(msg){
 }
 
 export function loadData(dispatch, userinfo){
-    console.log('dispatched to loaddata');
-    console.log(userinfo);
+    // console.log('dispatched to load data');
+    // console.log(userinfo);
     return dispatch({type: constants.LOAD_DATA, payload: userinfo});
 }
 
@@ -26,7 +26,8 @@ export function updateProfile(dispatch, data){
             data:data,
             withCredentials: true} )
         .then(res=>{
-            if(res.status == 200 && res.data.code === 0){
+            if(res.status === 200 && res.data.code === 0){
+                // console.log(res.data);
                 return dispatch(authSUCCESS(res.data.data));
             } else {
                 return dispatch(errorMsg(res.data.msg));
@@ -46,7 +47,8 @@ export const login = (dispatch, {user, password}) => {
             withCredentials: true
         })
             .then(res=>{
-                if(res.status ==200&&res.data.code===0){
+                if(res.status ===200&&res.data.code===0){
+                    // console.log(res.data);
                     return dispatch(authSUCCESS(res.data.data));
                 }
                 else{
@@ -71,7 +73,7 @@ export const register = (dispatch,{user, password, confirmedPassword, status}) =
             withCredentials: true
         })
             .then(res=>{
-                if(res.status ==200&&res.data.code===0){ // code 0 means login success
+                if(res.status ===200&&res.data.code===0){ // code 0 means login success
                     return dispatch(authSUCCESS({user, password, status}));
                 }
                 else{
