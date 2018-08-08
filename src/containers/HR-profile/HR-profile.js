@@ -9,6 +9,7 @@ class HRProfile extends React.Component{
     constructor(props){
         super(props);
         this.state = {
+            avatar:null,
             title: '',
             company: '',
             money: '',
@@ -16,6 +17,28 @@ class HRProfile extends React.Component{
         };
         this.onChange = this.onChange.bind(this);
         this.selectAvatar = this.selectAvatar.bind(this);
+    }
+
+    componentDidMount(){
+        this.setState({
+            avatar: this.props.avatar,
+            title: this.props.title,
+            company: this.props.company,
+            money: this.props.money,
+            posDesc: this.props.posDesc
+        });
+
+    }
+
+    componentWillReceiveProps(nextProps){
+        this.setState({
+            avatar: nextProps.avatar,
+            title: nextProps.title,
+            company: nextProps.company,
+            money: nextProps.money,
+            posDesc: nextProps.posDesc
+        });
+
     }
 
     onChange(key, val){
@@ -43,7 +66,7 @@ class HRProfile extends React.Component{
         return(
                 <div>
                     <AuthRouteContainer></AuthRouteContainer>
-                    {this.props.redirectTo&&this.props.redirectTo!=this.props.location.pathname? <Redirect to = {this.props.redirectTo}></Redirect>:null}
+                    {this.props.redirectTo&&this.props.redirectTo!==this.props.location.pathname? <Redirect to = {this.props.redirectTo}></Redirect>:null}
                     <nav className="navbar navbar-expand-md bg-dark fixed-top">
                         <div className="container-fluid">
                             <div className="navbar-header">
@@ -57,7 +80,7 @@ class HRProfile extends React.Component{
 
                     <div className="container">
                         <AvatarSelector
-                            selectAvatar={this.selectAvatar}
+                            selectAvatar={this.selectAvatar} avatar = {this.state.avatar}
                         ></AvatarSelector>
                         <br/>
                         <input
