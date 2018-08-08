@@ -6,6 +6,8 @@ import * as actions from "../../actions";
 import { Redirect } from 'react-router-dom';
 import AuthRouteContainer from '../../components/auth-route/auth-route'
 import browserCookie from 'browser-cookies';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css'
 
 class ApplicantProfile extends React.Component{
     constructor(props){
@@ -38,8 +40,26 @@ class ApplicantProfile extends React.Component{
     }
 
     logout() {
-      browserCookie.erase('userId')
-      console.log("logout!");
+      confirmAlert({
+        title: 'Are you sure to logout?',
+        message: 'Are you sure to logout?',
+        buttons: [
+          {
+            label: 'Yes',
+            onClick: () => {
+            //   console.log('yes')
+              browserCookie.erase('userId');
+              window.location.href = window.location.href;
+            }
+          },
+          {
+            label: 'No',
+            onClick: () => console.log('cancel')
+          }
+        ]
+      })
+    //   
+    //   console.log("logout!");
     }
 
 
