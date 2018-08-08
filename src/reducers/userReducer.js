@@ -1,9 +1,10 @@
 // import { combineReducers } from 'redux'
+import { getRedirectPath } from '../util'
 // import { user } from '../redux/user.redux'
 import * as constants from "../constants";
 
-// export default combineReducers({user});
-import { getRedirectPath } from '../util'
+// export default combineReducers({userReducer});
+
 const initState={
     redirectTo: '',
     msg:'',
@@ -41,6 +42,8 @@ export const userReducer = (state = initState, action) => {
             // console.log(state);
             newState = Object.assign({},{...state, isAuth:false, msg:action.msg});
             return newState;
+        case constants.LOGOUT:
+           return {...initState, redirectTo:'/login'}
         default:
             // console.log(state);
             return state;

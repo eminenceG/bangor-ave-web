@@ -5,6 +5,10 @@ import {connect} from 'react-redux';
 import * as actions from "../../actions";
 import { Redirect } from 'react-router-dom';
 import AuthRouteContainer from '../../components/auth-route/auth-route'
+import browserCookie from 'browser-cookies';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css'
+
 class ApplicantProfile extends React.Component{
     constructor(props){
         super(props);
@@ -13,24 +17,46 @@ class ApplicantProfile extends React.Component{
             title: '',
             desc: ''
         };
+
         this.onChange = this.onChange.bind(this);
         this.selectAvatar = this.selectAvatar.bind(this);
+        this.logout = this.logout.bind(this);
     }
 
     componentDidMount(){
         this.setState({
-            avatar: this.props.avatar,
-            title: this.props.title,
-            desc: this.props.desc
+            avatar: this.props.userReducer.avatar,
+            title: this.props.userReducer.title,
+            desc: this.props.userReducer.desc
         });
     }
 
     componentWillReceiveProps(nextProps){
         this.setState({
-            avatar: nextProps.avatar,
-            title: nextProps.title,
-            desc: nextProps.desc
+            avatar: nextProps.userReducer.avatar,
+            title: nextProps.userReducer.title,
+            desc: nextProps.userReducer.desc
         });
+    }
+
+    logout() {
+      confirmAlert({
+        title: 'Logout',
+        message: 'Are you sure to logout?',
+        buttons: [
+          {
+            label: 'Yes',
+            onClick: () => {
+              browserCookie.erase('userId');
+              this.props.logoutSubmit()
+            }
+          },
+          {
+            label: 'No',
+            onClick: () => console.log('cancel')
+          }
+        ]
+      })
     }
 
 
@@ -57,7 +83,7 @@ class ApplicantProfile extends React.Component{
         return(
             <div>
                 <AuthRouteContainer></AuthRouteContainer>
-                {this.props.redirectTo&&this.props.redirectTo!==this.props.location.pathname? <Redirect to = {this.props.redirectTo}></Redirect>:null}
+                {this.props.userReducer.redirectTo&&this.props.userReducer.redirectTo!==this.props.location.pathname? <Redirect to = {this.props.userReducer.redirectTo}></Redirect>:null}
                 <nav className="navbar navbar-expand-md bg-dark fixed-top">
                     <div className="container-fluid">
                         <div className="navbar-header">
@@ -91,6 +117,12 @@ class ApplicantProfile extends React.Component{
                             onClick={()=>{
                                 this.props.update(this.state);
                             }}>Save</button>
+                    <button
+                      className="btn btn-primary"
+                      onClick={this.logout}
+                    >
+                      Logout
+                    </button>
                 </div>
             </div>
         )
@@ -104,8 +136,8 @@ const stateToPropertiesMapper = (state) =>(
 )
 
 const dispatcherToPropsMapper = dispatch =>({
-    update: (userInfo) => actions.updateProfile(dispatch, userInfo)
-
+    update: (userInfo) => actions.updateProfile(dispatch, userInfo),
+    logoutSubmit: () => actions.logoutSubmit(dispatch)
 })
 
 

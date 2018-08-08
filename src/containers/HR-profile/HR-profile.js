@@ -21,22 +21,22 @@ class HRProfile extends React.Component{
 
     componentDidMount(){
         this.setState({
-            avatar: this.props.avatar,
-            title: this.props.title,
-            company: this.props.company,
-            money: this.props.money,
-            posDesc: this.props.posDesc
+            avatar: this.props.userReducer.avatar,
+            title: this.props.userReducer.title,
+            company: this.props.userReducer.company,
+            money: this.props.userReducer.money,
+            posDesc: this.props.userReducer.posDesc
         });
 
     }
 
     componentWillReceiveProps(nextProps){
         this.setState({
-            avatar: nextProps.avatar,
-            title: nextProps.title,
-            company: nextProps.company,
-            money: nextProps.money,
-            posDesc: nextProps.posDesc
+            avatar: nextProps.userReducer.avatar,
+            title: nextProps.userReducer.title,
+            company: nextProps.userReducer.company,
+            money: nextProps.userReducer.money,
+            posDesc: nextProps.userReducer.posDesc
         });
 
     }
@@ -66,7 +66,7 @@ class HRProfile extends React.Component{
         return(
                 <div>
                     <AuthRouteContainer></AuthRouteContainer>
-                    {this.props.redirectTo&&this.props.redirectTo!==this.props.location.pathname? <Redirect to = {this.props.redirectTo}></Redirect>:null}
+                    {this.props.userReducer.redirectTo&&this.props.userReducer.redirectTo!==this.props.location.pathname? <Redirect to = {this.props.redirectTo}></Redirect>:null}
                     <nav className="navbar navbar-expand-md bg-dark fixed-top">
                         <div className="container-fluid">
                             <div className="navbar-header">

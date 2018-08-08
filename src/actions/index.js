@@ -1,7 +1,8 @@
 import * as constants from "../constants";
 import axios from 'axios'
 
-function authSUCCESS(data){
+function authSUCCESS(obj){
+    const {password, ...data} = obj; // exclude password when auth success. So when register success, password will not appear in redux.
     return {type: constants.AUTH_SUCCESS, payload: data}
 }
 
@@ -17,6 +18,11 @@ export function loadData(dispatch, userinfo){
     // console.log('dispatched to load data');
     // console.log(userinfo);
     return dispatch({type: constants.LOAD_DATA, payload: userinfo});
+}
+
+
+export function logoutSubmit(dispatch) {
+  return dispatch({type: constants.LOGOUT});
 }
 
 export function updateProfile(dispatch, data){

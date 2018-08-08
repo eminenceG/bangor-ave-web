@@ -8,9 +8,12 @@ import LoginContainer from './containers/login/login'
 import RegisterContainer from './containers/register/register'
 import HRProfileContainer from './containers/HR-profile/HR-profile'
 import ApplicantProfileContainer from './containers/applicant-profile/applicant-profile'
+import Chat from './components/chat/chat'
+import ApplicantProfileContainer from './containers/applicant-profile/applicant-profile'
+import Dashboard from './components/dashboard/dashboard'
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
-import {userReducer} from './reducers/reducer';
+import combineReducer from './reducers/combineReducer';
 import {Provider} from 'react-redux'
 import Chat from './components/chat/chat'
 import './config/config'
@@ -19,11 +22,16 @@ import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
 const bootstrap = require('bootstrap');
 
-let store = createStore(userReducer, compose(
+
+let store = createStore(combineReducer, compose(
     applyMiddleware(thunk),
     window.devToolsExtension? window.devToolsExtension():f=>f
 ));
 
+
+// 4 main pages: HR, applicant, self center, massage
+
+// switch: once hit first one suitable option, render it and finish there. The rest of route will not be explored.
 ReactDOM.render(
     <div>
         <Provider store = {store}>
@@ -35,9 +43,10 @@ ReactDOM.render(
                         <Route path='/login' component={LoginContainer}/>
                         <Route path='/register' component={RegisterContainer}/>
                         <Route path='/HR-profile' component={HRProfileContainer}/>
-                        <Route path='/Applicant-profile' component={ApplicantProfileContainer}/>
+                        <Route path='/applicant-profile' component={ApplicantProfileContainer}/>
                         <Route path='/job/detail/:jobId' component={WidgetList}/>
                         <Route path='/chat/:user' component={Chat}/>
+                        <Route component={Dashboard}/>
                     </Switch>
                 </div>
             </BrowserRouter>
