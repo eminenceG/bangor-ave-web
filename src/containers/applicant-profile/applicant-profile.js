@@ -48,12 +48,12 @@ class ApplicantProfile extends React.Component{
             label: 'Yes',
             onClick: () => {
               browserCookie.erase('userId');
-              window.location.href = window.location.href;
+              this.props.logoutSubmit()
             }
           },
           {
             label: 'No',
-            onClick: () => console.log('cancel');
+            onClick: () => console.log('cancel')
           }
         ]
       })
@@ -136,8 +136,8 @@ const stateToPropertiesMapper = (state) =>(
 )
 
 const dispatcherToPropsMapper = dispatch =>({
-    update: (userInfo) => actions.updateProfile(dispatch, userInfo)
-
+    update: (userInfo) => actions.updateProfile(dispatch, userInfo),
+    logoutSubmit: () => actions.logoutSubmit(dispatch)
 })
 
 

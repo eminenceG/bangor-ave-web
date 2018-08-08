@@ -41,6 +41,8 @@ export const userReducer = (state = initState, action) => {
             // console.log(state);
             newState = Object.assign({},{...state, isAuth:false, msg:action.msg});
             return newState;
+        case constants.LOGOUT:
+           return {...initState, redirectTo:'/login'}
         default:
             // console.log(state);
             return state;
