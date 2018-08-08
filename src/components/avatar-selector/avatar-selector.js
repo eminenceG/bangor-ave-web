@@ -31,7 +31,7 @@ class AvatarSelector extends React.Component{
         const gridHeader = this.state.text
                             ? (<div>
                                     <span>{`Your avatar is: `}</span>
-                                    <img src = {this.state.icon} style={{width: 50}}/>
+                                    <img src = {this.state.icon} style={{width: 50}} alt=""/>
                                 </div>)
                             :(<div>Please select your avatar</div>);
         return(
@@ -45,6 +45,7 @@ class AvatarSelector extends React.Component{
                                 <img
                                     src={d.icon}
                                     className="img"
+                                    alt=""
                                     onClick={() => {
                                         this.setState(d);
                                         this.props.selectAvatar(d.text);

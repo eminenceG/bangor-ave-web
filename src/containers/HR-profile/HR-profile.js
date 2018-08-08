@@ -19,8 +19,18 @@ class HRProfile extends React.Component{
         this.selectAvatar = this.selectAvatar.bind(this);
     }
 
+    componentDidMount(){
+        this.setState({
+            avatar: this.props.avatar,
+            title: this.props.title,
+            company: this.props.company,
+            money: this.props.money,
+            posDesc: this.props.posDesc
+        });
+
+    }
+
     componentWillReceiveProps(nextProps){
-        console.log(nextProps);
         this.setState({
             avatar: nextProps.avatar,
             title: nextProps.title,
@@ -28,7 +38,6 @@ class HRProfile extends React.Component{
             money: nextProps.money,
             posDesc: nextProps.posDesc
         });
-        console.log(this.state);
 
     }
 
@@ -57,7 +66,7 @@ class HRProfile extends React.Component{
         return(
                 <div>
                     <AuthRouteContainer></AuthRouteContainer>
-                    {this.props.redirectTo&&this.props.redirectTo!=this.props.location.pathname? <Redirect to = {this.props.redirectTo}></Redirect>:null}
+                    {this.props.redirectTo&&this.props.redirectTo!==this.props.location.pathname? <Redirect to = {this.props.redirectTo}></Redirect>:null}
                     <nav className="navbar navbar-expand-md bg-dark fixed-top">
                         <div className="container-fluid">
                             <div className="navbar-header">
