@@ -5,6 +5,8 @@ import {connect} from 'react-redux';
 import * as actions from "../../actions";
 import { Redirect } from 'react-router-dom';
 import AuthRouteContainer from '../../components/auth-route/auth-route'
+import browserCookie from 'browser-cookies';
+
 class ApplicantProfile extends React.Component{
     constructor(props){
         super(props);
@@ -13,8 +15,10 @@ class ApplicantProfile extends React.Component{
             title: '',
             desc: ''
         };
+
         this.onChange = this.onChange.bind(this);
         this.selectAvatar = this.selectAvatar.bind(this);
+        this.logout = this.logout.bind(this);
     }
 
     componentDidMount(){
@@ -31,6 +35,11 @@ class ApplicantProfile extends React.Component{
             title: nextProps.title,
             desc: nextProps.desc
         });
+    }
+
+    logout() {
+      browserCookie.erase('userId')
+      console.log("logout!");
     }
 
 
@@ -91,6 +100,12 @@ class ApplicantProfile extends React.Component{
                             onClick={()=>{
                                 this.props.update(this.state);
                             }}>Save</button>
+                    <button
+                      className="btn btn-primary"
+                      onClick={this.logout}
+                    >
+                      Logout
+                    </button>
                 </div>
             </div>
         )
