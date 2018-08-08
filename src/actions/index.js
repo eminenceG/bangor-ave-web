@@ -20,6 +20,11 @@ export function loadData(dispatch, userinfo){
     return dispatch({type: constants.LOAD_DATA, payload: userinfo});
 }
 
+
+export function logoutSubmit(dispatch) {
+  return dispatch({type: constants.LOGOUT});
+}
+
 export function updateProfile(dispatch, data){
     console.log(data);
     return axios(constants.HOST + '/user/updateProfile',{

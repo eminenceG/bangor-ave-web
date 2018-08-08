@@ -7,6 +7,7 @@ import Home from './containers/homepage/homepage'
 import LoginContainer from './containers/login/login'
 import RegisterContainer from './containers/register/register'
 import HRProfileContainer from './containers/HR-profile/HR-profile'
+import Chat from './components/chat/chat'
 import ApplicantProfileContainer from './containers/applicant-profile/applicant-profile'
 import Dashboard from './components/dashboard/dashboard'
 import { createStore, applyMiddleware, compose } from 'redux'
@@ -17,7 +18,7 @@ import './config/config'
 
 import './index.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
-import '../node_modules/font-awesome/css/font-awesome.min.css';
+
 const bootstrap = require('bootstrap');
 
 
@@ -41,8 +42,9 @@ ReactDOM.render(
                         <Route path='/login' component={LoginContainer}/>
                         <Route path='/register' component={RegisterContainer}/>
                         <Route path='/HR-profile' component={HRProfileContainer}/>
-                        <Route path='/Applicant-profile' component={ApplicantProfileContainer}/>
+                        <Route path='/applicant-profile' component={ApplicantProfileContainer}/>
                         <Route path='/job/detail/:jobId' component={WidgetList}/>
+                        <Route path='/chat/:user' component={Chat}/>
                         <Route component={Dashboard}></Route>
                     </Switch>
                 </div>
