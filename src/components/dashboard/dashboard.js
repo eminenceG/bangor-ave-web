@@ -1,11 +1,13 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import {connect} from 'react-redux';
 import NavLinkBar from '../navlink/navlink'
 import AuthRouteContainer from '../../components/auth-route/auth-route'
-function HR(){
-    return <h2>HR front page</h2>
-}
+import HR from '../HR/HR'
+
+// function HR(){
+//     return <h2>HR front page</h2>
+// }
 
 function applicant(){
     return <h2>applicant front page</h2>
@@ -73,7 +75,7 @@ class Dashboard extends React.Component{
         return (
             <div>
                 <AuthRouteContainer></AuthRouteContainer>
-                <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top box-shadow">
+                <nav className="navbar navbar-expand-md fixed-header navbar-dark bg-dark fixed-top box-shadow">
                     <div className="container-fluid d-flex justify-content-between">
                         <div className="navbar-header">
                             <a className="navbar-brand align-items-center d-flex" href="/home">{navList.find(v=>v.path === pathname).title}</a>
@@ -95,7 +97,13 @@ class Dashboard extends React.Component{
                 </nav>
                 <br/>
                 <br/>
-                <h2>content</h2>
+                <div style={{marginTop: 45}}>
+                    <Switch>
+                        {navList.map(v=>(
+                            <Route key = {v.path} path = {v.path} component={v.component}></Route>
+                        ))}
+                    </Switch>
+                </div>
 
             </div>
         )
