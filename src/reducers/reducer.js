@@ -15,7 +15,7 @@ const initState={
     posDesc:'',
     company:'',
     money:''
-}
+};
 
 
 export const userReducer = (state = initState, action) => {
@@ -45,4 +45,4 @@ export const userReducer = (state = initState, action) => {
             // console.log(state);
             return state;
     }
-}
+};
