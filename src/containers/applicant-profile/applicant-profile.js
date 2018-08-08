@@ -41,25 +41,22 @@ class ApplicantProfile extends React.Component{
 
     logout() {
       confirmAlert({
-        title: 'Are you sure to logout?',
+        title: 'Logout',
         message: 'Are you sure to logout?',
         buttons: [
           {
             label: 'Yes',
             onClick: () => {
-            //   console.log('yes')
               browserCookie.erase('userId');
               window.location.href = window.location.href;
             }
           },
           {
             label: 'No',
-            onClick: () => console.log('cancel')
+            onClick: () => console.log('cancel');
           }
         ]
       })
-    //   
-    //   console.log("logout!");
     }
 
 
