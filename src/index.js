@@ -8,7 +8,7 @@ import LoginContainer from './containers/login/login'
 import RegisterContainer from './containers/register/register'
 import HRProfileContainer from './containers/HR-profile/HR-profile'
 import ApplicantProfileContainer from './containers/applicant-profile/applicant-profile'
-// import Dashboard from './components/dashboard/dashboard'
+import Dashboard from './components/dashboard/dashboard'
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import combineReducer from './reducers/combineReducer';
@@ -43,6 +43,7 @@ ReactDOM.render(
                         <Route path='/applicant-profile' component={ApplicantProfileContainer}/>
                         <Route path='/job/detail/:jobId' component={WidgetList}/>
                         <Route path='/chat/:user' component={Chat}/>
+                        <Route component={Dashboard}></Route>
                     </Switch>
                 </div>
             </BrowserRouter>
