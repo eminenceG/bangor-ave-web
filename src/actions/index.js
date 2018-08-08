@@ -1,7 +1,8 @@
 import * as constants from "../constants";
 import axios from 'axios'
 
-function authSUCCESS(data){
+function authSUCCESS(obj){
+    const {password, ...data} = obj; // exclude password when auth success. So when register success, password will not appear in redux.
     return {type: constants.AUTH_SUCCESS, payload: data}
 }
 

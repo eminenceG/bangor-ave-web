@@ -38,14 +38,14 @@ class Register extends React.Component{
         let inputElemConfirmedPassword;
         return (
             <div>
-                {this.props.redirectTo? <Redirect to={this.props.redirectTo}/>:null}
+                {this.props.userReducer.redirectTo? <Redirect to={this.props.userReducer.redirectTo}/>:null}
 
                 <Logo></Logo>
                 <div className="container">
                     <h2>Register</h2>
 
                     <div>
-                        {this.props.msg?<p className='error-msg'>{this.props.msg}</p>:null}
+                        {this.props.userReducer.msg?<p className='error-msg'>{this.props.userReducer.msg}</p>:null}
 
                         <input
                             placeholder="Username"

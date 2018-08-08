@@ -25,17 +25,17 @@ class ApplicantProfile extends React.Component{
 
     componentDidMount(){
         this.setState({
-            avatar: this.props.avatar,
-            title: this.props.title,
-            desc: this.props.desc
+            avatar: this.props.userReducer.avatar,
+            title: this.props.userReducer.title,
+            desc: this.props.userReducer.desc
         });
     }
 
     componentWillReceiveProps(nextProps){
         this.setState({
-            avatar: nextProps.avatar,
-            title: nextProps.title,
-            desc: nextProps.desc
+            avatar: nextProps.userReducer.avatar,
+            title: nextProps.userReducer.title,
+            desc: nextProps.userReducer.desc
         });
     }
 
@@ -83,7 +83,7 @@ class ApplicantProfile extends React.Component{
         return(
             <div>
                 <AuthRouteContainer></AuthRouteContainer>
-                {this.props.redirectTo&&this.props.redirectTo!==this.props.location.pathname? <Redirect to = {this.props.redirectTo}></Redirect>:null}
+                {this.props.userReducer.redirectTo&&this.props.userReducer.redirectTo!==this.props.location.pathname? <Redirect to = {this.props.userReducer.redirectTo}></Redirect>:null}
                 <nav className="navbar navbar-expand-md bg-dark fixed-top">
                     <div className="container-fluid">
                         <div className="navbar-header">

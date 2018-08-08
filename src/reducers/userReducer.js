@@ -1,9 +1,10 @@
 // import { combineReducers } from 'redux'
+import { getRedirectPath } from '../util'
 // import { user } from '../redux/user.redux'
 import * as constants from "../constants";
 
-// export default combineReducers({user});
-import { getRedirectPath } from '../util'
+// export default combineReducers({userReducer});
+
 const initState={
     redirectTo: '',
     msg:'',
