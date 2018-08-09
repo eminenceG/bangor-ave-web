@@ -18,7 +18,7 @@ class Applicant extends React.Component{
     render(){
         return (
             <div className="container">
-                <h2>Applicant front page</h2>
+                <h2>Applicant List</h2>
                 {this.props.chatUser.userList?this.props.chatUser.userList.map(v=>(
                     v.avatar?
                         <div className="card"  key={v.user}>
