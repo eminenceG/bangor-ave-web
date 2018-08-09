@@ -47,9 +47,41 @@ class Chat extends React.Component {
     }
 
     render() {
+        const user = this.props.match.params.user;
         return(
             <div className="container">
                 <AuthRouteContainer/>
+                <ul className="list-group">
+                <li className=" active list-group-item">
+                    to:
+                    <em>{this.props.match.params.user}</em>
+                </li>
+
+
+                    {this.props.chatReducer.chatmsg.map(
+                        v => {
+                            if(v.from === user) {
+                                return(
+                                    <li key={v._id} className="list-group-item">
+                                        <p className="float-left"
+                                           >
+                                            <em>receive</em> : {v.content}
+                                            </p>
+                                    </li>
+                                )
+                            } else {
+                                return(
+                                    <li key={v._id} className="list-group-item">
+                                        <p  className="float-right"
+                                            >
+                                            <em>send</em> : {v.content}
+                                        </p>
+                                    </li>
+                                )
+                            }
+                        }
+                    )}
+                </ul>
                 <div>
                     {this.state.message.map(
                         message => {
