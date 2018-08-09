@@ -8,7 +8,6 @@ class UserCard extends React.Component {
   };
 
   render() {
-    console.log(this.props.userlist);
     return (
       <div>
         {this.props.userlist?this.props.userlist.map(v=>(
