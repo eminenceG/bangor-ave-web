@@ -9,6 +9,9 @@ export function getRedirectPath({status, avatar}){
     if(!avatar){
         url += '-profile'
     }
+    if(status === 'admin'){
+        url = '/admin';
+    }
     // console.log(url);
     return url;
 

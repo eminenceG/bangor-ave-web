@@ -5,6 +5,7 @@ import NavLinkBar from '../navlink/navlink'
 import AuthRouteContainer from '../../components/auth-route/auth-route'
 import HRContainer from '../HR/HR';
 import ApplicantContainer from '../applicant/applicant'
+import adminContainer from '../admin/admin'
 import browserCookie from 'browser-cookies';
 import { confirmAlert } from 'react-confirm-alert';
 import * as actions from "../../actions";
@@ -67,7 +68,7 @@ class Dashboard extends React.Component{
                 icon:'HR',
                 title:'Applicants list',
                 component: HRContainer,
-                hide: user.status !== 'HR'
+                hide: user.status !== 'HR' && (user.status !== 'admin')
             },
             {
                 path:'/applicant',
@@ -75,7 +76,15 @@ class Dashboard extends React.Component{
                 icon:'job',
                 title:'HR list',
                 component: ApplicantContainer,
-                hide: user.status !== 'applicant'
+                hide: user.status !== 'applicant' && (user.status !== 'admin')
+            },
+            {
+                path:'/admin',
+                text:'admin',
+                icon:'admin',
+                title:'Users list',
+                component: adminContainer,
+                hide: user.status !== 'admin'
             },
             {
                 path:'/msg',
