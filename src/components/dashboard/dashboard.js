@@ -9,7 +9,7 @@ import browserCookie from 'browser-cookies';
 import { confirmAlert } from 'react-confirm-alert';
 import * as actions from "../../actions";
 import { Redirect } from 'react-router-dom';
-
+import UserContainer from "../user/user"
 // function HR(){
 //     return <h2>HR front page</h2>
 // }
@@ -22,9 +22,9 @@ function Msg(){
     return <h2>Msg front page</h2>
 }
 
-function User(){
-    return <h2>User front page</h2>
-}
+// function User(){
+//     return <h2>User front page</h2>
+// }
 
 
 class Dashboard extends React.Component{
@@ -90,7 +90,7 @@ class Dashboard extends React.Component{
                 text:'me',
                 icon:'user',
                 title:'Self center',
-                component: User,
+                component: UserContainer,
                 hide: false
             }
         ]
