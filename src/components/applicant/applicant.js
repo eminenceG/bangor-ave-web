@@ -21,9 +21,10 @@ class Applicant extends React.Component{
         return (
             <div className="container">
                 <h2>HR List</h2>
+                {this.props.chatUser.userList?
                 <UserCard
                   userlist={this.props.chatUser.userList}
-                ></UserCard>
+                ></UserCard>:null}
             </div>
         )
 
