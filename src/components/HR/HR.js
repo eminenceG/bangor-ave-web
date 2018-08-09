@@ -21,9 +21,10 @@ class HR extends React.Component{
         return (
             <div className="container">
                 <h2>Applicant List</h2>
+                {this.props.chatUser.userList?
                 <UserCard
                   userlist={this.props.chatUser.userList}
-                ></UserCard>
+                ></UserCard>:null}
             </div>
         )
 
