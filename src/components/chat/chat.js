@@ -1,9 +1,14 @@
 import React from 'react'
 import * as constants from "../../constants";
 import io from 'socket.io-client'
+import {connect} from 'react-redux'
+import {getMsgList} from '../../redux/chat.redux'
+
+
 const socket = io(constants.HOST);
 
-export default class Chat extends React.Component {
+
+class Chat extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -15,20 +20,21 @@ export default class Chat extends React.Component {
 
     handleSubmit() {
 
-        socket.emit('sendmsg', {text: this.state.textInput});
+        // socket.emit('sendmsg', {text: this.state.textInput});
         this.setState({textInput: ''});
     }
 
     componentDidMount() {
-        socket.on('receiveMessage', (data) => {
-            this.setState({
-                message: [
-                    ...this.state.message,
-                    data.text
-                ]
-            });
-
-        });
+        this.props.getMsgList();
+        // socket.on('receiveMessage', (data) => {
+        //     this.setState({
+        //         message: [
+        //             ...this.state.message,
+        //             data.text
+        //         ]
+        //     });
+        //
+        // });
     }
 
     render() {
@@ -69,3 +75,16 @@ export default class Chat extends React.Component {
         )
     }
 }
+
+
+const stateToPropertiesMapper = (state) =>(
+    state
+);
+
+const dispatcherToPropsMapper = dispatch =>({
+    getMsgList: () => getMsgList(dispatch)
+});
+
+const ChatContainer = connect(stateToPropertiesMapper,dispatcherToPropsMapper)(Chat);
+
+export default ChatContainer;

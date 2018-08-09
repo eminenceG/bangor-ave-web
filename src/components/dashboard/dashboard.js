@@ -4,14 +4,11 @@ import {connect} from 'react-redux';
 import NavLinkBar from '../navlink/navlink'
 import AuthRouteContainer from '../../components/auth-route/auth-route'
 import HRContainer from '../HR/HR';
+import ApplicantContainer from '../applicant/applicant'
 import browserCookie from 'browser-cookies';
 import { confirmAlert } from 'react-confirm-alert';
 import * as actions from "../../actions";
 import { Redirect } from 'react-router-dom';
-
-
-
-
 
 // function HR(){
 //     return <h2>HR front page</h2>
@@ -77,7 +74,7 @@ class Dashboard extends React.Component{
                 text:'HR',
                 icon:'job',
                 title:'HR list',
-                component: applicant,
+                component: ApplicantContainer,
                 hide: user.status !== 'applicant'
             },
             {
@@ -108,7 +105,7 @@ class Dashboard extends React.Component{
                 <nav className="navbar navbar-expand-md fixed-header navbar-dark bg-dark fixed-top box-shadow">
                     <div className="container-fluid d-flex justify-content-between">
                         <div className="navbar-header">
-                            <a className="navbar-brand align-items-center d-flex" href="/home">{navList.find(v=>v.path === pathname).title}</a>
+                            <a className="navbar-brand align-items-center d-flex" href="/">{navList.find(v=>v.path === pathname).title}</a>
                         </div>
                         <div className=" collapse navbar-collapse col-sm-9" id="myNavbar">
                             <NavLinkBar data = {navList} ></NavLinkBar>
