@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import * as actions from "../../actions";
+import {Link} from 'react-router-dom';
 
 class HR extends React.Component{
     constructor(props){
@@ -27,9 +28,9 @@ class HR extends React.Component{
                         </div>
                         <div className="col-8">
                             <div className="card-body">
-                                <h5 className="card-title">{v.user}</h5>
+                                <Link to={`/chat/${v._id}`}><h5 className="card-title">{v.user}</h5></Link>
                                 <p className="card-text">{v.title}</p>
-                                <div className="card-text">{v.desc.split('\n').map(v=>(<div key={v}>{v}</div>))}</div>
+                                <div className="card-text">{v.desc?v.desc.split('\n').map(v=>(<div key={v}>{v}</div>)):null}</div>
                             </div>
                         </div>
                     </div>
