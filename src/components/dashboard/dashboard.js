@@ -3,7 +3,13 @@ import { Switch, Route } from 'react-router-dom'
 import {connect} from 'react-redux';
 import NavLinkBar from '../navlink/navlink'
 import AuthRouteContainer from '../../components/auth-route/auth-route'
-import HRContainer from '../HR/HR'
+import HRContainer from '../HR/HR';
+import browserCookie from 'browser-cookies';
+import { confirmAlert } from 'react-confirm-alert';
+import * as actions from "../../actions";
+
+
+
 
 // function HR(){
 //     return <h2>HR front page</h2>
@@ -28,6 +34,27 @@ class Dashboard extends React.Component{
         this.state = {
             user:''
         };
+        this.logout = this.logout.bind(this);
+    }
+
+    logout() {
+      confirmAlert({
+        title: 'Logout',
+        message: 'Are you sure to logout?',
+        buttons: [
+          {
+            label: 'Yes',
+            onClick: () => {
+              browserCookie.erase('userId');
+              this.props.logoutSubmit()
+            }
+          },
+          {
+            label: 'No',
+            onClick: () => console.log('cancel')
+          }
+        ]
+      })
     }
 
     render(){
@@ -83,6 +110,12 @@ class Dashboard extends React.Component{
                         <div className=" collapse navbar-collapse col-sm-9" id="myNavbar">
                             <NavLinkBar data = {navList} ></NavLinkBar>
                         </div>
+                        {/* TODO: move some buttons to drop down */}
+                        <button
+                          className="btn btn-primary"
+                          onClick={this.logout}>
+                          logout
+                        </button>
 
                         <button className="btn btn-link bd-search-docs-toggle d-md-none p-0 ml-2 collapsed"
                                 type="button" data-toggle="collapse" data-target="#myNavbar"
@@ -93,6 +126,7 @@ class Dashboard extends React.Component{
                                       strokeMiterlimit="10" d="M4 7h22M4 15h22M4 23h22"></path>
                             </svg>
                         </button>
+
                     </div>
                 </nav>
                 <br/>
@@ -115,6 +149,7 @@ const stateToPropertiesMapper = (state) =>(
     state
 )
 const dispatcherToPropsMapper = dispatch =>({
+    logoutSubmit: () => actions.logoutSubmit(dispatch)
 })
 
 const DashboardContainer = connect(stateToPropertiesMapper,dispatcherToPropsMapper)(Dashboard)
