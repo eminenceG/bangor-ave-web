@@ -13,8 +13,9 @@ class Chat extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            textInput: '123',
-            message: []
+            textInput: '',
+            message: [],
+            listened: false
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -22,9 +23,8 @@ class Chat extends React.Component {
     handleSubmit() {
 
         // socket.emit('sendmsg', {text: this.state.textInput});
-
+        console.log('send');
         const from = this.props.userReducer._id;
-        console.log(this.props.userReducer._id);
         const to = this.props.match.params.user;
         const msg = this.state.textInput;
         this.props.sendMsg({from, to, msg});
@@ -32,9 +32,10 @@ class Chat extends React.Component {
     }
 
     componentDidMount() {
+
         this.props.getMsgList();
         this.props.recvMsg();
-        console.log(this.props);
+        // console.log(this.props);
         // socket.on('receiveMessage', (data) => {
         //     this.setState({
         //         message: [
@@ -47,7 +48,11 @@ class Chat extends React.Component {
     }
 
     render() {
+
         const user = this.props.match.params.user;
+        const from = this.props.userReducer._id;
+        const to = this.props.match.params.user;
+        const chatId = [from, to].sort().join('_');
         return(
             <div className="container">
                 <AuthRouteContainer/>
@@ -60,7 +65,7 @@ class Chat extends React.Component {
 
                     {this.props.chatReducer.chatmsg.map(
                         v => {
-                            if(v.from === user) {
+                            if(v.chatid === chatId && v.from === user) {
                                 return(
                                     <li key={v._id} className="list-group-item">
                                         <p className="float-left"
@@ -69,7 +74,7 @@ class Chat extends React.Component {
                                             </p>
                                     </li>
                                 )
-                            } else {
+                            } else if(v.chatid === chatId && v.to === user){
                                 return(
                                     <li key={v._id} className="list-group-item">
                                         <p  className="float-right"
@@ -79,6 +84,7 @@ class Chat extends React.Component {
                                     </li>
                                 )
                             }
+                            return null;
                         }
                     )}
                 </ul>
@@ -124,8 +130,8 @@ const stateToPropertiesMapper = (state) =>(
 );
 
 const dispatcherToPropsMapper = dispatch =>({
-    getMsgList: () => getMsgList(dispatch),
     sendMsg: (send) => sendMsg(dispatch, send),
+    getMsgList: () => getMsgList(dispatch),
     recvMsg: () => recvMsg(dispatch)
 });
 

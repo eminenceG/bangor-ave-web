@@ -25,6 +25,14 @@ export function chatReducer(state=initState, action) {
                 ).length
             };
         case MSG_RECEIVE:
+            // console.log(action.payload);
+            const temp = state.chatmsg;
+            for(let i = 0; i < temp.length; i++) {
+                if(action.payload === temp[i]) {
+                    // console.log('equal');
+                    return state
+                }
+            }
             return {
                 chatmsg: [
                     ...state.chatmsg,
@@ -50,12 +58,13 @@ function msgRecv(msg) {
 
 export function recvMsg(dispatch) {
     return socket.on('recvmsg', (data) => {
-        console.log('recvmsg', data);
+
         dispatch(msgRecv(data))
     })
 }
 
 export function sendMsg(dispatch, send) {
+    console.log(send);
     return socket.emit('sendmsg', send)
 }
 
