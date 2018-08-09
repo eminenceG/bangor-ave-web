@@ -23,7 +23,8 @@ class UserCard extends React.Component {
                                 <Link to={`/chat/${v._id}`}><h5 className="card-title">{v.user}</h5></Link>
                                 <p className="card-text">{v.title}</p>
                                 <div className="card-text">{v.posDesc?v.posDesc.split('\n').map(v=>(<div key={v}>{v}</div>)):null}</div>
-                                {v.status=='HR'?<p className="card-text">salary: {v.money}</p>:null}
+                                {v.status=='HR'?<p className="card-text">Salary: {v.money}</p>:null}
+                                {v.status=='HR'?<p className="card-text">Company: {v.company}</p>:null}
                             </div>
                         </div>
                     </div>
