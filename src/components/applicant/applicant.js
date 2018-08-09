@@ -1,7 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import * as actions from "../../actions";
+import UserCard from '../usercard/usercard';
 import {Link} from 'react-router-dom';
+
 
 class Applicant extends React.Component{
     constructor(props){
@@ -19,7 +21,10 @@ class Applicant extends React.Component{
         return (
             <div className="container">
                 <h2>Applicant List</h2>
-                {this.props.chatUser.userList?this.props.chatUser.userList.map(v=>(
+                <UserCard
+                  userlist={this.props.chatUser.userList}
+                ></UserCard>
+                {/* {this.props.chatUser.userList?this.props.chatUser.userList.map(v=>(
                     v.avatar?
                         <div className="card"  key={v.user}>
                             <div className="row">
@@ -35,7 +40,8 @@ class Applicant extends React.Component{
                                 </div>
                             </div>
                         </div>:null
-                )):null}
+                )):null} */}
+
             </div>
         )
 
