@@ -26,7 +26,7 @@ export function logoutSubmit(dispatch) {
 }
 
 export function updateProfile(dispatch, data){
-    console.log(data);
+    // console.log(data);
     return axios(constants.HOST + '/user/updateProfile',{
             method:'post',
             data:data,
@@ -88,4 +88,19 @@ export const register = (dispatch,{user, password, confirmedPassword, status}) =
                 }
             });
 
+}
+
+
+export function userList(data) {
+    return {type: constants.USER_LIST, payload: data};
+}
+
+export function getUserList(dispatch, status){
+    return axios(constants.HOST + '/user/list?status='+status,{
+            withCredentials: true
+        }).then(res=>{
+            if(res.data.code === 0){
+                dispatch(userList(res.data.data))
+            }
+        })
 }
