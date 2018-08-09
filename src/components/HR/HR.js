@@ -1,6 +1,6 @@
 import React from 'react'
-import axios from 'axios'
-import * as constants from "../../constants";
+import { connect } from 'react-redux'
+import * as actions from "../../actions";
 
 class HR extends React.Component{
     constructor(props){
@@ -10,25 +10,15 @@ class HR extends React.Component{
         }
     }
 
-
     componentDidMount(){
-        axios(constants.HOST + '/user/list?status=applicant',{
-            withCredentials: true
-        }).then(res=>{
-            if(res.data.code === 0){
-                this.setState({
-                    data: res.data.data
-                })
-            }
-        })
-
+        this.props.getUserList('applicant');
     }
 
     render(){
         return (
             <div className="container">
                 <h2>HR front page</h2>
-                {this.state.data.map(v=>(
+                {this.props.chatUser.userList?this.props.chatUser.userList.map(v=>(
                     v.avatar?
                     <div className="card"  key={v.user}>
                     <div className="row">
@@ -44,7 +34,7 @@ class HR extends React.Component{
                         </div>
                     </div>
                     </div>:null
-                ))}
+                )):null}
             </div>
         )
 
@@ -52,4 +42,17 @@ class HR extends React.Component{
 
 }
 
-export default HR
+const stateToPropertiesMapper = (state) =>(
+    state
+)
+
+const dispatcherToPropsMapper = dispatch =>({
+    getUserList: (userInfo) => actions.getUserList(dispatch, userInfo)
+
+})
+
+
+
+const HRContainer = connect(stateToPropertiesMapper,dispatcherToPropsMapper)(HR)
+
+export default HRContainer;

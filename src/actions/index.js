@@ -89,3 +89,18 @@ export const register = (dispatch,{user, password, confirmedPassword, status}) =
             });
 
 }
+
+
+export function userList(data) {
+    return {type: constants.USER_LIST, payload: data};
+}
+
+export function getUserList(dispatch, status){
+    return axios(constants.HOST + '/user/list?status='+status,{
+            withCredentials: true
+        }).then(res=>{
+            if(res.data.code === 0){
+                dispatch(userList(res.data.data))
+            }
+        })
+}

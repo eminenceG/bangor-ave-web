@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 import {connect} from 'react-redux';
 import NavLinkBar from '../navlink/navlink'
 import AuthRouteContainer from '../../components/auth-route/auth-route'
-import HR from '../HR/HR'
+import HRContainer from '../HR/HR'
 
 // function HR(){
 //     return <h2>HR front page</h2>
@@ -36,11 +36,11 @@ class Dashboard extends React.Component{
         const {pathname} = this.props.location;
         const navList = [
             {
-                path:'/hr',
+                path:'/HR',
                 text:'applicant',
                 icon:'HR',
                 title:'Applicants list',
-                component: HR,
+                component: HRContainer,
                 hide: user.status !== 'HR'
             },
             {
