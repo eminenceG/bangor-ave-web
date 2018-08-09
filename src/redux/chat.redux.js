@@ -13,9 +13,9 @@ const initState = {
     unread: 0
 };
 
-export function chat(state=initState, action) {
+export function chatReducer(state=initState, action) {
+    // console.log('chat', action);
     switch(action.type) {
-
         case MSG_LIST:
             return {
                 ...state,
@@ -36,13 +36,13 @@ function msgList(messages) {
     }
 }
 
-export function getMegList() {
-    return dispatch=>{
-        axios.get('/user/getmsglist')
-            .then(res => {
-                if(res.state === 200 && res.data.code === 0) {
-                    dispatch(msgList(res.data.msgs))
-                }
-            })
-    }
+export function getMsgList(dispatch) {
+    // console.log(dispatch);
+    return axios.get(constants.HOST + '/user/getmsglist')
+        .then(res => {
+            if(res.state === 200 && res.data.code === 0) {
+                dispatch(msgList(res.data.msgs))
+            }
+        })
+
 }

@@ -13,7 +13,7 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import combineReducer from './reducers/combineReducer';
 import {Provider} from 'react-redux'
-import Chat from './components/chat/chat'
+import ChatContainer from './components/chat/chat'
 import './config/config'
 import './index.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
@@ -42,8 +42,9 @@ ReactDOM.render(
                         <Route path='/HR-profile' component={HRProfileContainer}/>
                         <Route path='/applicant-profile' component={ApplicantProfileContainer}/>
                         <Route path='/job/detail/:jobId' component={WidgetList}/>
-                        <Route path='/chat/:user' component={Chat}/>
-                        <Route component={Dashboard}></Route>
+                        <Route path='/chat/:user' component={ChatContainer}/>
+                        <Route component={Dashboard}/>
+
                     </Switch>
                 </div>
             </BrowserRouter>
