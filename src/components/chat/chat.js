@@ -2,7 +2,8 @@ import React from 'react'
 import * as constants from "../../constants";
 import io from 'socket.io-client'
 import {connect} from 'react-redux'
-import {getMsgList} from '../../redux/chat.redux'
+import AuthRouteContainer from '../../components/auth-route/auth-route'
+import {getMsgList, sendMsg, recvMsg} from '../../redux/chat.redux'
 
 
 const socket = io(constants.HOST);
@@ -12,8 +13,9 @@ class Chat extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            textInput: '123',
-            message: []
+            textInput: '',
+            message: [],
+            listened: false
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -21,11 +23,19 @@ class Chat extends React.Component {
     handleSubmit() {
 
         // socket.emit('sendmsg', {text: this.state.textInput});
+        console.log('send');
+        const from = this.props.userReducer._id;
+        const to = this.props.match.params.user;
+        const msg = this.state.textInput;
+        this.props.sendMsg({from, to, msg});
         this.setState({textInput: ''});
     }
 
     componentDidMount() {
+
         this.props.getMsgList();
+        this.props.recvMsg();
+        // console.log(this.props);
         // socket.on('receiveMessage', (data) => {
         //     this.setState({
         //         message: [
@@ -38,8 +48,46 @@ class Chat extends React.Component {
     }
 
     render() {
+
+        const user = this.props.match.params.user;
+        const from = this.props.userReducer._id;
+        const to = this.props.match.params.user;
+        const chatId = [from, to].sort().join('_');
         return(
             <div className="container">
+                <AuthRouteContainer/>
+                <ul className="list-group">
+                <li className=" active list-group-item">
+                    to:
+                    <em>{this.props.match.params.user}</em>
+                </li>
+
+
+                    {this.props.chatReducer.chatmsg.map(
+                        v => {
+                            if(v.chatid === chatId && v.from === user) {
+                                return(
+                                    <li key={v._id} className="list-group-item">
+                                        <p className="float-left"
+                                           >
+                                            <em>receive</em> : {v.content}
+                                            </p>
+                                    </li>
+                                )
+                            } else if(v.chatid === chatId && v.to === user){
+                                return(
+                                    <li key={v._id} className="list-group-item">
+                                        <p  className="float-right"
+                                            >
+                                            <em>send</em> : {v.content}
+                                        </p>
+                                    </li>
+                                )
+                            }
+                            return null;
+                        }
+                    )}
+                </ul>
                 <div>
                     {this.state.message.map(
                         message => {
@@ -82,7 +130,9 @@ const stateToPropertiesMapper = (state) =>(
 );
 
 const dispatcherToPropsMapper = dispatch =>({
-    getMsgList: () => getMsgList(dispatch)
+    sendMsg: (send) => sendMsg(dispatch, send),
+    getMsgList: () => getMsgList(dispatch),
+    recvMsg: () => recvMsg(dispatch)
 });
 
 const ChatContainer = connect(stateToPropertiesMapper,dispatcherToPropsMapper)(Chat);
