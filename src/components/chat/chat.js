@@ -2,7 +2,8 @@ import React from 'react'
 import * as constants from "../../constants";
 import io from 'socket.io-client'
 import {connect} from 'react-redux'
-import {getMsgList} from '../../redux/chat.redux'
+import AuthRouteContainer from '../../components/auth-route/auth-route'
+import {getMsgList, sendMsg, recvMsg} from '../../redux/chat.redux'
 
 
 const socket = io(constants.HOST);
@@ -21,11 +22,19 @@ class Chat extends React.Component {
     handleSubmit() {
 
         // socket.emit('sendmsg', {text: this.state.textInput});
+
+        const from = this.props.userReducer._id;
+        console.log(this.props.userReducer._id);
+        const to = this.props.match.params.user;
+        const msg = this.state.textInput;
+        this.props.sendMsg({from, to, msg});
         this.setState({textInput: ''});
     }
 
     componentDidMount() {
         this.props.getMsgList();
+        this.props.recvMsg();
+        console.log(this.props);
         // socket.on('receiveMessage', (data) => {
         //     this.setState({
         //         message: [
@@ -40,6 +49,7 @@ class Chat extends React.Component {
     render() {
         return(
             <div className="container">
+                <AuthRouteContainer/>
                 <div>
                     {this.state.message.map(
                         message => {
@@ -82,7 +92,9 @@ const stateToPropertiesMapper = (state) =>(
 );
 
 const dispatcherToPropsMapper = dispatch =>({
-    getMsgList: () => getMsgList(dispatch)
+    getMsgList: () => getMsgList(dispatch),
+    sendMsg: (send) => sendMsg(dispatch, send),
+    recvMsg: () => recvMsg(dispatch)
 });
 
 const ChatContainer = connect(stateToPropertiesMapper,dispatcherToPropsMapper)(Chat);
