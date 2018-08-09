@@ -24,6 +24,14 @@ export function chatReducer(state=initState, action) {
                     msg => !msg.read
                 ).length
             };
+        case MSG_RECEIVE:
+            return {
+                chatmsg: [
+                    ...state.chatmsg,
+                    action.payload
+                ],
+                unread: state.unread + 1
+            };
         default:
             return state;
     }
@@ -36,11 +44,26 @@ function msgList(messages) {
     }
 }
 
+function msgRecv(msg) {
+    return {type: MSG_RECEIVE, payload: msg}
+}
+
+export function recvMsg(dispatch) {
+    return socket.on('recvmsg', (data) => {
+        console.log('recvmsg', data);
+        dispatch(msgRecv(data))
+    })
+}
+
+export function sendMsg(dispatch, send) {
+    return socket.emit('sendmsg', send)
+}
+
 export function getMsgList(dispatch) {
     // console.log(dispatch);
     return axios.get(constants.HOST + '/user/getmsglist')
         .then(res => {
-            if(res.state === 200 && res.data.code === 0) {
+            if(res.status === 200 && res.data.code === 0) {
                 dispatch(msgList(res.data.msgs))
             }
         })
