@@ -14,6 +14,7 @@ import { Redirect } from 'react-router-dom';
 import UserContainer from "../user/user"
 import {getMsgList, sendMsg, recvMsg} from '../../redux/chat.redux'
 import RepresentativeContainer from "../representative/representative";
+import HrJobContainer from "../../containers/hr-job/hrJob";
 // function HR(){
 //     return <h2>HR front page</h2>
 // }
@@ -120,7 +121,7 @@ class Dashboard extends React.Component{
                 icon:'CompanyManager',
                 title: 'Company Profile',
                 component: CompanyEditor,
-                hide: false
+                hide: user.status !== 'CompanyManager'
             },
             { 
                 path:'/representative',
@@ -129,7 +130,14 @@ class Dashboard extends React.Component{
                 title:'representative',
                 component: RepresentativeContainer,
                 hide: true
-            }
+            },
+            {
+                path:'/jobList/hr',
+                text:'Job-list',
+                icon:'job',
+                title:'Job-list',
+                component: HrJobContainer,
+                hide: user.status !== 'HR'
             }
         ];
 
@@ -140,7 +148,7 @@ class Dashboard extends React.Component{
         return (
             <div>
                 <AuthRouteContainer/>
-                {this.props.userReducer.redirectTo&&this.props.userReducer.redirectTo=='/login'? <Redirect to = {this.props.userReducer.redirectTo}></Redirect>:null}
+                {this.props.userReducer.redirectTo&&this.props.userReducer.redirectTo=='/login'? <Redirect to = {this.props.userReducer.redirectTo}/>:null}
                 <nav className="navbar navbar-expand-md fixed-header navbar-dark bg-dark fixed-top box-shadow">
                     <div className="container-fluid d-flex justify-content-between">
                         <div className="navbar-header">
