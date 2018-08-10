@@ -20,7 +20,6 @@ export function loadData(dispatch, userinfo){
     return dispatch({type: constants.LOAD_DATA, payload: userinfo});
 }
 
-
 export function logoutSubmit(dispatch) {
   return dispatch({type: constants.LOGOUT});
 }
@@ -123,6 +122,13 @@ export const register = (dispatch,{user, password, confirmedPassword, status}) =
         info = Object.assign({}, {user, password, status, avatar});
         console.log(info);
     }
+
+    if(status === 'representative') {
+        let avatar = 'girl';
+        info = {user, password, status, avatar};
+    }
+
+
 
     return axios(constants.HOST +'/user/register',{
             method:'post',

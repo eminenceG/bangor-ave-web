@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import Job from './containers/job/job'
-import WidgetList from './containers/WidgetList/WidgetList'
-import Home from './containers/homepage/homepage'
-import LoginContainer from './containers/login/login'
-import RegisterContainer from './containers/register/register'
-import HRProfileContainer from './containers/HR-profile/HR-profile'
-import ApplicantProfileContainer from './containers/applicant-profile/applicant-profile'
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Job from './containers/job/job';
+import WidgetList from './containers/WidgetList/WidgetList';
+import Home from './containers/homepage/homepage';
+import LoginContainer from './containers/login/login';
+import RegisterContainer from './containers/register/register';
+import HRProfileContainer from './containers/HR-profile/HR-profile';
+import ApplicantProfileContainer from './containers/applicant-profile/applicant-profile';
+import CompanyManagerProfileContainer from './containers/company-manager-profile/company-manager-profile';
+
 import Dashboard from './components/dashboard/dashboard'
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
@@ -18,6 +20,7 @@ import './config/config'
 import './index.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
+import LocalJob from "./containers/local-job/localJob";
 const bootstrap = require('bootstrap');
 
 let store = createStore(combineReducer, compose(
@@ -41,8 +44,10 @@ ReactDOM.render(
                         <Route path='/register' component={RegisterContainer}/>
                         <Route path='/HR-profile' component={HRProfileContainer}/>
                         <Route path='/applicant-profile' component={ApplicantProfileContainer}/>
+                        <Route path='/CompanyManager-profile' component={CompanyManagerProfileContainer}/>
                         <Route path='/job/detail/:jobId' component={WidgetList}/>
                         <Route path='/chat/:user' component={ChatContainer}/>
+                        <Route path='/localJob' component={LocalJob}/>
                         <Route component={Dashboard}/>
 
                     </Switch>

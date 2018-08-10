@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import NavLinkBar from '../navlink/navlink'
 import AuthRouteContainer from '../../components/auth-route/auth-route'
 import HRContainer from '../HR/HR';
+import CompanyEditor from '../companyEditor/companyEditor'
 import ApplicantContainer from '../applicant/applicant'
 import adminContainer from '../admin/admin'
 import browserCookie from 'browser-cookies';
@@ -12,6 +13,7 @@ import * as actions from "../../actions";
 import { Redirect } from 'react-router-dom';
 import UserContainer from "../user/user"
 import {getMsgList, sendMsg, recvMsg} from '../../redux/chat.redux'
+import RepresentativeContainer from "../representative/representative";
 // function HR(){
 //     return <h2>HR front page</h2>
 // }
@@ -111,8 +113,26 @@ class Dashboard extends React.Component{
                 title:'Self center',
                 component: UserContainer,
                 hide: false
+            },
+            {
+                path:'/CompanyManager',
+                text:'CompanyManager',
+                icon:'CompanyManager',
+                title: 'Company Profile',
+                component: CompanyEditor,
+                hide: false
+            },
+            { 
+                path:'/representative',
+                text:'representative',
+                icon:'user',
+                title:'representative',
+                component: RepresentativeContainer,
+                hide: true
             }
-        ]
+            }
+        ];
+
 
 
 
@@ -166,13 +186,13 @@ class Dashboard extends React.Component{
 
 const stateToPropertiesMapper = (state) =>(
     state
-)
+);
 const dispatcherToPropsMapper = dispatch =>({
     logoutSubmit: () => actions.logoutSubmit(dispatch),
     sendMsg: (send) => sendMsg(dispatch, send),
     getMsgList: () => getMsgList(dispatch),
     recvMsg: () => recvMsg(dispatch)
-})
+});
 
 const DashboardContainer = connect(stateToPropertiesMapper,dispatcherToPropsMapper)(Dashboard)
 
