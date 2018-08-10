@@ -22,6 +22,7 @@ class Admin extends React.Component{
         }
         this.onChange = this.onChange.bind(this);
         this.handleRegister = this.handleRegister.bind(this);
+        this.handleEdit = this.handleEdit.bind(this);
     }
 
     componentDidMount(){
@@ -39,9 +40,20 @@ class Admin extends React.Component{
         let info = {user: this.state.user, password: this.state.password, status: this.state.status, avatar: this.state.avatar};
         this.props.createUser(info)
             .then(res=>{
+                if(res === null){
+                    alert('user cannot be created.');
+                    return;
+                }
                 this.props.getUserList('admin');
-                alert('user has been created!');
+                if(res.data.code === 0){
+                    alert('user has been created!');
+                } else {
+                    alert('user cannot be created.');
+                }
             });
+    }
+
+    handleEdit(){
     }
 
     render(){

@@ -66,7 +66,11 @@ export const login = (dispatch, {user, password}) => {
 // create user directly from admin users list
 export const createUser = (dispatch, {user, password, status,avatar}) => {
     if(!user||!password||!status||!avatar){
-        return errorMsg('username and password must not be empty!');
+        return new Promise(
+            function (resolve, reject){
+                resolve(null);
+            }
+        );
     }
 
     return axios(constants.HOST +'/user/createUser',{
