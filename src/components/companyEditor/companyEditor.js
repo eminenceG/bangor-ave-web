@@ -33,7 +33,6 @@ class CompanyEditor extends React.Component{
     console.log(this.props);
     return (
       <div className="container">
-        <h2>Company Editor</h2>
         <h2>{this.props.userReducer.company}</h2>
         <form>
           <FieldGroup

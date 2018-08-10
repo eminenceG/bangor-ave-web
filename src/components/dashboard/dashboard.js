@@ -113,10 +113,7 @@ class Dashboard extends React.Component{
                 hide: false
             }
         ]
-
-
-
-
+        
         return (
             <div>
                 <AuthRouteContainer/>
