@@ -63,6 +63,18 @@ export const login = (dispatch, {user, password}) => {
                 }
             });
 }
+// create user directly from admin users list
+export const createUser = (dispatch, {user, password, status,avatar}) => {
+    if(!user||!password||!status||!avatar){
+        return errorMsg('username and password must not be empty!');
+    }
+
+    return axios(constants.HOST +'/user/createUser',{
+        method:'post',
+        data: {user, password, status,avatar},
+        withCredentials: true
+    });
+}
 
 
 export const register = (dispatch,{user, password, confirmedPassword, status}) => {

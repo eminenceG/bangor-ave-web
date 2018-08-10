@@ -78,7 +78,7 @@ class Dashboard extends React.Component{
                 icon:'HR',
                 title:'Applicants list',
                 component: HRContainer,
-                hide: user.status !== 'HR' && (user.status !== 'admin')
+                hide: user.status !== 'HR'
             },
             {
                 path:'/applicant',
@@ -86,7 +86,7 @@ class Dashboard extends React.Component{
                 icon:'job',
                 title:'HR list',
                 component: ApplicantContainer,
-                hide: user.status !== 'applicant' && (user.status !== 'admin')
+                hide: user.status !== 'applicant'
             },
             {
                 path:'/admin',

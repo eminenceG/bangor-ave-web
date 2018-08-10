@@ -59,8 +59,8 @@ class HRProfile extends React.Component{
         let inputElemCompany;
         let inputElemMoney;
         let inputElemPosDesc;
-        console.log(this.props);
-        console.log(this.state);
+        // console.log(this.props);
+        // console.log(this.state);
         //this.props.redirectTo&&this.props.redirectTo!=this.props.location.pathname
         // only redirect when current location is different from target url.
         return(
