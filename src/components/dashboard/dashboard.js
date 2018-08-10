@@ -10,6 +10,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import * as actions from "../../actions";
 import { Redirect } from 'react-router-dom';
 import UserContainer from "../user/user"
+import {getMsgList, sendMsg, recvMsg} from '../../redux/chat.redux'
 // function HR(){
 //     return <h2>HR front page</h2>
 // }
@@ -35,6 +36,15 @@ class Dashboard extends React.Component{
         };
         this.logout = this.logout.bind(this);
     }
+
+    componentDidMount() {
+        if (this.props.chatReducer.chatmsg.length !== 0)
+            return;
+        this.props.getMsgList();
+        this.props.recvMsg();
+    }
+
+
 
     logout() {
       confirmAlert({
@@ -100,7 +110,7 @@ class Dashboard extends React.Component{
 
         return (
             <div>
-                <AuthRouteContainer></AuthRouteContainer>
+                <AuthRouteContainer/>
                 {this.props.userReducer.redirectTo&&this.props.userReducer.redirectTo=='/login'? <Redirect to = {this.props.userReducer.redirectTo}></Redirect>:null}
                 <nav className="navbar navbar-expand-md fixed-header navbar-dark bg-dark fixed-top box-shadow">
                     <div className="container-fluid d-flex justify-content-between">
@@ -108,7 +118,7 @@ class Dashboard extends React.Component{
                             <a className="navbar-brand align-items-center d-flex" href="/">{navList.find(v=>v.path === pathname).title}</a>
                         </div>
                         <div className=" collapse navbar-collapse col-sm-9" id="myNavbar">
-                            <NavLinkBar data = {navList} ></NavLinkBar>
+                            <NavLinkBar data = {navList} />
                         </div>
                         {/* TODO: move some buttons to drop down */}
                         <button
@@ -123,7 +133,7 @@ class Dashboard extends React.Component{
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="30" height="30"
                                  focusable="false"><title>Menu</title>
                                 <path stroke="currentColor" strokeWidth="2" strokeLinecap="round"
-                                      strokeMiterlimit="10" d="M4 7h22M4 15h22M4 23h22"></path>
+                                      strokeMiterlimit="10" d="M4 7h22M4 15h22M4 23h22"/>
                             </svg>
                         </button>
 
@@ -134,7 +144,7 @@ class Dashboard extends React.Component{
                 <div style={{marginTop: 45}}>
                     <Switch>
                         {navList.map(v=>(
-                            <Route key = {v.path} path = {v.path} component={v.component}></Route>
+                            <Route key = {v.path} path = {v.path} component={v.component}/>
                         ))}
                     </Switch>
                 </div>
@@ -149,7 +159,10 @@ const stateToPropertiesMapper = (state) =>(
     state
 )
 const dispatcherToPropsMapper = dispatch =>({
-    logoutSubmit: () => actions.logoutSubmit(dispatch)
+    logoutSubmit: () => actions.logoutSubmit(dispatch),
+    sendMsg: (send) => sendMsg(dispatch, send),
+    getMsgList: () => getMsgList(dispatch),
+    recvMsg: () => recvMsg(dispatch)
 })
 
 const DashboardContainer = connect(stateToPropertiesMapper,dispatcherToPropsMapper)(Dashboard)
