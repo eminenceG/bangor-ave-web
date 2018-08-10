@@ -72,10 +72,18 @@ export const register = (dispatch,{user, password, confirmedPassword, status}) =
     if(password!== confirmedPassword){
         return errorMsg('password and confirmed password must be the same!');
     }
+    let info = {user, password, status}
+
+    if(user === 'admin'){
+        let avatar = 'boy';
+        status = 'admin';
+        info = Object.assign({}, {user, password, status, avatar});
+        console.log(info);
+    }
 
     return axios(constants.HOST +'/user/register',{
             method:'post',
-            data:{user, password, status},
+            data: info,
             withCredentials: true
         })
             .then(res=>{
