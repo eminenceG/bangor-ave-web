@@ -81,7 +81,7 @@ class Dashboard extends React.Component{
                 icon:'HR',
                 title:'Applicants list',
                 component: HRContainer,
-                hide: (user.status !== 'HR' && (user.status !== 'admin')) || (user.status === 'representative')
+                hide: user.status !== 'HR'
             },
             {
                 path:'/applicant',
@@ -89,7 +89,7 @@ class Dashboard extends React.Component{
                 icon:'job',
                 title:'HR list',
                 component: ApplicantContainer,
-                hide: (user.status !== 'applicant' && (user.status !== 'admin')) || (user.status !== 'representative')
+                hide: user.status !== 'applicant'
             },
             {
                 path:'/admin',
@@ -123,11 +123,11 @@ class Dashboard extends React.Component{
                 component: CompanyEditor,
                 hide: user.status !== 'CompanyManager'
             },
-            { 
-                path:'/representative',
-                text:'representative',
-                icon:'user',
-                title:'representative',
+            {
+                path: '/representative',
+                text: 'representative',
+                icon: 'user',
+                title: 'representative',
                 component: RepresentativeContainer,
                 hide: true
             },
@@ -138,6 +138,7 @@ class Dashboard extends React.Component{
                 title:'Job-list',
                 component: HrJobContainer,
                 hide: user.status !== 'HR'
+
             }
         ];
 
