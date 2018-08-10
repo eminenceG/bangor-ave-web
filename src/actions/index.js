@@ -25,7 +25,7 @@ export function logoutSubmit(dispatch) {
 }
 
 export function updateProfile(dispatch, data){
-    // console.log(data);
+    console.log(data);
     return axios(constants.HOST + '/user/updateProfile',{
             method:'post',
             data:data,
@@ -40,6 +40,16 @@ export function updateProfile(dispatch, data){
         })
 
 }
+
+export function updateUserFromAdmin(dispatch, data){
+    // console.log(data);
+    return axios(constants.HOST + '/user/updateUserFromAdmin',{
+        method:'post',
+        data:data,
+        withCredentials: true} )
+}
+
+
 
 export const login = (dispatch, {user, password}) => {
     if(!user||!password){
@@ -61,6 +71,39 @@ export const login = (dispatch, {user, password}) => {
                     // the error message will be determined by backend.
                 }
             });
+}
+// create user directly from admin users list
+export const createUser = (dispatch, {user, password, status,avatar}) => {
+    if(!user||!password||!status||!avatar){
+        return new Promise(
+            function (resolve, reject){
+                resolve(null);
+            }
+        );
+    }
+
+    return axios(constants.HOST +'/user/createUser',{
+        method:'post',
+        data: {user, password, status,avatar},
+        withCredentials: true
+    });
+}
+
+// delete user directly from admin users list
+export const deleteUser = (dispatch, userId) => {
+    if(!userId){
+        return new Promise(
+            function (resolve, reject){
+                resolve(null);
+            }
+        );
+    }
+
+    return axios(constants.HOST +'/user/deleteUser',{
+        method:'delete',
+        data: {userId},
+        withCredentials: true
+    });
 }
 
 
@@ -106,7 +149,11 @@ export const register = (dispatch,{user, password, confirmedPassword, status}) =
 
 
 export function userList(data) {
-    return {type: constants.USER_LIST, payload: data};
+    let filteredData = data.map(item => {
+        const {password, ...d} = item;
+        return d;
+    });
+    return {type: constants.USER_LIST, payload: filteredData};
 }
 
 export function getUserList(dispatch, status){
