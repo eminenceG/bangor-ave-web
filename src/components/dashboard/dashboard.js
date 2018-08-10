@@ -130,7 +130,6 @@ class Dashboard extends React.Component{
                 component: RepresentativeContainer,
                 hide: true
             }
-            }
         ];
 
 
