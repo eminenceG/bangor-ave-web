@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import NavLinkBar from '../navlink/navlink'
 import AuthRouteContainer from '../../components/auth-route/auth-route'
 import HRContainer from '../HR/HR';
+import CompanyEditor from '../companyEditor/companyEditor'
 import ApplicantContainer from '../applicant/applicant'
 import browserCookie from 'browser-cookies';
 import { confirmAlert } from 'react-confirm-alert';
@@ -101,6 +102,14 @@ class Dashboard extends React.Component{
                 icon:'user',
                 title:'Self center',
                 component: UserContainer,
+                hide: false
+            },
+            {
+                path:'/CompanyManager',
+                text:'CompanyManager',
+                icon:'CompanyManager',
+                title: 'Company Profile',
+                component: CompanyEditor,
                 hide: false
             }
         ]
