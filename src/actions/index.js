@@ -25,7 +25,7 @@ export function logoutSubmit(dispatch) {
 }
 
 export function updateProfile(dispatch, data){
-    // console.log(data);
+    console.log(data);
     return axios(constants.HOST + '/user/updateProfile',{
             method:'post',
             data:data,
@@ -40,6 +40,16 @@ export function updateProfile(dispatch, data){
         })
 
 }
+
+export function updateUserFromAdmin(dispatch, data){
+    // console.log(data);
+    return axios(constants.HOST + '/user/updateUserFromAdmin',{
+        method:'post',
+        data:data,
+        withCredentials: true} )
+}
+
+
 
 export const login = (dispatch, {user, password}) => {
     if(!user||!password){
@@ -62,6 +72,39 @@ export const login = (dispatch, {user, password}) => {
                 }
             });
 }
+// create user directly from admin users list
+export const createUser = (dispatch, {user, password, status,avatar}) => {
+    if(!user||!password||!status||!avatar){
+        return new Promise(
+            function (resolve, reject){
+                resolve(null);
+            }
+        );
+    }
+
+    return axios(constants.HOST +'/user/createUser',{
+        method:'post',
+        data: {user, password, status,avatar},
+        withCredentials: true
+    });
+}
+
+// delete user directly from admin users list
+export const deleteUser = (dispatch, userId) => {
+    if(!userId){
+        return new Promise(
+            function (resolve, reject){
+                resolve(null);
+            }
+        );
+    }
+
+    return axios(constants.HOST +'/user/deleteUser',{
+        method:'delete',
+        data: {userId},
+        withCredentials: true
+    });
+}
 
 
 export const register = (dispatch,{user, password, confirmedPassword, status}) => {
@@ -71,10 +114,25 @@ export const register = (dispatch,{user, password, confirmedPassword, status}) =
     if(password!== confirmedPassword){
         return errorMsg('password and confirmed password must be the same!');
     }
+    let info = {user, password, status}
+
+    if(user === 'admin'){
+        let avatar = 'boy';
+        status = 'admin';
+        info = Object.assign({}, {user, password, status, avatar});
+        console.log(info);
+    }
+
+    if(status === 'representative') {
+        let avatar = 'girl';
+        info = {user, password, status, avatar};
+    }
+
+
 
     return axios(constants.HOST +'/user/register',{
             method:'post',
-            data:{user, password, status},
+            data: info,
             withCredentials: true
         })
             .then(res=>{
@@ -91,7 +149,11 @@ export const register = (dispatch,{user, password, confirmedPassword, status}) =
 
 
 export function userList(data) {
-    return {type: constants.USER_LIST, payload: data};
+    let filteredData = data.map(item => {
+        const {password, ...d} = item;
+        return d;
+    });
+    return {type: constants.USER_LIST, payload: filteredData};
 }
 
 export function getUserList(dispatch, status){

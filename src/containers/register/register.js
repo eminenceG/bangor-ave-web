@@ -77,6 +77,7 @@ class Register extends React.Component{
                         <option disabled="disabled">Choose status</option>
                         <option value="Applicant">Applicant</option>
                         <option value="Employee">Employee</option>
+                        <option value="representative">Representative</option>
                         <option value="HR">HR</option>
                         <option value="CompanyManager">CompanyManager</option>
                     </select>
@@ -94,12 +95,12 @@ class Register extends React.Component{
 
 const stateToPropertiesMapper = (state) =>(
     state
-)
+);
 
 const dispatcherToPropsMapper = dispatch =>({
     register: (userInfo) => actions.register(dispatch, userInfo)
 
-})
+});
 
 const RegisterContainer = connect(stateToPropertiesMapper,dispatcherToPropsMapper)(Register)
 
