@@ -42,6 +42,14 @@ export function updateProfile(dispatch, data){
 
 }
 
+export function updateUserFromAdmin(dispatch, data){
+    // console.log(data);
+    return axios(constants.HOST + '/user/updateUserFromAdmin',{
+        method:'post',
+        data:data,
+        withCredentials: true} )
+}
+
 
 
 export const login = (dispatch, {user, password}) => {

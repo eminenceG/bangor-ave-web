@@ -24,6 +24,7 @@ class Admin extends React.Component{
         this.handleRegister = this.handleRegister.bind(this);
         this.handleEdit = this.handleEdit.bind(this);
         this.handleEditDone = this.handleEditDone.bind(this);
+        this.handleEditToAdd = this.handleEditToAdd.bind(this);
     }
 
     componentDidMount(){
@@ -61,8 +62,24 @@ class Admin extends React.Component{
 
     handleEditDone(){
         const {action, password, ... info} = this.state;
-        console.log(info);
-        this.props.updateProfile(info);
+        // console.log(info);
+        this.props.updateUserFromAdmin(info)
+            .then(res=>{
+                if(res === null){
+                    alert('user cannot be updated.');
+                    return;
+                }
+                this.props.getUserList('admin');
+                if(res.data.code === 0){
+                    alert('user info has been updated!');
+                } else {
+                    alert('user cannot be updated.');
+                }
+            });
+    }
+
+    handleEditToAdd(){
+        this.setState({action:'add'})
     }
 
     render(){
@@ -76,6 +93,7 @@ class Admin extends React.Component{
         let inputPassword;
         return (
             <div className="container">
+                <a name="top"></a>
                 <h2>User Editor</h2>
                 <div className="container">
                     <input
@@ -144,9 +162,11 @@ class Admin extends React.Component{
                         :null}
 
                     {this.state.action==='edit'?
-                        <button
-                            className="btn btn-success"
-                            onClick={this.handleEditDone}>Edit done!</button>
+                        <div>
+                            <button className="btn btn-success" onClick={this.handleEditDone} style={{paddingRight: "20px"}}>Edit done!</button>
+                            &nbsp;
+                            <button className="btn btn-primary" onClick={this.handleEditToAdd}>Add user</button>
+                        </div>
                         :null}
                 </div>
 
@@ -170,7 +190,7 @@ const stateToPropertiesMapper = (state) =>(
 const dispatcherToPropsMapper = dispatch =>({
     getUserList: (userInfo) => actions.getUserList(dispatch, userInfo),
     createUser: (userInfo) => actions.createUser(dispatch, userInfo),
-    updateProfile: (userInfo) => actions.updateProfile(dispatch, userInfo)
+    updateUserFromAdmin: (userInfo) => actions.updateUserFromAdmin(dispatch, userInfo)
 })
 
 

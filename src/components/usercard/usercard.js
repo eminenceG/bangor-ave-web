@@ -36,8 +36,9 @@ class UserCard extends React.Component {
                         </div>
                         {this.props.userReducer.status==='admin'?
                         <div className="col-1">
-                            <button className="btn btn-primary"
-                                    onClick={()=>{this.props.handleEdit(v)}}>edit</button>
+                            <a className="btn btn-primary"
+                                    href="#top"
+                                    onClick={()=>{this.props.handleEdit(v)}}>edit</a>
                         </div>:null}
                     </div>
                 </div>:null
