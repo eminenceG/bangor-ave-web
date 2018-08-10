@@ -32,7 +32,8 @@ class Chat extends React.Component {
     }
 
     componentDidMount() {
-
+        if(this.props.chatReducer.chatmsg.length !== 0)
+            return;
         this.props.getMsgList();
         this.props.recvMsg();
         // console.log(this.props);
@@ -49,38 +50,67 @@ class Chat extends React.Component {
 
     render() {
 
-        const user = this.props.match.params.user;
+        const userId = this.props.match.params.user;
         const from = this.props.userReducer._id;
         const to = this.props.match.params.user;
         const chatId = [from, to].sort().join('_');
+        const users = this.props.chatReducer.users;
+
+        if(!users || !users[userId]) {
+            return null;
+        }
+
         return(
             <div className="container">
                 <AuthRouteContainer/>
                 <ul className="list-group">
-                <li className=" active list-group-item">
-                    to:
-                    <em>{this.props.match.params.user}</em>
+                <li style={{textAlign: 'center'}}
+                    className="active list-group-item">
+                    Chatting with:
+                    <strong style={{marginLeft: 10}}>{users[userId].name}</strong>
                 </li>
-
 
                     {this.props.chatReducer.chatmsg.map(
                         v => {
-                            if(v.chatid === chatId && v.from === user) {
+                            if(v.chatid === chatId && v.from === userId) {
                                 return(
                                     <li key={v._id} className="list-group-item">
-                                        <p className="float-left"
-                                           >
-                                            <em>receive</em> : {v.content}
-                                            </p>
+                                        <div className="col-9 float-left row">
+                                            <div className="col-1">
+                                                <img className="float-left"
+                                                     style={{width: 50}}
+                                                     src={require(`../img/${users[userId].avatar}.png`)}
+                                                     alt="Card image cap"/>
+                                            </div>
+                                            <div className="col-11" >
+                                                <p style={{padding: 10, border: "0.5px solid #141416", borderRadius: "5px"}}
+                                                    className="float-left">
+                                                    {v.content}
+                                                </p>
+                                            </div>
+                                        </div>
+
                                     </li>
                                 )
-                            } else if(v.chatid === chatId && v.to === user){
+                            } else if(v.chatid === chatId && v.to === userId){
                                 return(
                                     <li key={v._id} className="list-group-item">
-                                        <p  className="float-right"
-                                            >
-                                            <em>send</em> : {v.content}
-                                        </p>
+                                        <div className="col-9 float-right">
+                                            <div className="row">
+                                                <div className="col-11" >
+                                                    <p style={{padding: 10, border: "0.5px solid #27983d", borderRadius: "5px"}}
+                                                       className="float-right">{v.content}</p>
+                                                </div>
+                                                <div className="col-1">
+                                                    <img className="float-right"
+                                                         style={{width: 50}}
+                                                         src={require(`../img/${users[from].avatar}.png`)}
+                                                         alt="Card image cap"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
                                     </li>
                                 )
                             }
@@ -88,7 +118,7 @@ class Chat extends React.Component {
                         }
                     )}
                 </ul>
-                <div>
+                <div  style={{marginBottom: 200}} >
                     {this.state.message.map(
                         message => {
                             return(
@@ -100,8 +130,15 @@ class Chat extends React.Component {
                     )}
                 </div>
 
-                <div className="stick-footer container">
+                <div className="stick-footer fixed-bottom container">
                     <div className="input-group mb-3">
+                        <div className="input-group-append">
+                            <button className="btn btn-outline-secondary"
+                                    onClick={() => this.props.history.goBack()}
+                                    type="button" id="button-addon2">
+                                Go Back
+                            </button>
+                        </div>
                         <input type="text"
                                className="form-control"
                                placeholder="message"
