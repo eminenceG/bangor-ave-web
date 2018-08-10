@@ -81,6 +81,13 @@ export const register = (dispatch,{user, password, confirmedPassword, status}) =
         console.log(info);
     }
 
+    if(status === 'representative') {
+        let avatar = 'girl';
+        info = {user, password, status, avatar};
+    }
+
+
+
     return axios(constants.HOST +'/user/register',{
             method:'post',
             data: info,

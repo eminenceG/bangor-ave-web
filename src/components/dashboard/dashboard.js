@@ -12,6 +12,7 @@ import * as actions from "../../actions";
 import { Redirect } from 'react-router-dom';
 import UserContainer from "../user/user"
 import {getMsgList, sendMsg, recvMsg} from '../../redux/chat.redux'
+import RepresentativeContainer from "../representative/representative";
 // function HR(){
 //     return <h2>HR front page</h2>
 // }
@@ -78,7 +79,7 @@ class Dashboard extends React.Component{
                 icon:'HR',
                 title:'Applicants list',
                 component: HRContainer,
-                hide: user.status !== 'HR' && (user.status !== 'admin')
+                hide: (user.status !== 'HR' && (user.status !== 'admin')) || (user.status === 'representative')
             },
             {
                 path:'/applicant',
@@ -86,7 +87,7 @@ class Dashboard extends React.Component{
                 icon:'job',
                 title:'HR list',
                 component: ApplicantContainer,
-                hide: user.status !== 'applicant' && (user.status !== 'admin')
+                hide: (user.status !== 'applicant' && (user.status !== 'admin')) || (user.status !== 'representative')
             },
             {
                 path:'/admin',
@@ -111,8 +112,17 @@ class Dashboard extends React.Component{
                 title:'Self center',
                 component: UserContainer,
                 hide: false
+            },
+            {
+                path:'/representative',
+                text:'representative',
+                icon:'user',
+                title:'representative',
+                component: RepresentativeContainer,
+                hide: true
             }
-        ]
+        ];
+
 
 
 
@@ -166,13 +176,13 @@ class Dashboard extends React.Component{
 
 const stateToPropertiesMapper = (state) =>(
     state
-)
+);
 const dispatcherToPropsMapper = dispatch =>({
     logoutSubmit: () => actions.logoutSubmit(dispatch),
     sendMsg: (send) => sendMsg(dispatch, send),
     getMsgList: () => getMsgList(dispatch),
     recvMsg: () => recvMsg(dispatch)
-})
+});
 
 const DashboardContainer = connect(stateToPropertiesMapper,dispatcherToPropsMapper)(Dashboard)
 
