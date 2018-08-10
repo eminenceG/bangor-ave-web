@@ -73,10 +73,10 @@ class CompanyEditor extends React.Component{
 
 const stateToPropertiesMapper = (state) =>(
     state
-)
+);
 
 const dispatcherToPropsMapper = dispatch =>({
-})
+});
 
 
 export default connect(stateToPropertiesMapper,dispatcherToPropsMapper)(CompanyEditor)

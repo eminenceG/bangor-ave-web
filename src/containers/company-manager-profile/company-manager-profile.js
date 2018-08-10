@@ -8,6 +8,7 @@ import AuthRouteContainer from '../../components/auth-route/auth-route'
 import browserCookie from 'browser-cookies';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css'
+import CompanyServiceClient from "../../services/CompanyServiceClient";
 
 class CompanyManagerProfile extends React.Component{
     constructor(props){
@@ -21,8 +22,10 @@ class CompanyManagerProfile extends React.Component{
         };
 
         this.onChange = this.onChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.selectAvatar = this.selectAvatar.bind(this);
         this.logout = this.logout.bind(this);
+        this.companyService = CompanyServiceClient.instance;
     }
 
     componentDidMount(){
@@ -74,6 +77,30 @@ class CompanyManagerProfile extends React.Component{
         });
     }
 
+
+    handleSubmit() {
+        //Check if the company exists, if exist, the manager can't finish the profile
+
+        if(!this.state.company.company) {
+            alert('Company name can\'t be empty');
+            return;
+        }
+
+
+        this.companyService.createCompany(this.state.company)
+            .then(
+                response => {
+                    if(response.error) {
+                        alert("Sorry you can't save the profile because the company name already exists")
+                    } else {
+                        this.props.update(this.state);
+                    }
+                }
+            );
+
+
+    }
+
     render(){
         document.body.style = 'background: white;';
         let inputElemComp;
@@ -85,8 +112,8 @@ class CompanyManagerProfile extends React.Component{
         // only redirect when current location is different from target url.
         return(
             <div>
-                <AuthRouteContainer></AuthRouteContainer>
-                {this.props.userReducer.redirectTo&&this.props.userReducer.redirectTo!==this.props.location.pathname? <Redirect to = {this.props.userReducer.redirectTo}></Redirect>:null}
+                <AuthRouteContainer/>
+                {this.props.userReducer.redirectTo&&this.props.userReducer.redirectTo!==this.props.location.pathname? <Redirect to = {this.props.userReducer.redirectTo}/>:null}
                 <nav className="navbar navbar-expand-md bg-dark fixed-top">
                     <div className="container-fluid">
                         <div className="navbar-header">
@@ -101,7 +128,7 @@ class CompanyManagerProfile extends React.Component{
                 <div className="container">
                     <AvatarSelector
                         selectAvatar={this.selectAvatar} avatar = {this.state.avatar}
-                    ></AvatarSelector>
+                    />
                     <br/>
                     <input
                         placeholder="Company Name"
@@ -126,12 +153,13 @@ class CompanyManagerProfile extends React.Component{
 
 
                     <button className="btn btn-primary"
-                            onClick={()=>{
-                                this.props.update(this.state);
-                            }}>Save</button>
+                            onClick={this.handleSubmit}>
+                        Save
+                    </button>
                     <button
-                      className="btn btn-primary"
-                      onClick={this.logout}
+                        style={{marginLeft: 20}}
+                        className="btn btn-danger"
+                        onClick={this.logout}
                     >
                       Logout
                     </button>
@@ -145,15 +173,15 @@ class CompanyManagerProfile extends React.Component{
 
 const stateToPropertiesMapper = (state) =>(
     state
-)
+);
 
 const dispatcherToPropsMapper = dispatch =>({
     update: (userInfo) => actions.updateProfile(dispatch, userInfo),
     logoutSubmit: () => actions.logoutSubmit(dispatch)
-})
+});
 
 
 
-const CompanyManagerProfileContainer = connect(stateToPropertiesMapper,dispatcherToPropsMapper)(CompanyManagerProfile)
+const CompanyManagerProfileContainer = connect(stateToPropertiesMapper,dispatcherToPropsMapper)(CompanyManagerProfile);
 
 export default CompanyManagerProfileContainer;
