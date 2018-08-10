@@ -26,7 +26,7 @@ export function logoutSubmit(dispatch) {
 }
 
 export function updateProfile(dispatch, data){
-    // console.log(data);
+    console.log(data);
     return axios(constants.HOST + '/user/updateProfile',{
             method:'post',
             data:data,
@@ -41,6 +41,8 @@ export function updateProfile(dispatch, data){
         })
 
 }
+
+
 
 export const login = (dispatch, {user, password}) => {
     if(!user||!password){
@@ -116,7 +118,11 @@ export const register = (dispatch,{user, password, confirmedPassword, status}) =
 
 
 export function userList(data) {
-    return {type: constants.USER_LIST, payload: data};
+    let filteredData = data.map(item => {
+        const {password, ...d} = item;
+        return d;
+    });
+    return {type: constants.USER_LIST, payload: filteredData};
 }
 
 export function getUserList(dispatch, status){

@@ -23,6 +23,7 @@ class Admin extends React.Component{
         this.onChange = this.onChange.bind(this);
         this.handleRegister = this.handleRegister.bind(this);
         this.handleEdit = this.handleEdit.bind(this);
+        this.handleEditDone = this.handleEditDone.bind(this);
     }
 
     componentDidMount(){
@@ -53,7 +54,15 @@ class Admin extends React.Component{
             });
     }
 
-    handleEdit(){
+    handleEdit(v){
+        this.setState(v);
+        this.setState({action:'edit'});
+    }
+
+    handleEditDone(){
+        const {action, password, ... info} = this.state;
+        console.log(info);
+        this.props.updateProfile(info);
     }
 
     render(){
@@ -75,12 +84,13 @@ class Admin extends React.Component{
                         value={this.state.user}
                         onChange={()=>this.onChange('user',inputElemName.value)}
                         ref={node=> inputElemName = node}/>
-                    <input
+                    {this.state.action === 'add'? <input
                         className="form-control mb-3"
                         placeholder="password"
                         value={this.state.password}
                         onChange={()=>this.onChange('password',inputPassword.value)}
-                        ref={node=> inputPassword = node}/>
+                        ref={node=> inputPassword = node}/>:null}
+
                     <input
                         className="form-control mb-3"
                         placeholder="avatar"
@@ -106,19 +116,16 @@ class Admin extends React.Component{
                                value={this.state.company}
                                onChange={()=>this.onChange('company',inputCompany.value)}
                                ref={node=> inputCompany = node}/>
-                        <br/>
                         <input className="form-control mb-3"
                                 placeholder="money"
                                value={this.state.money}
                                onChange={()=>this.onChange('money',inputMoney.value)}
                                ref={node=> inputMoney = node}/>
-                        <br/>
                         <textarea className="form-control mb-3"
                                 placeholder="Position Description"
                                value={this.state.posDesc}
                                onChange={()=>this.onChange('posDesc',inputposDesc.value)}
                                ref={node=> inputposDesc = node}/>
-                        <br/>
                     </div>:null}
 
                     {this.state.status === 'applicant' && this.state.action==='edit'?<div>
@@ -127,7 +134,6 @@ class Admin extends React.Component{
                                value={this.state.desc}
                                onChange={()=>this.onChange('desc',inputDesc.value)}
                                ref={node=> inputDesc = node}/>
-                        <br/>
                     </div>:null}
 
 
@@ -138,7 +144,9 @@ class Admin extends React.Component{
                         :null}
 
                     {this.state.action==='edit'?
-                        <button className="btn btn-success">Edit done!</button>
+                        <button
+                            className="btn btn-success"
+                            onClick={this.handleEditDone}>Edit done!</button>
                         :null}
                 </div>
 
@@ -146,7 +154,7 @@ class Admin extends React.Component{
                 <h2>User List</h2>
                 {this.props.chatUser.userList?
                     <UserCard
-                        userlist={this.props.chatUser.userList}
+                        userlist={this.props.chatUser.userList} handleEdit={this.handleEdit}
                     ></UserCard>:null}
             </div>
         )
@@ -161,7 +169,8 @@ const stateToPropertiesMapper = (state) =>(
 
 const dispatcherToPropsMapper = dispatch =>({
     getUserList: (userInfo) => actions.getUserList(dispatch, userInfo),
-    createUser: (userInfo) => actions.createUser(dispatch, userInfo)
+    createUser: (userInfo) => actions.createUser(dispatch, userInfo),
+    updateProfile: (userInfo) => actions.updateProfile(dispatch, userInfo)
 })
 
 
