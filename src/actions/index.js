@@ -20,7 +20,6 @@ export function loadData(dispatch, userinfo){
     return dispatch({type: constants.LOAD_DATA, payload: userinfo});
 }
 
-
 export function logoutSubmit(dispatch) {
   return dispatch({type: constants.LOGOUT});
 }
