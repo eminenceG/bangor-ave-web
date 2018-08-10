@@ -20,6 +20,27 @@ class Admin extends React.Component{
     render(){
         return (
             <div className="container">
+                <h2>User Editor</h2>
+                <div>
+                    <input className="form-control" placeholder="name"/>
+                    <br/>
+                    <input className="form-control" placeholder="status"/>
+                    <br/>
+                    <input className="form-control" placeholder="avatar"/>
+                    <br/>
+                    <input className="form-control" placeholder="desc"/>
+                    <br/>
+                    <input className="form-control" placeholder="company"/>
+                    <br/>
+                    <input className="form-control" placeholder="money"/>
+                    <br/>
+                    <input className="form-control" placeholder="posDesc"/>
+                    <br/>
+
+
+                </div>
+
+
                 <h2>User List</h2>
                 {this.props.chatUser.userList?
                     <UserCard
