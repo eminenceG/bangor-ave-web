@@ -25,7 +25,7 @@ class UserCard extends React.Component {
                         <div className="col-4">
                             <img className="card-img-top" style={{width: '180px'}} src={require(`../img/${v.avatar}.png`)} alt="Card image cap"/>
                         </div>
-                        <div className="col-7">
+                        <div className="col-6">
                             <div className="card-body">
                                 <Link to={`/chat/${v._id}`}><h5 className="card-title">{v.user}</h5></Link>
                                 <p className="card-text">{v.title}</p>
@@ -35,10 +35,14 @@ class UserCard extends React.Component {
                             </div>
                         </div>
                         {this.props.userReducer.status==='admin'?
-                        <div className="col-1">
+                        <div className="col-2">
                             <a className="btn btn-primary"
                                     href="#top"
                                     onClick={()=>{this.props.handleEdit(v)}}>edit</a>
+                            &nbsp;
+                            <a className="btn btn-danger"
+                                style={{color:"white"}}
+                               onClick={()=>{this.props.handleDelete(v)}}>delete</a>
                         </div>:null}
                     </div>
                 </div>:null

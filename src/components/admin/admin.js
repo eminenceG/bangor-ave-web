@@ -25,6 +25,7 @@ class Admin extends React.Component{
         this.handleEdit = this.handleEdit.bind(this);
         this.handleEditDone = this.handleEditDone.bind(this);
         this.handleEditToAdd = this.handleEditToAdd.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     componentDidMount(){
@@ -80,6 +81,23 @@ class Admin extends React.Component{
 
     handleEditToAdd(){
         this.setState({action:'add'})
+    }
+
+    handleDelete(v){
+        // console.log(v);
+        this.props.deleteUser(v._id)
+            .then(res=>{
+                if(res === null){
+                    alert('user cannot be deleted.');
+                    return;
+                }
+                this.props.getUserList('admin');
+                if(res.data.code === 0){
+                    alert('user has been deleted!');
+                } else {
+                    alert('user cannot be deleted.');
+                }
+            });
     }
 
     render(){
@@ -174,7 +192,7 @@ class Admin extends React.Component{
                 <h2>User List</h2>
                 {this.props.chatUser.userList?
                     <UserCard
-                        userlist={this.props.chatUser.userList} handleEdit={this.handleEdit}
+                        userlist={this.props.chatUser.userList} handleEdit={this.handleEdit} handleDelete={this.handleDelete}
                     ></UserCard>:null}
             </div>
         )
@@ -190,7 +208,8 @@ const stateToPropertiesMapper = (state) =>(
 const dispatcherToPropsMapper = dispatch =>({
     getUserList: (userInfo) => actions.getUserList(dispatch, userInfo),
     createUser: (userInfo) => actions.createUser(dispatch, userInfo),
-    updateUserFromAdmin: (userInfo) => actions.updateUserFromAdmin(dispatch, userInfo)
+    updateUserFromAdmin: (userInfo) => actions.updateUserFromAdmin(dispatch, userInfo),
+    deleteUser: (userInfo) => actions.deleteUser(dispatch, userInfo)
 })
 
 

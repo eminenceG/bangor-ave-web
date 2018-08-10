@@ -90,6 +90,23 @@ export const createUser = (dispatch, {user, password, status,avatar}) => {
     });
 }
 
+// delete user directly from admin users list
+export const deleteUser = (dispatch, userId) => {
+    if(!userId){
+        return new Promise(
+            function (resolve, reject){
+                resolve(null);
+            }
+        );
+    }
+
+    return axios(constants.HOST +'/user/deleteUser',{
+        method:'delete',
+        data: {userId},
+        withCredentials: true
+    });
+}
+
 
 export const register = (dispatch,{user, password, confirmedPassword, status}) => {
     if(!user||!password||!status){
