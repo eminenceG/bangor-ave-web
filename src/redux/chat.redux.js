@@ -10,7 +10,8 @@ const MSG_READ = 'MSG_READ';
 
 const initState = {
     chatmsg: [],
-    unread: 0
+    unread: 0,
+    users: {}
 };
 
 export function chatReducer(state=initState, action) {
@@ -19,13 +20,14 @@ export function chatReducer(state=initState, action) {
         case MSG_LIST:
             return {
                 ...state,
-                chatmsg: action.payload,
-                unread: action.payload.filter(
+                users: action.payload.users,
+                chatmsg: action.payload.messages,
+                unread: action.payload.messages.filter(
                     msg => !msg.read
                 ).length
             };
         case MSG_RECEIVE:
-            // console.log(action.payload);
+            console.log(action.payload);
             const temp = state.chatmsg;
             for(let i = 0; i < temp.length; i++) {
                 if(action.payload === temp[i]) {
@@ -38,17 +40,18 @@ export function chatReducer(state=initState, action) {
                     ...state.chatmsg,
                     action.payload
                 ],
-                unread: state.unread + 1
+                unread: state.unread + 1,
+                users: state.users
             };
         default:
             return state;
     }
 }
 
-function msgList(messages) {
+function msgList(messages, users) {
     return {
         type: 'MSG_LIST',
-        payload : messages
+        payload : {messages, users}
     }
 }
 
@@ -57,6 +60,7 @@ function msgRecv(msg) {
 }
 
 export function recvMsg(dispatch) {
+
     return socket.on('recvmsg', (data) => {
 
         dispatch(msgRecv(data))
@@ -69,11 +73,13 @@ export function sendMsg(dispatch, send) {
 }
 
 export function getMsgList(dispatch) {
-    // console.log(dispatch);
-    return axios.get(constants.HOST + '/user/getmsglist')
+
+    return axios(constants.HOST + '/user/getmsglist', {
+        withCredentials: true
+    })
         .then(res => {
             if(res.status === 200 && res.data.code === 0) {
-                dispatch(msgList(res.data.msgs))
+                dispatch(msgList(res.data.msgs, res.data.users))
             }
         })
 
