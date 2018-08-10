@@ -1,4 +1,3 @@
-
 // if user hasn't setup his avatar, visit profile page after login. Otherwise, goto his status page.
 export function getRedirectPath({status, avatar}){
 // return redirect path according to user information.
