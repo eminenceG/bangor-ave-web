@@ -37,11 +37,14 @@ export default class CompanyServiceClient {
     }
 
     findCompanyByName(companyName) {
-      console.log(constants.HOST + '/api/company/' + companyName)
       return fetch(constants.HOST + '/api/company/' + companyName)
-               .then(response => response.json());
+        .then(response => response.json());
     }
 
+    findAllCompany() {
+      return fetch(constants.HOST + '/api/company')
+        .then(response => response.json());
+    }
 
 
 
