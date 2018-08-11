@@ -205,3 +205,33 @@ export function breakFriend(dispatch, friendId){
         }
     })
 }
+
+export function makeApplication(dispatch, jobId){
+    return axios(constants.HOST + '/api/application',{
+        method:'post',
+        withCredentials: true,
+        data: {jobId}
+    }).then(res=>{
+        // console.log(res);
+        if(res.data.code === 0){
+            // console.log(res);
+            dispatch(userList(res.data.data));
+        }
+    })
+
+}
+
+export function cancelApplication(dispatch, jobId){
+    return axios(constants.HOST + '/api/application',{
+        method:'delete',
+        withCredentials: true,
+        data: {jobId}
+    }).then(res=>{
+        // console.log(res);
+        if(res.data.code === 0){
+            // console.log(res);
+            dispatch(userList(res.data.data));
+        }
+    })
+
+}
