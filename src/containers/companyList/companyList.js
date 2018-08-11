@@ -5,6 +5,36 @@ import * as actions from "../../actions";
 import CompanyServiceClient from "../../services/CompanyServiceClient";
 
 
+
+class CompanyRow extends React.Component {
+  constructor(props) {
+    super(props);  
+  }
+  render () {
+    return (
+      <div 
+        style={{marginTop: 20, marginBottom: 20}}
+        key={this.props.company._id}
+        className="border border-dark card text-center">
+        <img
+          class="card-img-top" src={this.props.company.companyImg} alt="Card image cap"/>
+        <div className="card-header">
+          <h3 className="card-title">{this.props.company.companyName}</h3>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{this.props.company.companyState}</li>
+          <li class="list-group-item">{this.props.company.companyCity}</li>
+          <li class="list-group-item">{this.props.company.companyAddress}</li>
+        </ul>
+        <div class="card-body">
+            <p class="card-text">{this.props.company.companyDescription}</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+     </div>
+    )
+  }
+}
+
 class CompanyList extends React.Component {
 
 
@@ -36,39 +66,8 @@ class CompanyList extends React.Component {
       return this.state.company.map(
         company => {
             return (
-                <div style={{marginTop: 20, marginBottom: 20}}
-                     key={company._id}
-                     className="border border-dark card text-center">
-                    <div className="card-header">
-                        <h5 className="card-title">Company: {company.companyName}</h5>
-                    </div>
-                    {/* <div className="card-header">
-                        <div>
-                            Company: {job.company.companyName}
-                        </div>
-                        <div>
-                            <Link to={'/news/' + job.company.companyName}>
-                                click to view news about this company
-                            </Link>
-                        </div>  
-                    </div>
-                    <div className="card-header">
-                        Salary: {job.salary}
-                    </div>
-                    <div className="card-header">
-                        <div>
-                            Location: {job.location}
-                        </div>
-                        <div>
-                            <Link to={'/news/' + job.location}>
-                                click to view news about this location
-                            </Link>
-                        </div>  
-                    </div>
-                    <div className="card-body">
-                        <p className="card-text">Job Description: {job.description}</p>
-                    </div> */}
-                </div>
+              <CompanyRow
+                company={company}/>
             )
         }
       )
