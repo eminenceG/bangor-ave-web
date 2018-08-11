@@ -5,7 +5,7 @@ export default class NewsRowComponent extends React.Component {
     render() {
         const article = this.props.article;
         return(
-            <li className='list-group-item'>
+            <li className='list-group-item border border-dark'>
 
                 <div className="row">
                     <div className="col-4">

@@ -15,6 +15,7 @@ import UserContainer from "../user/user"
 import {getMsgList, sendMsg, recvMsg} from '../../redux/chat.redux'
 import RepresentativeContainer from "../representative/representative";
 import HrJobContainer from "../../containers/hr-job/hrJob";
+import LocalJobContainer from "../../containers/local-job/localJob";
 // function HR(){
 //     return <h2>HR front page</h2>
 // }
@@ -132,13 +133,20 @@ class Dashboard extends React.Component{
                 hide: true
             },
             {
+                path:'/myJobList/hr',
+                text:'My-Job-list',
+                icon:'job',
+                title:'My-Job-list',
+                component: HrJobContainer,
+                hide: user.status !== 'HR'
+            },
+            {
                 path:'/jobList/hr',
                 text:'Job-list',
                 icon:'job',
                 title:'Job-list',
-                component: HrJobContainer,
+                component: LocalJobContainer,
                 hide: user.status !== 'HR'
-
             }
         ];
 

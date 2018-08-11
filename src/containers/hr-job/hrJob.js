@@ -25,11 +25,12 @@ class HrJob extends React.Component {
         this.createNewJob = this.createNewJob.bind(this);
         this.findJobsForHR = this.findJobsForHR.bind(this);
         this.handleDeleteJob = this.handleDeleteJob.bind(this);
+        this.renderJobList = this.renderJobList.bind(this);
     }
 
 
     componentDidMount() {
-
+        this.findJobsForHR(this.props._id);
     }
 
     componentWillReceiveProps(newProps) {
@@ -172,36 +173,36 @@ class HrJob extends React.Component {
                 <form style={{marginTop: 30}} hidden={this.state.hideEditor}>
                     <h3 style={{textAlign: 'center'}}>Job Editor</h3>
                     <div className="form-group">
-                        <label htmlFor="name">Job Name</label>
+                        <label htmlFor="nameEdit">Job Name</label>
                         <input type="text"
                                value={this.state.name}
                                className="form-control"
-                               id="name"
+                               id="nameEdit"
                                onChange={event => this.setState({name: event.target.value})}
                                placeholder="Job Name"/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="location">Location</label>
+                        <label htmlFor="locationEdit">Location</label>
                         <input type="text"
                                className="form-control"
                                value={this.state.location}
-                               id="location"
+                               id="locationEdit"
                                onChange={event => this.setState({location: event.target.value})}
                                placeholder="Location"/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="Salary">Salary</label>
+                        <label htmlFor="SalaryEdit">Salary</label>
                         <input type="text"
                                className="form-control"
-                               id="Salary"
+                               id="SalaryEdit"
                                value={this.state.salary}
                                onChange={event => this.setState({salary: event.target.value})}
                                placeholder="Salary"/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="description">Description</label>
+                        <label htmlFor="descriptionEdit">Description</label>
                         <textarea className="form-control"
-                                  id="description"
+                                  id="descriptionEdit"
                                   value={this.state.description}
                                   onChange={event => {
                                       this.setState({description: event.target.value});
