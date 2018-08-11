@@ -31,6 +31,10 @@ class HrJob extends React.Component {
 
     componentDidMount() {
         this.findJobsForHR(this.props._id);
+        this.setState({
+            company: this.props.company,
+            hrId: this.props._id
+        });
     }
 
     componentWillReceiveProps(newProps) {
