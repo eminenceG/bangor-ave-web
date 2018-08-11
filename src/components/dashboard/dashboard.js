@@ -146,7 +146,7 @@ class Dashboard extends React.Component{
                 icon:'job',
                 title:'Job-list',
                 component: LocalJobContainer,
-                hide: user.status !== 'HR'
+                hide: false
             }
         ];
 
