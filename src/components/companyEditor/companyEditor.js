@@ -4,6 +4,7 @@ import * as actions from "../../actions";
 import {Link} from 'react-router-dom';
 import UserCard from '../usercard/usercard';
 import { FormGroup, ControlLabel, FormControl, HelpBlock, Button } from 'react-bootstrap'
+import CompanyServiceClient from "../../services/CompanyServiceClient";
 
 
 
@@ -28,6 +29,8 @@ class CompanyEditor extends React.Component{
 
     this.onChange = this.onChange.bind(this);
     this.handleSubmitButton = this.handleSubmitButton.bind(this);
+    this.companyService = CompanyServiceClient.instance;
+
   } 
   handleSubmitButton() {
     console.log("Submit Button Clicked");
@@ -40,6 +43,9 @@ class CompanyEditor extends React.Component{
       companyAddress: this.state.companyAddress
     };
     console.log(company);
+    this.companyService
+        .updateCompany(company)
+        .then(() => console.log('Finish Update Company Information'));
   }
 
   componentDidMount(){
