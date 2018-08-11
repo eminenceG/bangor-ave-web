@@ -77,10 +77,10 @@ export default class NewsPage extends React.Component{
                 <h2 style={{textAlign: 'center'}}>News List</h2>
 
                 <button
-                    style={{marginTop: 50, marginBottom: 50}}
+                    style={{marginTop: 50, marginBottom: 50, lineHeight: 10, textTransform: 10}}
                     onClick={() => this.props.history.goBack()}
                     className="btn btn-dark btn-block">
-                    Gg Back
+                    Go Back
                 </button>
 
                 {this.renderNewsList()}

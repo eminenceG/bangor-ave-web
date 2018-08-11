@@ -12,6 +12,7 @@ export default class LocalJobServiceClient {
     }
 
     createJob(job) {
+        console.log(job);
         return fetch(constants.HOST + '/api/job', {
             method: 'post',
             body: JSON.stringify(job),
