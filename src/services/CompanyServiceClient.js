@@ -11,8 +11,10 @@ export default class CompanyServiceClient {
         return this[_singleton];
     }
 
-    createCompany(companyName) {
-        const company = {companyName: companyName};
+    createCompany(company) {
+
+
+        console.log(company);
         return fetch(constants.HOST + '/api/company', {
             method: 'post',
             body: JSON.stringify(company),
