@@ -11,9 +11,45 @@ export default class LocalJobServiceClient {
         return this[_singleton];
     }
 
+    createJob(job) {
+        return fetch(constants.HOST + '/api/job', {
+            method: 'post',
+            body: JSON.stringify(job),
+            headers: {
+                'content-type' : 'application/json'
+            }
+        }).then(
+            response => response.json()
+        )
+    }
+
+    deleteJob(jobId) {
+        return fetch(constants.HOST + '/api/job/' + jobId, {
+            method: 'delete'
+        }).then(response => response.json());
+    }
+
     findAllJobs() {
         return fetch(constants.HOST + '/api/job')
             .then(response => response.json());
+    }
+
+
+    findJobsForHR(hrId) {
+        return fetch(constants.HOST + '/api/job/hr/' + hrId)
+            .then(response => response.json())
+    }
+
+    updateJob(job) {
+        return fetch(constants.HOST + '/api/job', {
+            method: 'put',
+            body: JSON.stringify(job),
+            headers: {
+                'content-type' : 'application/json'
+            }
+        }).then(
+            response => response.json()
+        )
     }
 
 

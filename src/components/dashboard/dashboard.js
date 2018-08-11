@@ -12,9 +12,11 @@ import { confirmAlert } from 'react-confirm-alert';
 import * as actions from "../../actions";
 import { Redirect } from 'react-router-dom';
 import UserContainer from "../user/user"
+import FriendListContainer from "../friend-list/friend-list"
 import {getMsgList, sendMsg, recvMsg} from '../../redux/chat.redux'
 import RepresentativeContainer from "../representative/representative";
 import HrJobContainer from "../../containers/hr-job/hrJob";
+import LocalJobContainer from "../../containers/local-job/localJob";
 // function HR(){
 //     return <h2>HR front page</h2>
 // }
@@ -132,13 +134,28 @@ class Dashboard extends React.Component{
                 hide: true
             },
             {
+                path:'/friends',
+                text:'Friends',
+                icon:'Friends',
+                title:'Friends',
+                component: FriendListContainer,
+                hide: false
+            },
+            {
+                path:'/myJobList/hr',
+                text:'My-Job-list',
+                icon:'job',
+                title:'My-Job-list',
+                component: HrJobContainer,
+                hide: user.status !== 'HR'
+            },
+            {
                 path:'/jobList/hr',
                 text:'Job-list',
                 icon:'job',
                 title:'Job-list',
-                component: HrJobContainer,
-                hide: user.status !== 'HR'
-
+                component: LocalJobContainer,
+                hide: false
             }
 
         ];

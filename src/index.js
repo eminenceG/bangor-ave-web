@@ -21,6 +21,7 @@ import './index.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
 import LocalJob from "./containers/local-job/localJob";
+import NewsPage from "./containers/new-page/NewsPage";
 const bootstrap = require('bootstrap');
 
 let store = createStore(combineReducer, compose(
@@ -48,6 +49,7 @@ ReactDOM.render(
                         <Route path='/job/detail/:jobId' component={WidgetList}/>
                         <Route path='/chat/:user' component={ChatContainer}/>
                         <Route path='/localJob' component={LocalJob}/>
+                        <Route path='/news/:keyword' component={NewsPage}/>
                         <Route component={Dashboard}/>
 
                     </Switch>
