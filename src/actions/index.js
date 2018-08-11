@@ -177,3 +177,31 @@ export function getFriendListForUserLoggedIn(dispatch){
         }
     })
 }
+
+export function makeFriend(dispatch, friendId){
+    return axios(constants.HOST + '/api/friendship',{
+        method:'post',
+        withCredentials: true,
+        data: {friendId}
+    }).then(res=>{
+        console.log(res);
+        if(res.data.code === 0){
+            console.log(res);
+            dispatch(userList(res.data.data));
+        }
+    })
+}
+
+export function breakFriend(dispatch, friendId){
+    return axios(constants.HOST + '/api/friendship',{
+        method:'delete',
+        withCredentials: true,
+        data: {friendId}
+    }).then(res=>{
+        // console.log(res);
+        if(res.data.code === 0){
+            // console.log(res);
+            dispatch(userList(res.data.data));
+        }
+    })
+}
