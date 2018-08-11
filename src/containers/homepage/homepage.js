@@ -9,7 +9,7 @@ class Home extends React.Component{
         document.body.style = 'background: black;';
         return(
             <div>
-                {this.props.redirectTo? <Redirect to={this.props.redirectTo}/>:null}
+                {this.props.redirectTo&&this.props.userReducer.redirectTo!==this.props.location.pathname? <Redirect to={this.props.redirectTo}/>:null}
                 <Logo></Logo>
                 <div style={{ display:'flex',alignItems:'center', justifyContent:'center', textAlign:'center' }}>
                     <div className="card bg-light mb-3" style={{maxWidth: '18rem'}}>

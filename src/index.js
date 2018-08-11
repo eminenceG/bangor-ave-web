@@ -22,6 +22,7 @@ import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
 import LocalJob from "./containers/local-job/localJob";
 import NewsPage from "./containers/new-page/NewsPage";
+import LoadingContainer from './components/loading/loading';
 const bootstrap = require('bootstrap');
 
 let store = createStore(combineReducer, compose(
@@ -38,6 +39,7 @@ ReactDOM.render(
         <Provider store = {store}>
             <BrowserRouter>
                 <div>
+                    <LoadingContainer/>
                     <Switch>
                         <Route exact path='/' component={Home}/>
                         <Route path='/jobs' component={Job}/>
