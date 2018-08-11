@@ -24,6 +24,27 @@ export default class CompanyServiceClient {
         )
     }
 
+    updateCompany(company) {
+        return fetch(constants.HOST + '/api/company', {
+            method: 'put',
+            body: JSON.stringify(company),
+            headers: {
+                'content-type' : 'application/json'
+            }
+        }).then(
+            response => response.json()
+        )
+    }
+
+    findCompanyByName(companyName) {
+      return fetch(constants.HOST + '/api/company/' + companyName)
+        .then(response => response.json());
+    }
+
+    findAllCompany() {
+      return fetch(constants.HOST + '/api/company')
+        .then(response => response.json());
+    }
 
 
 

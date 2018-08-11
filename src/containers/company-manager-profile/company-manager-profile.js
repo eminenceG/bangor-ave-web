@@ -80,8 +80,8 @@ class CompanyManagerProfile extends React.Component{
 
     handleSubmit() {
         //Check if the company exists, if exist, the manager can't finish the profile
-
-        if(!this.state.company.company) {
+        console.log(this.state);
+        if(!this.state.company) {
             alert('Company name can\'t be empty');
             return;
         }
