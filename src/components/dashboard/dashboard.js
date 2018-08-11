@@ -157,6 +157,14 @@ class Dashboard extends React.Component{
                 component: LocalJobContainer,
                 hide: false
             }
+            {
+                path:'/company',
+                text:'Company',
+                icon:'company',
+                title:'Company List',
+                component: CompanyListContainer,
+                hide: false
+            },
 
         ];
 
