@@ -151,7 +151,7 @@ class Dashboard extends React.Component{
                 hide: user.status !== 'HR'
             },
             {
-                path:'/jobList/hr',
+                path:'/jobList',
                 text:'Job-list',
                 icon:'job',
                 title:'Job-list',
