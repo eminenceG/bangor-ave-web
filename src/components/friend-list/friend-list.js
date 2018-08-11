@@ -10,10 +10,17 @@ class FriendList extends React.Component{
         this.state={
             data:[]
         }
+        this.handleDisConnect = this.handleDisConnect.bind(this);
     }
 
     componentDidMount(){
         this.props.getFriendListForUserLoggedIn();
+    }
+
+    handleDisConnect(v){
+        // console.log(v._id);
+        this.props.breakFriend(v._id)
+            .then(()=>{this.props.getFriendListForUserLoggedIn()});
     }
 
     render(){
@@ -22,7 +29,7 @@ class FriendList extends React.Component{
                 <h2>Friend list</h2>
                 {this.props.chatUser.userList?
                     <UserCard
-                        userlist={this.props.chatUser.userList}
+                        userlist={this.props.chatUser.userList} page={'friendlist'} handleDisConnect={this.handleDisConnect}
                     ></UserCard>:null}
             </div>
         )
@@ -36,8 +43,8 @@ const stateToPropertiesMapper = (state) =>(
 )
 
 const dispatcherToPropsMapper = dispatch =>({
-    getFriendListForUserLoggedIn: () => actions.getFriendListForUserLoggedIn(dispatch)
-
+    getFriendListForUserLoggedIn: () => actions.getFriendListForUserLoggedIn(dispatch),
+    breakFriend: (friendId) => actions.breakFriend(dispatch, friendId)
 })
 
 

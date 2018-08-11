@@ -25,7 +25,7 @@ export function logoutSubmit(dispatch) {
 }
 
 export function updateProfile(dispatch, data){
-    console.log(data);
+    // console.log(data);
     return axios(constants.HOST + '/user/updateProfile',{
             method:'post',
             data:data,
@@ -120,7 +120,7 @@ export const register = (dispatch,{user, password, confirmedPassword, status}) =
         let avatar = 'boy';
         status = 'admin';
         info = Object.assign({}, {user, password, status, avatar});
-        console.log(info);
+        // console.log(info);
     }
 
     if(status === 'representative') {
@@ -170,9 +170,9 @@ export function getFriendListForUserLoggedIn(dispatch){
     return axios(constants.HOST + '/api/friendship',{
         withCredentials: true
     }).then(res=>{
-        console.log(res);
+        // console.log(res);
         if(res.data.code === 0){
-            console.log(res);
+            // console.log(res);
             dispatch(userList(res.data.data));
         }
     })
@@ -184,9 +184,9 @@ export function makeFriend(dispatch, friendId){
         withCredentials: true,
         data: {friendId}
     }).then(res=>{
-        console.log(res);
+        // console.log(res);
         if(res.data.code === 0){
-            console.log(res);
+            // console.log(res);
             dispatch(userList(res.data.data));
         }
     })

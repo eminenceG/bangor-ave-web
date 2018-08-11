@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import * as actions from "../../actions";
 import UserCard from '../usercard/usercard';
-import {Link} from 'react-router-dom';
 
 
 class Applicant extends React.Component{
@@ -20,7 +19,7 @@ class Applicant extends React.Component{
     }
 
     handleConnect(v){
-        console.log(v);
+        // console.log(v);
         this.props.makeFriend(v._id)
             .then(()=>{this.props.getUserList('HR')});
     }

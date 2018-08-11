@@ -18,7 +18,6 @@ class UserCard extends React.Component {
 
 
   render() {
-    console.log(this.props);
     return (
       <div>
         {this.props.userlist?this.props.userlist.map(v=>(
@@ -48,12 +47,12 @@ class UserCard extends React.Component {
                                onClick={()=>{this.props.handleDelete(v)}}>delete</a>
                         </div>:null}
                         <div className="col-2">
-                        {!v.isFriend&&(this.props.userReducer.status==='applicant'||this.props.userReducer.status==='HR')?
+                        {!v.isFriend&&this.props.page!=='friendlist'&&(this.props.userReducer.status==='applicant'||this.props.userReducer.status==='HR')?
                             <a className="btn btn-primary"
                                style={{color:"white"}}
                                onClick={()=>{this.props.handleConnect(v)}}>connect</a>
                                :null}
-                        {v.isFriend&&(this.props.userReducer.status==='applicant'||this.props.userReducer.status==='HR')?
+                        {v.isFriend&&(this.props.userReducer.status==='applicant'||this.props.userReducer.status==='HR')||this.props.page==='friendlist'?
                             <a className="btn btn-danger"
                                   style={{color:"white"}}
                                   onClick={()=>{this.props.handleDisConnect(v)}}>disconnect</a>
