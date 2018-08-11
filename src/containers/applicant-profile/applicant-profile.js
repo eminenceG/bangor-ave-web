@@ -8,6 +8,7 @@ import AuthRouteContainer from '../../components/auth-route/auth-route'
 import browserCookie from 'browser-cookies';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css'
+import CompanyServiceClient  from '../../services/CompanyServiceClient';
 
 class ApplicantProfile extends React.Component{
     constructor(props){
@@ -21,6 +22,7 @@ class ApplicantProfile extends React.Component{
         this.onChange = this.onChange.bind(this);
         this.selectAvatar = this.selectAvatar.bind(this);
         this.logout = this.logout.bind(this);
+        this.handleSaveButton = this.handleSaveButton.bind(this);
     }
 
     componentDidMount(){
@@ -59,6 +61,11 @@ class ApplicantProfile extends React.Component{
       })
     }
 
+    handleSaveButton() {
+      console.log("save");
+    //   this.props.update(this.state)
+    }
+
 
     onChange(key, val){
         this.setState({
@@ -78,7 +85,7 @@ class ApplicantProfile extends React.Component{
         let inputElemPosDesc;
         // console.log(this.props);
         // console.log(this.state);
-        //this.props.redirectTo&&this.props.redirectTo!=this.props.location.pathname
+        // this.props.redirectTo&&this.props.redirectTo!=this.props.location.pathname
         // only redirect when current location is different from target url.
         return(
             <div>
@@ -113,10 +120,13 @@ class ApplicantProfile extends React.Component{
                         value={this.state.desc}
                         onChange={()=>this.onChange('desc',inputElemPosDesc.value)}
                         ref={node=> inputElemPosDesc = node}/>
-                    <button className="btn btn-primary"
-                            onClick={()=>{
-                                this.props.update(this.state);
-                            }}>Save</button>
+                    
+                    <button 
+                      className="btn btn-primary"
+                      onClick={this.handleSaveButton()}>
+                      Save
+                    </button>
+
                     <button
                       className="btn btn-primary"
                       onClick={this.logout}
