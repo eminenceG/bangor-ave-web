@@ -87,7 +87,13 @@ class CompanyManagerProfile extends React.Component{
         }
 
 
-        this.companyService.createCompany(this.state.company)
+        const newCompany = {
+            companyName: this.state.company,
+            companyImg: this.state.companyImg,
+            companyDescription: this.state.desc
+        };
+
+        this.companyService.createCompany(newCompany)
             .then(
                 response => {
                     if(response.error) {
