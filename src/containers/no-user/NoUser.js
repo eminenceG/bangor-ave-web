@@ -30,27 +30,28 @@ export default class NoUser extends React.Component {
                             <li className="nav-item active">
                                 <Link className="nav-link" to="/noUser/jobList">Job List</Link>
                             </li>
-                            <li className="nav-item active">
+                        <li className="nav-item active">
                                 <Link className="nav-link" to="/noUser/company">Company List</Link>
                             </li>
                         </ul>
                     </div>
-                    <button style={{marginRight: 20}} className="btn btn-primary">
-                        <Link to = {`/login`} style={{color:'white'}}>
+                    <Link to = {`/login`} style={{color:'white'}}>
+                        <button style={{marginRight: 20}} className="btn btn-primary">
                             Login
-                        </Link>
-                    </button>
+                        </button>
+                    </Link>
+                    <Link  to = {`/register`} style={{color:'white'}}>
+                        <button  style={{marginRight: 20}} className="btn btn-success">
 
-                    <button  style={{marginRight: 20}} className="btn btn-success">
-                        <Link  to = {`/register`} style={{color:'white'}}>
-                            Register
-                        </Link>
-                    </button>
-                    <button  style={{marginRight: 20}} className="btn btn-warning">
-                        <Link to = {`/jobs`} style={{color:'white'}}>
+                                Register
+
+                        </button>
+                    </Link>
+                    <Link to = {`/jobs`} style={{color:'white'}}>
+                        <button  style={{marginRight: 20}} className="btn btn-warning">
                             Search online jobs
-                        </Link>
-                    </button>
+                        </button>
+                    </Link>
                 </nav>
             <div style={{marginTop: 30}}>
                 <Route path='/noUser/jobList' component={LocalJob}/>
