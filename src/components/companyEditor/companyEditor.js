@@ -24,7 +24,11 @@ class CompanyEditor extends React.Component{
   constructor(props){
     super(props);
     this.state={
-        data:[]
+        companyImg: '',
+        companyState: '',
+        companyCity: '',
+        companyAddress: '',
+        companyDescription: '' 
     }
 
     this.onChange = this.onChange.bind(this);
@@ -50,6 +54,42 @@ class CompanyEditor extends React.Component{
 
   componentDidMount(){
     //   this.props.getUserList('applicant');
+    console.log(this.props.userReducer.company); 
+    this.companyService
+        .findCompanyByName(this.props.userReducer.company)
+        .then(company => {
+          let newState = {
+            companyImg:         company.companyImg,
+            companyState:       company.companyState, 
+            companyCity:        company.companyCity,
+            companyAddress:     company.companyAddress,  
+            companyDescription: company.companyDescription,  
+          }
+          this.setState(newState)
+          console.log(this.state)});
+  }
+
+  componentWillReceiveProps(newProps) {
+    if(this.props === newProps) return;
+
+    // this.setState({
+    //     company: newProps.company,
+    //     hrId: newProps._id
+    // });
+
+    this.companyService
+        .findCompanyByName(this.props.userReducer.company)
+        .then(company => {
+          let newState = {
+            companyImg:         company.companyImg,
+            companyState:       company.companyState, 
+            companyCity:        company.companyCity,
+            companyAddress:     company.companyAddress,  
+            companyDescription: company.companyDescription,  
+          }
+          this.setState(newState)
+          console.log(this.state)});  
+
   }
 
   onChange(key, val){
@@ -74,6 +114,7 @@ class CompanyEditor extends React.Component{
             type="text"
             label="Image URL"
             placeholder="Image URL"
+            value={this.state.companyImg}
             inputRef={input => inputElemImgURL = input}
             onChange={()=>this.onChange('companyImg', inputElemImgURL.value)}
           />
@@ -82,6 +123,7 @@ class CompanyEditor extends React.Component{
             type="text"
             label="State"
             placeholder="Company State"
+            value={this.state.companyState}
             inputRef={input => inputElemCompanyState = input}
             onChange={()=>this.onChange('companyState', inputElemCompanyState.value)}
           />
@@ -90,6 +132,7 @@ class CompanyEditor extends React.Component{
             type="text"
             label="City"
             placeholder="Company City"
+            value={this.state.companyCity}
             inputRef={input => inputElemCompanyCity = input}
             onChange={()=>this.onChange('companyCity', inputElemCompanyCity.value)}
           />
@@ -98,6 +141,7 @@ class CompanyEditor extends React.Component{
             type="text"
             label="Address"
             placeholder="Company Address"
+            value={this.state.company}
             inputRef={input => inputElemCompanyAddress = input}
             onChange={()=>this.onChange('companyAddress', inputElemCompanyAddress.value)}
           />
@@ -107,6 +151,7 @@ class CompanyEditor extends React.Component{
             <FormControl 
               componentClass="textarea" 
               placeholder="Company description"
+              value={this.state.companyDescription}
               inputRef={input => inputElemCompanyDescription = input}
               onChange={()=>this.onChange('companyDescription', inputElemCompanyDescription .value)}
             />
