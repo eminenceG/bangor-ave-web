@@ -165,3 +165,15 @@ export function getUserList(dispatch, status){
             }
         })
 }
+
+export function getFriendListForUserLoggedIn(dispatch){
+    return axios(constants.HOST + '/api/friendship',{
+        withCredentials: true
+    }).then(res=>{
+        console.log(res);
+        if(res.data.code === 0){
+            console.log(res);
+            dispatch(userList(res.data.data));
+        }
+    })
+}

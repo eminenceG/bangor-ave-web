@@ -4,7 +4,7 @@ import * as constants from "../constants/index";
 
 
 const initState={
-    userLost: []
+    userList: []
 }
 
 // reducer: chat target
