@@ -12,6 +12,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import * as actions from "../../actions";
 import { Redirect } from 'react-router-dom';
 import UserContainer from "../user/user"
+import FriendListContainer from "../friend-list/friend-list"
 import {getMsgList, sendMsg, recvMsg} from '../../redux/chat.redux'
 import RepresentativeContainer from "../representative/representative";
 import HrJobContainer from "../../containers/hr-job/hrJob";
@@ -131,6 +132,14 @@ class Dashboard extends React.Component{
                 title: 'representative',
                 component: RepresentativeContainer,
                 hide: true
+            },
+            {
+                path:'/friends',
+                text:'Friends',
+                icon:'Friends',
+                title:'Friends',
+                component: FriendListContainer,
+                hide: false
             },
             {
                 path:'/myJobList/hr',

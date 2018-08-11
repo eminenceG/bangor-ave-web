@@ -13,7 +13,9 @@ class UserCard extends React.Component {
         this.state = {
 
         };
+
     }
+
 
   render() {
     return (
@@ -44,6 +46,20 @@ class UserCard extends React.Component {
                                 style={{color:"white"}}
                                onClick={()=>{this.props.handleDelete(v)}}>delete</a>
                         </div>:null}
+                        <div className="col-2">
+                        {!v.isFriend&&this.props.page!=='friendlist'&&(this.props.userReducer.status==='applicant'||this.props.userReducer.status==='HR')?
+                            <a className="btn btn-primary"
+                               style={{color:"white"}}
+                               onClick={()=>{this.props.handleConnect(v)}}>connect</a>
+                               :null}
+                        {v.isFriend&&(this.props.userReducer.status==='applicant'||this.props.userReducer.status==='HR')||this.props.page==='friendlist'?
+                            <a className="btn btn-danger"
+                                  style={{color:"white"}}
+                                  onClick={()=>{this.props.handleDisConnect(v)}}>disconnect</a>
+                                  :null}
+                        </div>
+
+
                     </div>
                 </div>:null
         )):null}
@@ -56,13 +72,13 @@ const stateToPropertiesMapper = (state) =>(
     state
 )
 
-const dispatcherToPropsMapper = dispatch =>({
+// const dispatcherToPropsMapper = dispatch =>({
+//
+// })
 
-})
 
 
-
-const UserCardContainer = connect(stateToPropertiesMapper,dispatcherToPropsMapper)(UserCard)
+const UserCardContainer = connect(stateToPropertiesMapper,null)(UserCard)
 
 
 export default UserCardContainer;
