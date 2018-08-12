@@ -196,6 +196,13 @@ class Dashboard extends React.Component{
                         <div className=" collapse navbar-collapse col-sm-9" id="myNavbar">
                             <NavLinkBar data = {navList} />
                         </div>
+                        {/* TODO: move some buttons to drop down */}
+                        <button
+                          className="btn btn-primary"
+                          onClick={this.logout}>
+                          logout
+                        </button>
+
                         <button className="btn btn-link bd-search-docs-toggle d-md-none p-0 ml-2 collapsed"
                                 type="button" data-toggle="collapse" data-target="#myNavbar"
                                 aria-controls="bd-docs-nav" aria-expanded="false" aria-label="Toggle docs navigation">
@@ -204,12 +211,6 @@ class Dashboard extends React.Component{
                                 <path stroke="currentColor" strokeWidth="2" strokeLinecap="round"
                                       strokeMiterlimit="10" d="M4 7h22M4 15h22M4 23h22"/>
                             </svg>
-                        </button>
-                        {/* TODO: move some buttons to drop down */}
-                        <button
-                          className="btn btn-primary"
-                          onClick={this.logout}>
-                          logout
                         </button>
                     </div>
                 </nav>
