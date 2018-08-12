@@ -83,9 +83,42 @@ export class User extends Component {
       )
   }
 
-  renderRepresentative(){}
+  renderRepresentative(){
+      return(
+          <div>
+              <h4 className="title">
+                  {this.props.userReducer.user}
+                  <br />
+                  <small>Customer Representative</small>
+                  <br />
+              </h4>
+              {/*<p className="description text-center">{this.props.userReducer.desc}</p>*/}
+          </div>
+      )
+  }
 
-  renderCompanyManager(){}
+  renderCompanyManager(){
+      return(
+          <div>
+              <h4 className="title">
+                  {this.props.userReducer.user}
+                  <br />
+                  <small>Company Manager of {this.props.userReducer.company}</small>
+                  <br />
+              </h4>
+              <p className="description text-center">{this.props.userReducer.desc}</p>
+              {/*<button*/}
+                  {/*className="btn btn-primary"*/}
+                  {/*onClick={()=>{*/}
+                      {/*this.props.changeRedirectTo('/' + this.props.userReducer.status + '-profile');*/}
+                      {/*this.props.history.push('/' + this.props.userReducer.status + '-profile');*/}
+                  {/*}}*/}
+              {/*>*/}
+                  {/*Edit My Profile*/}
+              {/*</button>*/}
+          </div>
+      )
+  }
 
 
   render() {
@@ -105,7 +138,7 @@ export class User extends Component {
                       {this.props.userReducer.status==='HR'?this.renderHR():null}
                       {this.props.userReducer.status==='applicant'?this.renderApplicant():null}
                       {this.props.userReducer.status==='representative'?this.renderRepresentative():null}
-                      {this.props.userReducer.status==='companyManager'?this.renderCompanyManager():null}
+                      {this.props.userReducer.status==='CompanyManager'?this.renderCompanyManager():null}
                   </center>
               </div>
           </div>:null}

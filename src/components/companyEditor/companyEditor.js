@@ -188,7 +188,7 @@ class CompanyEditor extends React.Component{
             onClick={this.handleDeleteButton}
             type="button">Delete
           </Button>
-1        </form>
+        </form>
       </div>
     // <div className="container">
     //   <h2>{this.props.userReducer.company}</h2>
