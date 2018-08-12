@@ -36,8 +36,9 @@ class CompanyEditor extends React.Component{
     this.companyService = CompanyServiceClient.instance;
 
   } 
+
   handleSubmitButton() {
-    console.log("Submit Button Clicked");
+    // console.log("Submit Button Clicked");
     let company = {
       companyName: this.props.userReducer.company,
       companyDescription: this.state.companyDescription,
@@ -46,10 +47,10 @@ class CompanyEditor extends React.Component{
       companyCity: this.state.companyCity,
       companyAddress: this.state.companyAddress
     };
-    console.log(company);
+    // console.log(company);
     this.companyService
         .updateCompany(company)
-        .then(() => console.log('Finish Update Company Information'));
+        .then(() => alert("Update the company information successfully!"));
   }
 
   componentDidMount(){
@@ -157,6 +158,8 @@ class CompanyEditor extends React.Component{
             />
           </FormGroup>
           <Button
+            block
+            bsStyle="success"
             onClick={this.handleSubmitButton}
             type="button">Submit</Button>
         </form>
