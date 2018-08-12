@@ -188,7 +188,7 @@ class ApplicantProfile extends React.Component{
                         onChange={()=>this.onChange('website',inputWebsite.value)}
                         ref={node=> inputWebsite = node}/>
                     <hr/>
-                    <h3>Background</h3>
+                    <h3>Basic Information</h3>
                     <label htmlFor="name">Education</label>
                     <textarea
                         placeholder="Self Description"
