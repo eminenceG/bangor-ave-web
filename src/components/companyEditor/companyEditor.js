@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 import UserCard from '../usercard/usercard';
 import { FormGroup, ControlLabel, FormControl, HelpBlock, Button } from 'react-bootstrap'
 import CompanyServiceClient from "../../services/CompanyServiceClient";
+import { Redirect } from 'react-router-dom';
 
 
 
@@ -56,7 +57,9 @@ class CompanyEditor extends React.Component{
 
   handleDeleteButton() {
     console.log("delete");
-    this.companyService.
+    this.companyService
+        .deleteCompanyByName(this.props.userReducer.company)
+        .then(() => this.setState({redirectTo: '/login'}))
   }
 
   componentDidMount(){
@@ -114,6 +117,7 @@ class CompanyEditor extends React.Component{
     let inputElemCompanyDescription
     return (
       <div className="container">
+        {this.props.userReducer.redirectTo&&this.props.userReducer.redirectTo=='/login'? <Redirect to = {this.props.userReducer.redirectTo}/>:null}
         <h2>{this.props.userReducer.company}</h2>
         <form>
           <FieldGroup
