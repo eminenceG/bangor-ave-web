@@ -7,9 +7,8 @@ export function getRedirectPath({status, avatar}){
     let url = '/' + status;
     if(!avatar){
         url += '-profile'
-    } else if (status === 'CompanyManager') {
-        url += '-profile'
     }
+
     if(status === 'admin'){
         url = '/admin';
     }
