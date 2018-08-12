@@ -18,6 +18,7 @@ import RepresentativeContainer from "../representative/representative";
 import HrJobContainer from "../../containers/hr-job/hrJob";
 import LocalJobContainer from "../../containers/local-job/localJob";
 import CompanyListContainer from '../../containers/companyList/companyList';
+import SearchLocalJob from "../search-local-job/SearchLocalJob";
 // function HR(){
 //     return <h2>HR front page</h2>
 // }
@@ -166,6 +167,15 @@ class Dashboard extends React.Component{
                 component: CompanyListContainer,
                 hide: false
             },
+            {
+                path:'/search/localJob',
+                text:'Search job',
+                icon:'Search',
+                title:'Search job',
+                component: SearchLocalJob,
+                hide: false
+            },
+
 
         ];
 
@@ -201,7 +211,6 @@ class Dashboard extends React.Component{
                                       strokeMiterlimit="10" d="M4 7h22M4 15h22M4 23h22"/>
                             </svg>
                         </button>
-
                     </div>
                 </nav>
                 <br/>
