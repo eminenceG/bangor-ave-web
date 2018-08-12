@@ -10,14 +10,33 @@ import {
     FormControl
   } from "react-bootstrap";
 
+import { Link } from 'react-router-dom';
+
+
 export class User extends Component {
+
+  constructor(props) {
+    
+    super(props);
+
+
+    this.handleEditProfileButtonClick = this.handleEditProfileButtonClick.bind(this);
+  }
+
+  componentDidMount() {
+  }
+
+  handleEditProfileButtonClick() {
+    console.log('handleEditProfileButtonClick()');
+    
+  }
   render() {
+    console.log(this.props);
     return (
       <div className="card container">
         <div className="content">
           <div className="author">
             <center>
-            <a href="#pablo">
               <img
                 className="avatar border-gray"
                 style={{width: '180px'}}
@@ -29,12 +48,16 @@ export class User extends Component {
                 <br />
                 <small>{this.props.userReducer.title}</small>
               </h4>
-            </a>
+              <p className="description text-center">{this.props.userReducer.desc}</p>
+              <Link
+                to={'/' + this.props.userReducer.status + '-profile'}>
+                Edit My Profile
+              </Link>
             </center>
           </div>
-          <p className="description text-center">{this.props.userReducer.desc}</p>
         </div>
         <hr />
+
         <div className="text-center">
           <div>
             <Button simple>
