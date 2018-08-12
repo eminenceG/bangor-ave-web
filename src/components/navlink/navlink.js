@@ -39,7 +39,7 @@ class NavLinkBar extends React.Component{
                 <li className={"nav-item"} style={{backgroundColor: "#666", marginRight: "5px"}} key={tab.title}>
                     <span className={`nav-link ${tab.text}`} >
                         <Link to = {`${tab.path}`} style={{color: "#FFF"}}>
-                            {tab.title}&nbsp;&nbsp;&nbsp;&nbsp;
+                            {tab.title}
                         </Link>
                     </span>
                 </li>
