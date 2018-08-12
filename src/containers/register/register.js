@@ -38,7 +38,7 @@ class Register extends React.Component{
         let inputElemConfirmedPassword;
         return (
             <div>
-                {this.props.userReducer.redirectTo? <Redirect to={this.props.userReducer.redirectTo}/>:null}
+                {this.props.userReducer.redirectTo&&this.props.userReducer.redirectTo!==this.props.location.pathname? <Redirect to={this.props.userReducer.redirectTo}/>:null}
 
                 <Logo></Logo>
                 <div className="container">

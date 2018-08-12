@@ -61,7 +61,7 @@ class UserCard extends React.Component {
                                onClick={()=>{this.props.handleDelete(v)}}>delete</a>
                         </div>:null}
                         <div className="col-2">
-                        {!v.isFriend&&this.props.page!=='friendlist'&&(this.props.userReducer.status==='applicant'||this.props.userReducer.status==='HR')?
+                        {!v.isFriend&&this.props.page!=='friendlist'&&(this.props.userReducer.status==='applicant'||(this.props.userReducer.status==='HR'&&this.props.page!=='applications'))?
                             <a className="btn btn-primary"
                                style={{color:"white"}}
                                onClick={()=>{this.props.handleConnect(v)}}>connect</a>
