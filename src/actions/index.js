@@ -25,7 +25,7 @@ export function logoutSubmit(dispatch) {
 }
 
 export function updateProfile(dispatch, data){
-    console.log(data);
+    // console.log(data);
     return axios(constants.HOST + '/user/updateProfile',{
             method:'post',
             data:data,

@@ -48,9 +48,6 @@ export default class CompanyServiceClient {
         .then(response => response.json());
     }
 
-    deleteCompanyByName(companyName) {
-      return fetch(constants.HOST + '/api/company/' + companyName, {
-          method: 'delete'
-      }).then(response => response.json());
-    }
+
+
 }
