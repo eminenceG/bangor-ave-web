@@ -171,7 +171,7 @@ class Dashboard extends React.Component{
         return (
             <div>
                 <AuthRouteContainer/>
-                {this.props.userReducer.redirectTo&&this.props.userReducer.redirectTo=='/login'? <Redirect to = {this.props.userReducer.redirectTo}/>:null}
+                {this.props.userReducer.redirectTo&&this.props.userReducer.redirectTo==='/login'? <Redirect to = {this.props.userReducer.redirectTo}/>:null}
                 <nav className="navbar navbar-expand-md fixed-header navbar-dark bg-dark fixed-top box-shadow">
                     <div className="container-fluid d-flex justify-content-between">
                         <div className="navbar-header">
