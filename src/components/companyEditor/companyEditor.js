@@ -7,9 +7,6 @@ import { FormGroup, ControlLabel, FormControl, HelpBlock, Button } from 'react-b
 import CompanyServiceClient from "../../services/CompanyServiceClient";
 import { Redirect } from 'react-router-dom';
 
-
-
-
 function FieldGroup({ id, label, help, ...props }) {
   return (
     <FormGroup controlId={id}>
@@ -191,7 +188,7 @@ class CompanyEditor extends React.Component{
             onClick={this.handleDeleteButton}
             type="button">Delete
           </Button>
-        </form>
+1        </form>
       </div>
     // <div className="container">
     //   <h2>{this.props.userReducer.company}</h2>
