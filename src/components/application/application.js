@@ -33,7 +33,10 @@ class Application extends React.Component{
     renderApplicantsForHR(){
         let userList=null;
         if(this.props.applicationReducer.applicationList){
-            userList = this.props.applicationReducer.applicationList.map(application => (application.applicant))
+            userList = this.props.applicationReducer.applicationList.map(
+            application => (
+                 {...application.applicant, job: application.job}
+            ))
         }
 
         return (

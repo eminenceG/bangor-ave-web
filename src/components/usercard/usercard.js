@@ -22,7 +22,7 @@ class UserCard extends React.Component {
       <div>
         {this.props.userlist?this.props.userlist.map(v=>(
             v.avatar?
-                <div className="card"  key={v.user}>
+                <div className="card"  key={v.job?(v.job.name+v.user):v.user}>
                     <div className="row">
                         <div className="col-4">
                             <div>
@@ -43,11 +43,18 @@ class UserCard extends React.Component {
                         </div>
                         <div className="col-6">
                             <div className="card-body">
-                                <h5 className="card-title">{v.user}</h5>
-                                <p className="card-text">{v.title}</p>
+                                <h4>Name</h4>
+                                <p>{v.user}</p>
+                                {!this.props.userReducer.status=='HR'&&this.props.page==='applications'?<p className="card-text">{v.title}</p>:null}
                                 <div className="card-text">{v.posDesc?v.posDesc.split('\n').map(d=>(<div key={d}>{d}</div>)):null}</div>
                                 {v.status=='HR'?<p className="card-text">Salary: {v.money}</p>:null}
                                 {v.status=='HR'?<p className="card-text">Company: {v.company}</p>:null}
+                                {this.props.userReducer.status=='HR'&&this.props.page==='applications'?
+                                    <div>
+                                        <h4>Applying job</h4>
+                                        <p>{v.job.name}</p>
+                                    </div>
+                                        :null}
                             </div>
                         </div>
                         {this.props.userReducer.status==='admin'?

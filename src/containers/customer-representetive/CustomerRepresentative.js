@@ -38,7 +38,7 @@ class CustomerRepresentative extends React.Component {
     renderUsers() {
         return this.state.users.map(
             v => (
-                <li className="list-group-item">
+                <li className="list-group-item" key={v.user}>
                     <div className="row">
                         <div className="col-4">
                             <div>

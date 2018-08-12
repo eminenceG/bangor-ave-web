@@ -72,7 +72,7 @@ class Dashboard extends React.Component{
                 path:'/HR',
                 text:'applicant',
                 icon:'HR',
-                title:'Applicants list',
+                title:'Applicants',
                 component: HRContainer,
                 hide: user.status !== 'HR'
             },
@@ -88,7 +88,7 @@ class Dashboard extends React.Component{
                 path:'/applicant',
                 text:'HR',
                 icon:'job',
-                title:'HR list',
+                title:'HRs',
                 component: ApplicantContainer,
                 hide: user.status !== 'applicant'
             },
@@ -136,7 +136,7 @@ class Dashboard extends React.Component{
                 path:'/myJobList/hr',
                 text:'My-Job-list',
                 icon:'job',
-                title:'My-Job-list',
+                title:'My Jobs',
                 component: HrJobContainer,
                 hide: user.status !== 'HR'
             },
@@ -144,7 +144,7 @@ class Dashboard extends React.Component{
                 path:'/jobList',
                 text:'Job-list',
                 icon:'job',
-                title:'Job-list',
+                title:'Jobs',
                 component: LocalJobContainer,
                 hide: false
             },
@@ -152,15 +152,15 @@ class Dashboard extends React.Component{
                 path:'/company',
                 text:'Company',
                 icon:'company',
-                title:'Company List',
+                title:'Companies',
                 component: CompanyListContainer,
                 hide: false
             },
             {
                 path:'/applications',
-                text:'applications',
+                text:'Applications',
                 icon:'applications',
-                title:'applications List',
+                title:'Applications',
                 component: ApplicationContainer,
                 hide: user.status === 'representative'
             },
