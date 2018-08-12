@@ -49,22 +49,22 @@ class CompanyRow extends React.Component {
         className="border border-dark card text-center">
         <img
           style={imgStyle}
-          class="card-img-top center" 
+          className="card-img-top center"
           src={this.props.company.companyImg} 
           alt="Card image cap"/>
         <div className="card-header">
           <h3 className="card-title">{this.props.company.companyName}</h3>
         </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">{this.props.company.companyState}</li>
-          <li class="list-group-item">{this.props.company.companyCity}</li>
-          <li class="list-group-item">{this.props.company.companyAddress}</li>
+        <ul className="list-group list-group-flush">
+          <li className="list-group-item">{this.props.company.companyState}</li>
+          <li className="list-group-item">{this.props.company.companyCity}</li>
+          <li className="list-group-item">{this.props.company.companyAddress}</li>
         </ul>
-        <div class="card-body">
-            <p class="card-text">{this.props.company.companyDescription}</p>
+        <div className="card-body">
+            <p className="card-text">{this.props.company.companyDescription}</p>
           <button 
             onClick={this.handleSeeJobsButton}
-            class='btn btn-primary'>See Jobs</button>
+            className='btn btn-primary'>See Jobs</button>
         </div>
         <JobList
           hidden="true"
@@ -96,17 +96,17 @@ class CompanyList extends React.Component {
     findAllCompany() {
         return this.companyService.findAllCompany()
           .then(company => {
-            console.log(company)
+            // console.log(company)
             this.setState({company: company})})
     }
 
     renderCompanyList() {
-      console.log(this.state);  
+      // console.log(this.state);
       return this.state.company.map(
         company => {
             return (
               <CompanyRow
-                company={company}/>
+                company={company} key={company._id}/>
             )
         }
       )
