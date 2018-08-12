@@ -5,9 +5,7 @@ import {Link} from 'react-router-dom';
 import UserCard from '../usercard/usercard';
 import { FormGroup, ControlLabel, FormControl, HelpBlock, Button } from 'react-bootstrap'
 import CompanyServiceClient from "../../services/CompanyServiceClient";
-
-
-
+import { Redirect } from 'react-router-dom';
 
 function FieldGroup({ id, label, help, ...props }) {
   return (
@@ -33,11 +31,13 @@ class CompanyEditor extends React.Component{
 
     this.onChange = this.onChange.bind(this);
     this.handleSubmitButton = this.handleSubmitButton.bind(this);
+    this.handleDeleteButton = this.handleDeleteButton.bind(this);
     this.companyService = CompanyServiceClient.instance;
 
   } 
+
   handleSubmitButton() {
-    console.log("Submit Button Clicked");
+    // console.log("Submit Button Clicked");
     let company = {
       companyName: this.props.userReducer.company,
       companyDescription: this.state.companyDescription,
@@ -46,27 +46,40 @@ class CompanyEditor extends React.Component{
       companyCity: this.state.companyCity,
       companyAddress: this.state.companyAddress
     };
-    console.log(company);
+    // console.log(company);
     this.companyService
         .updateCompany(company)
-        .then(() => console.log('Finish Update Company Information'));
+        .then(() => alert("Update the company information successfully!"));
+  }
+
+  handleDeleteButton() {
+    console.log("delete");
+    this.companyService
+        .deleteCompanyByName(this.props.userReducer.company)
+        .then(()=>{
+            window.location.reload();
+        })
   }
 
   componentDidMount(){
     //   this.props.getUserList('applicant');
-    console.log(this.props.userReducer.company); 
+    // console.log(this.props.userReducer.company);
     this.companyService
         .findCompanyByName(this.props.userReducer.company)
         .then(company => {
+            if(company === null){
+                this.props.history.push('/CompanyManager-profile');
+            return;}
           let newState = {
-            companyImg:         company.companyImg,
-            companyState:       company.companyState, 
-            companyCity:        company.companyCity,
-            companyAddress:     company.companyAddress,  
-            companyDescription: company.companyDescription,  
+            companyImg:         company.companyImg?company.companyImg:'',
+            companyState:       company.companyState?company.companyState:'',
+            companyCity:        company.companyCity?company.companyCity:'',
+            companyAddress:     company.companyAddress?company.companyAddress:'',
+            companyDescription: company.companyDescription?company.companyDescription:''
           }
-          this.setState(newState)
-          console.log(this.state)});
+            this.setState(newState)
+
+          });
   }
 
   componentWillReceiveProps(newProps) {
@@ -78,17 +91,21 @@ class CompanyEditor extends React.Component{
     // });
 
     this.companyService
-        .findCompanyByName(this.props.userReducer.company)
+        .findCompanyByName(newProps.userReducer.company)
         .then(company => {
+            if(company === null){
+                newProps.history.push('/CompanyManager-profile');
+                return;
+            }
           let newState = {
-            companyImg:         company.companyImg,
-            companyState:       company.companyState, 
-            companyCity:        company.companyCity,
-            companyAddress:     company.companyAddress,  
-            companyDescription: company.companyDescription,  
+            companyImg:         company.companyImg?company.companyImg:'',
+            companyState:       company.companyState?company.companyState:'',
+            companyCity:        company.companyCity?company.companyCity:'',
+            companyAddress:     company.companyAddress?company.companyAddress:'',
+            companyDescription: company.companyDescription?company.companyDescription:''
           }
           this.setState(newState)
-          console.log(this.state)});  
+          });
 
   }
 
@@ -107,6 +124,7 @@ class CompanyEditor extends React.Component{
     let inputElemCompanyDescription
     return (
       <div className="container">
+        {this.props.userReducer.redirectTo&&this.props.userReducer.redirectTo!==this.props.location.pathname? <Redirect to = {this.props.userReducer.redirectTo}/>:null}
         <h2>{this.props.userReducer.company}</h2>
         <form>
           <FieldGroup
@@ -141,7 +159,7 @@ class CompanyEditor extends React.Component{
             type="text"
             label="Address"
             placeholder="Company Address"
-            value={this.state.company}
+            value={this.state.companyAddress}
             inputRef={input => inputElemCompanyAddress = input}
             onChange={()=>this.onChange('companyAddress', inputElemCompanyAddress.value)}
           />
@@ -156,10 +174,21 @@ class CompanyEditor extends React.Component{
               onChange={()=>this.onChange('companyDescription', inputElemCompanyDescription .value)}
             />
           </FormGroup>
+
           <Button
+            block
+            bsStyle="success"
             onClick={this.handleSubmitButton}
-            type="button">Submit</Button>
-        </form>
+            type="button">Submit
+          </Button>
+
+          <Button
+            block
+            bsStyle="danger"
+            onClick={this.handleDeleteButton}
+            type="button">Delete
+          </Button>
+1        </form>
       </div>
     // <div className="container">
     //   <h2>{this.props.userReducer.company}</h2>
