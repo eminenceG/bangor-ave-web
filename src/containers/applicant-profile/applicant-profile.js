@@ -62,8 +62,8 @@ class ApplicantProfile extends React.Component{
     }
 
     handleSaveButton() {
-      console.log("save");
-    //   this.props.update(this.state)
+      // console.log("save");
+      this.props.update(this.state)
     }
 
 
@@ -123,7 +123,7 @@ class ApplicantProfile extends React.Component{
                     
                     <button 
                       className="btn btn-primary"
-                      onClick={this.handleSaveButton()}>
+                      onClick={()=>{this.handleSaveButton()}}>
                       Save
                     </button>
 

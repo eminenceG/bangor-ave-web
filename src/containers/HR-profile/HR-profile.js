@@ -66,7 +66,7 @@ class HRProfile extends React.Component{
         return(
                 <div>
                     <AuthRouteContainer></AuthRouteContainer>
-                    {this.props.userReducer.redirectTo&&this.props.userReducer.redirectTo!==this.props.location.pathname? <Redirect to = {this.props.redirectTo}></Redirect>:null}
+                    {this.props.userReducer.redirectTo&&this.props.userReducer.redirectTo!==this.props.location.pathname? <Redirect to = {this.props.userReducer.redirectTo}></Redirect>:null}
                     <nav className="navbar navbar-expand-md bg-dark fixed-top">
                         <div className="container-fluid">
                             <div className="navbar-header">
