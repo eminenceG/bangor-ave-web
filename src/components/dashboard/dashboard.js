@@ -20,6 +20,8 @@ import LocalJobContainer from "../../containers/local-job/localJob";
 import CompanyListContainer from '../../containers/companyList/companyList';
 import ApplicationContainer from '../../components/application/application';
 import SearchLocalJob from "../search-local-job/SearchLocalJob";
+import MessageListContainer from "../../containers/message-list/MessageList";
+import CustomerRepresentativeContainer from "../../containers/customer-representetive/CustomerRepresentative";
 
 
 // function HR(){
@@ -89,6 +91,14 @@ class Dashboard extends React.Component{
                 title:'Applicants list',
                 component: HRContainer,
                 hide: user.status !== 'HR'
+            },
+            {
+                path:'/CustomerRepresentative',
+                text:'Customer Representative',
+                icon:'HR',
+                title:'Customer Representative',
+                component: CustomerRepresentativeContainer,
+                hide: false
             },
             {
                 path:'/applicant',
@@ -168,7 +178,7 @@ class Dashboard extends React.Component{
                 icon:'applications',
                 title:'applications List',
                 component: ApplicationContainer,
-                hide: false
+                hide: user.status === 'representative'
             },
             {
                 path:'/search/localJob',
@@ -177,7 +187,18 @@ class Dashboard extends React.Component{
                 title:'Search job',
                 component: SearchLocalJob,
                 hide: false
-            }
+            },
+
+            {
+                path:'/messageList',
+                text:'MessageList',
+                icon:'messageList',
+                title:'MessageList',
+                component: MessageListContainer,
+                hide: user.status !== 'representative'
+            },
+
+
         ];
 
 
