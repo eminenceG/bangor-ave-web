@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 import UserCard from '../usercard/usercard';
 import { FormGroup, ControlLabel, FormControl, HelpBlock, Button } from 'react-bootstrap'
 import CompanyServiceClient from "../../services/CompanyServiceClient";
+import { Redirect } from 'react-router-dom';
 
 
 
@@ -33,11 +34,13 @@ class CompanyEditor extends React.Component{
 
     this.onChange = this.onChange.bind(this);
     this.handleSubmitButton = this.handleSubmitButton.bind(this);
+    this.handleDeleteButton = this.handleDeleteButton.bind(this);
     this.companyService = CompanyServiceClient.instance;
 
   } 
+
   handleSubmitButton() {
-    console.log("Submit Button Clicked");
+    // console.log("Submit Button Clicked");
     let company = {
       companyName: this.props.userReducer.company,
       companyDescription: this.state.companyDescription,
@@ -46,10 +49,22 @@ class CompanyEditor extends React.Component{
       companyCity: this.state.companyCity,
       companyAddress: this.state.companyAddress
     };
-    console.log(company);
+    // console.log(company);
     this.companyService
         .updateCompany(company)
-        .then(() => console.log('Finish Update Company Information'));
+        .then(() => alert("Update the company information successfully!"));
+  }
+
+  handleDeleteButton() {
+    console.log("delete");
+    this.companyService
+        .deleteCompanyByName(this.props.userReducer.company)
+        .then(() => {
+            // TODO: After delete the Company, redirect to the profile.
+          this.setState({redirectTo: '/CompanyManager-profile'})
+          this.forceUpdate()
+          }
+        )
   }
 
   componentDidMount(){
@@ -107,6 +122,7 @@ class CompanyEditor extends React.Component{
     let inputElemCompanyDescription
     return (
       <div className="container">
+        {this.props.userReducer.redirectTo? <Redirect to = {this.props.userReducer.redirectTo}/>:null}
         <h2>{this.props.userReducer.company}</h2>
         <form>
           <FieldGroup
@@ -156,9 +172,20 @@ class CompanyEditor extends React.Component{
               onChange={()=>this.onChange('companyDescription', inputElemCompanyDescription .value)}
             />
           </FormGroup>
+
           <Button
+            block
+            bsStyle="success"
             onClick={this.handleSubmitButton}
-            type="button">Submit</Button>
+            type="button">Submit
+          </Button>
+
+          <Button
+            block
+            bsStyle="danger"
+            onClick={this.handleDeleteButton}
+            type="button">Delete
+          </Button>
         </form>
       </div>
     // <div className="container">
