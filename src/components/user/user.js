@@ -36,7 +36,7 @@ export class User extends Component {
   renderHR(){
     return(
         <div>
-            <h4 className="title">
+            <h4 className="title description text-center">
                 {this.props.userReducer.user}
                 <br />
                 <small>{this.props.userReducer.status} from {this.props.userReducer.company}</small>
@@ -112,7 +112,7 @@ export class User extends Component {
   renderRepresentative(){
       return(
           <div>
-              <h4 className="title">
+              <h4 className="title description text-center">
                   {this.props.userReducer.user}
                   <br />
                   <small>Customer Representative</small>
@@ -126,7 +126,7 @@ export class User extends Component {
   renderCompanyManager(){
       return(
           <div>
-              <h4 className="title">
+              <h4 className="title description text-center">
                   {this.props.userReducer.user}
                   <br />
                   <small>Company Manager of {this.props.userReducer.company}</small>
