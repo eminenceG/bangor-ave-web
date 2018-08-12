@@ -28,40 +28,40 @@ class CompanyManagerProfile extends React.Component{
         this.companyService = CompanyServiceClient.instance;
     }
 
-    componentDidMount(){
-        this.setState({
-            avatar: this.props.userReducer.avatar,
-            title: this.props.userReducer.title,
-            desc: this.props.userReducer.desc
-        });
-    }
-
-    componentWillReceiveProps(nextProps){
-        this.setState({
-            avatar: nextProps.userReducer.avatar,
-            title: nextProps.userReducer.title,
-            desc: nextProps.userReducer.desc
-        });
-    }
+    // componentDidMount(){
+    //     this.setState({
+    //         avatar: this.props.userReducer.avatar,
+    //         title: this.props.userReducer.title,
+    //         desc: this.props.userReducer.desc
+    //     });
+    // }
+    //
+    // componentWillReceiveProps(nextProps){
+    //     this.setState({
+    //         avatar: nextProps.userReducer.avatar,
+    //         title: nextProps.userReducer.title,
+    //         desc: nextProps.userReducer.desc
+    //     });
+    // }
 
     logout() {
-      confirmAlert({
-        title: 'Logout',
-        message: 'Are you sure to logout?',
-        buttons: [
-          {
-            label: 'Yes',
-            onClick: () => {
-              browserCookie.erase('userId');
-              this.props.logoutSubmit()
-            }
-          },
-          {
-            label: 'No',
-            onClick: () => console.log('cancel')
-          }
-        ]
-      })
+        confirmAlert({
+            title: 'Logout',
+            message: 'Are you sure to logout?',
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => {
+                        browserCookie.erase('userId');
+                        this.props.logoutSubmit()
+                    }
+                },
+                {
+                    label: 'No',
+                    onClick: () => console.log('cancel')
+                }
+            ]
+        })
     }
 
 
@@ -149,13 +149,13 @@ class CompanyManagerProfile extends React.Component{
                         value={this.state.desc}
                         onChange={()=>this.onChange('desc', inputElemPosDesc.value)}
                         ref={node=> inputElemPosDesc = node}/>
-                    
+
                     <input
-                      placeholder="Company Image URL"
-                      className="form-control mb-3"
-                      value={this.state.companyImg}
-                      onChange={()=>this.onChange('companyImg', inputElemImg.value)}
-                      ref={node=> inputElemImg = node}/>
+                        placeholder="Company Image URL"
+                        className="form-control mb-3"
+                        value={this.state.companyImg}
+                        onChange={()=>this.onChange('companyImg', inputElemImg.value)}
+                        ref={node=> inputElemImg = node}/>
 
 
                     <button className="btn btn-primary"
@@ -167,7 +167,7 @@ class CompanyManagerProfile extends React.Component{
                         className="btn btn-danger"
                         onClick={this.logout}
                     >
-                      Logout
+                        Logout
                     </button>
                 </div>
             </div>

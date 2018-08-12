@@ -2,6 +2,7 @@ import React from 'react'
 import Logo from '../../components/logo/logo'
 import { Redirect } from 'react-router-dom'
 import {Link} from 'react-router-dom'
+import AuthRouteContainer from '../../components/auth-route/auth-route'
 
 class Home extends React.Component{
 
@@ -9,7 +10,7 @@ class Home extends React.Component{
         document.body.style = 'background: black;';
         return(
             <div className='background'>
-                {this.props.redirectTo&&this.props.userReducer.redirectTo!==this.props.location.pathname? <Redirect to={this.props.redirectTo}/>:null}
+                <AuthRouteContainer></AuthRouteContainer>
                 <Logo/>
                 <div style={{display:'flex', alignItems:'center', justifyContent:'center', textAlign:'center'}}>
                     <div className="card bg-light mb-6" style={{maxWidth: '18rem'}}>

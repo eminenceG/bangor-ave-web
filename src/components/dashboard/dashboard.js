@@ -24,22 +24,6 @@ import MessageListContainer from "../../containers/message-list/MessageList";
 import CustomerRepresentativeContainer from "../../containers/customer-representetive/CustomerRepresentative";
 
 
-// function HR(){
-//     return <h2>HR front page</h2>
-// }
-
-function applicant(){
-    return <h2>applicant front page</h2>
-}
-
-function Msg(){
-    return <h2>Msg front page</h2>
-}
-
-// function User(){
-//     return <h2>User front page</h2>
-// }
-
 
 class Dashboard extends React.Component{
     constructor(props){
@@ -208,7 +192,7 @@ class Dashboard extends React.Component{
         return (
             <div>
                 <AuthRouteContainer/>
-                {this.props.userReducer.redirectTo&&this.props.userReducer.redirectTo=='/login'? <Redirect to = {this.props.userReducer.redirectTo}/>:null}
+                {this.props.userReducer.redirectTo&&this.props.userReducer.redirectTo==='/login'? <Redirect to = {this.props.userReducer.redirectTo}/>:null}
                 <nav className="navbar navbar-expand-md fixed-header navbar-dark bg-dark fixed-top box-shadow">
                     <div className="container-fluid d-flex justify-content-between">
                         <div className="navbar-header">
@@ -216,7 +200,13 @@ class Dashboard extends React.Component{
                         </div>
                         <div className=" collapse navbar-collapse col-sm-9" id="myNavbar">
                             <NavLinkBar data = {navList} />
+                            <button
+                                className="btn btn-primary"
+                                onClick={this.logout}>
+                                logout
+                            </button>
                         </div>
+
                         <button className="btn btn-link bd-search-docs-toggle d-md-none p-0 ml-2 collapsed"
                                 type="button" data-toggle="collapse" data-target="#myNavbar"
                                 aria-controls="bd-docs-nav" aria-expanded="false" aria-label="Toggle docs navigation">
@@ -226,12 +216,7 @@ class Dashboard extends React.Component{
                                       strokeMiterlimit="10" d="M4 7h22M4 15h22M4 23h22"/>
                             </svg>
                         </button>
-                        {/* TODO: move some buttons to drop down */}
-                        <button
-                          className="btn btn-primary"
-                          onClick={this.logout}>
-                          logout
-                        </button>
+
                     </div>
                 </nav>
                 <br/>

@@ -8,7 +8,7 @@ import AuthRouteContainer from '../../components/auth-route/auth-route'
 import browserCookie from 'browser-cookies';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css'
-import CompanyServiceClient  from '../../services/CompanyServiceClient';
+import {Link} from 'react-router-dom'
 
 class ApplicantProfile extends React.Component{
     constructor(props){
@@ -122,13 +122,15 @@ class ApplicantProfile extends React.Component{
                         ref={node=> inputElemPosDesc = node}/>
                     
                     <button 
-                      className="btn btn-primary"
+                      className="btn btn-success"
                       onClick={()=>{this.handleSaveButton()}}>
                       Save
                     </button>
-
+                    &nbsp;
+                    <Link to = {`/me`} className="btn btn-primary">Return to dashboard</Link>
+                    &nbsp;
                     <button
-                      className="btn btn-primary"
+                      className="btn btn-danger"
                       onClick={this.logout}
                     >
                       Logout
