@@ -16,6 +16,7 @@ class LocalJob extends React.Component {
         this.jobService = LocalJobServiceClient.instance;
         this.findAllJobs = this.findAllJobs.bind(this);
         this.renderJobList = this.renderJobList.bind(this);
+        this.handleApply = this.handleApply.bind(this);
     }
 
     componentDidMount() {
@@ -28,6 +29,16 @@ class LocalJob extends React.Component {
             .then(jobs => this.setState({jobs: jobs}))
     }
 
+    handleApply(job){
+        return this.props.makeApplication(job._id)
+            .then(()=>{this.findAllJobs()});
+    }
+
+    handleCancelApply(job){
+        return this.props.cancelApplication(job._id)
+            .then(()=>{this.findAllJobs()});
+    }
+
     renderJobList() {
         return this.state.jobs.map(
             job => {
@@ -37,6 +48,17 @@ class LocalJob extends React.Component {
                          className="border border-dark card text-center">
                         <div className="card-header">
                             <h5 className="card-title">Job Position: {job.name}</h5>
+                            {!job.hasApplied&&this.props.status==='applicant'?<a className="btn btn-primary"
+                                                style={{color:"white"}}
+                                                onClick={()=>{this.handleApply(job)}}
+                            >apply</a>:null}
+
+
+                            {job.hasApplied&&this.props.status==='applicant'?<a className="btn btn-danger"
+                                          style={{color:"white"}}
+                                          onClick={()=>{this.handleCancelApply(job)}}
+                            >cancel application</a>:null}
+
                         </div>
                         <div className="card-header">
                             <div>
@@ -88,8 +110,9 @@ const stateToPropertiesMapper = (state) =>(
 );
 
 const dispatcherToPropsMapper = dispatch =>({
-    update: (userInfo) => actions.updateProfile(dispatch, userInfo)
-
+    update: (userInfo) => actions.updateProfile(dispatch, userInfo),
+    makeApplication: (jobId) => actions.makeApplication(dispatch,jobId),
+    cancelApplication:(jobId) =>actions.cancelApplication(dispatch,jobId)
 });
 
 
