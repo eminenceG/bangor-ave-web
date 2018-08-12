@@ -53,6 +53,11 @@ export default class LocalJobServiceClient {
         )
     }
 
+    findJobByName(name) {
+        return fetch(constants.HOST + '/api/job/search/' + name)
+            .then(response => response.json());
+    }
+
 
 
 
