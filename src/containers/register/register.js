@@ -3,6 +3,8 @@ import Logo from '../../components/logo/logo'
 import { connect } from 'react-redux'
 import * as actions from "../../actions";
 import { Redirect } from 'react-router-dom'
+import {Link} from 'react-router-dom'
+
 
 // only pass state.user to register, so that other field will be updated to
 // register only when they are changed in the input field.
@@ -85,7 +87,23 @@ class Register extends React.Component{
                     <button
                         onClick={this.handleRegister}
                         className="btn btn-primary"
-                        style={{marginRight: "5px"}}>Register</button>
+                        style={{marginRight: 20}}>
+                        Register
+                    </button>
+
+
+                    <Link to = {`/login`} style={{color:'white'}}>
+                        <button style={{marginRight: 20}} className="btn btn-success">
+                            Login
+                        </button>
+                    </Link>
+
+                    <Link to = {`/`} style={{color:'white'}}>
+                        <button style={{marginRight: 20}} className="btn btn-dark">
+                            Home
+                        </button>
+                    </Link>
+
                 </div>
             </div>
         )

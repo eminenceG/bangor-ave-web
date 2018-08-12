@@ -124,11 +124,11 @@ class Dashboard extends React.Component{
             },
             {
                 path: '/representative',
-                text: 'representative',
+                text: 'All Users',
                 icon: 'user',
-                title: 'representative',
+                title: 'All Users',
                 component: RepresentativeContainer,
-                hide: true
+                hide: user.status !== 'representative'
             },
             {
                 path:'/friends',
@@ -198,7 +198,7 @@ class Dashboard extends React.Component{
                         </div>
                         {/* TODO: move some buttons to drop down */}
                         <button
-                          className="btn btn-primary"
+                          className="btn btn-danger"
                           onClick={this.logout}>
                           logout
                         </button>
