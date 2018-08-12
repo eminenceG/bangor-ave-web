@@ -8,13 +8,15 @@ export function getRedirectPath({status, avatar}){
     if(!avatar){
         url += '-profile'
     }
+
     if(status === 'admin'){
         url = '/admin';
     }
 
     if(status === 'representative'){
         url = '/representative';
-    }
+    } 
+    
     // console.log(url);
     return url;
 
