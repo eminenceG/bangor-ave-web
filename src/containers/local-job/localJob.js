@@ -48,13 +48,16 @@ class LocalJob extends React.Component {
                          className="border border-dark card text-center">
                         <div className="card-header">
                             <h5 className="card-title">Job Position: {job.name}</h5>
-                            {!job.hasApplied?<a className="btn btn-primary"
+                            {!job.hasApplied&&this.props.status==='applicant'?<a className="btn btn-primary"
                                                 style={{color:"white"}}
                                                 onClick={()=>{this.handleApply(job)}}
-                            >apply</a>:<a className="btn btn-danger"
+                            >apply</a>:null}
+
+
+                            {job.hasApplied&&this.props.status==='applicant'?<a className="btn btn-danger"
                                           style={{color:"white"}}
                                           onClick={()=>{this.handleCancelApply(job)}}
-                            >cancel application</a>}
+                            >cancel application</a>:null}
 
                         </div>
                         <div className="card-header">

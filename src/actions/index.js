@@ -235,3 +235,22 @@ export function cancelApplication(dispatch, jobId){
     })
 
 }
+
+export function applicationList(data) {
+    // console.log(data);
+    return {type: constants.APPLICATION_LIST, payload: data};
+}
+
+
+export function findApplicationsForUserLoggedIn(dispatch){
+    return axios(constants.HOST + '/api/application',{
+        withCredentials: true
+    }).then(res=>{
+        // console.log(res);
+        if(res.data.code === 0){
+            // console.log(res);
+            dispatch(applicationList(res.data.data));
+        }
+    })
+
+}
