@@ -76,10 +76,9 @@ class Register extends React.Component{
                         ref={node=> selectElem = node}>
                         <option disabled="disabled">Choose status</option>
                         <option value="Applicant">Applicant</option>
-                        <option value="Employee">Employee</option>
-                        <option value="representative">Representative</option>
+                        <option value="representative">Customer Representative</option>
                         <option value="HR">HR</option>
-                        <option value="CompanyManager">CompanyManager</option>
+                        <option value="CompanyManager">Company Manager</option>
                     </select>
 
                     <button

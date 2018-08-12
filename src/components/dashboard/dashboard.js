@@ -125,8 +125,8 @@ class Dashboard extends React.Component{
             {
                 path: '/representative',
                 text: 'representative',
-                icon: 'user',
-                title: 'representative',
+                icon: 'representative',
+                title: 'Customer Representative',
                 component: RepresentativeContainer,
                 hide: true
             },
