@@ -39,12 +39,25 @@ class JobCard extends React.Component {
                                     <img className="card-img-top" style={{width: '180px'}} src={v.company.companyImg} alt="Card image cap"/>
                                 </div>
                                 <div className="col-6">
-                                    <div className="card-body">
-                                        <h1>Job title: {v.name}</h1>
-                                        <p>Company name: {v.company.companyName}</p>
-                                        <p>Job description: {v.description}</p>
-                                        <p>Company Location: {v.location}</p>
-                                        <p>Salary: {v.salary}</p>
+                                    <div className="card-body row">
+                                        <div className="col-6">
+                                            <h3>Job title</h3>
+                                            <p>{v.name}</p>
+                                            <h3>Company name</h3>
+                                            <p>{v.company.companyName}</p>
+                                            <h3>Job description</h3>
+                                            {v.description?v.description.split('\n').map(d=>(
+                                                <p key={d}>{d}</p>
+                                            )):null}
+                                        </div>
+                                        <div className="col-6">
+                                            <h3>Company Location</h3>
+                                            <p>{v.location}</p>
+                                            <h3>Salary</h3>
+                                            <p>{v.salary}</p>
+                                        </div>
+
+
                                     </div>
                                 </div>
 
