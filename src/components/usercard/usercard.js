@@ -25,11 +25,25 @@ class UserCard extends React.Component {
                 <div className="card"  key={v.user}>
                     <div className="row">
                         <div className="col-4">
-                            <img className="card-img-top" style={{width: '180px'}} src={require(`../img/${v.avatar}.png`)} alt="Card image cap"/>
+                            <div>
+                                <img className="card-img-top"
+                                     style={{width: '180px'}}
+                                     src={require(`../img/${v.avatar}.png`)}
+                                     alt="Card image cap"/>
+                            </div>
+                            <div>
+                                <Link to={`/chat/${v._id}`} >
+                                    <button style={{marginTop: 20, marginBottom: 20, width: '180px'}}
+                                            className="btn btn-block btn-dark">
+                                        Chat
+                                    </button>
+                                </Link>
+                            </div>
+
                         </div>
                         <div className="col-6">
                             <div className="card-body">
-                                <Link to={`/chat/${v._id}`}><h5 className="card-title">{v.user}</h5></Link>
+                                <h5 className="card-title">{v.user}</h5>
                                 <p className="card-text">{v.title}</p>
                                 <div className="card-text">{v.posDesc?v.posDesc.split('\n').map(d=>(<div key={d}>{d}</div>)):null}</div>
                                 {v.status=='HR'?<p className="card-text">Salary: {v.money}</p>:null}
@@ -58,7 +72,6 @@ class UserCard extends React.Component {
                                   onClick={()=>{this.props.handleDisConnect(v)}}>disconnect</a>
                                   :null}
                         </div>
-
 
                     </div>
                 </div>:null

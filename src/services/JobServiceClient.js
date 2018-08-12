@@ -25,9 +25,7 @@ class JobServiceClient {
 
     }
 
-    // getJobs(){
-    //     return fakeData;
-    // }
+
 
 }
 export default JobServiceClient;

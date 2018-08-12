@@ -23,6 +23,7 @@ import '../node_modules/font-awesome/css/font-awesome.min.css';
 import LocalJob from "./containers/local-job/localJob";
 import NewsPage from "./containers/new-page/NewsPage";
 import LoadingContainer from './components/loading/loading';
+import NoUser from "./containers/no-user/NoUser";
 const bootstrap = require('bootstrap');
 
 let store = createStore(combineReducer, compose(
@@ -52,8 +53,8 @@ ReactDOM.render(
                         <Route path='/chat/:user' component={ChatContainer}/>
                         <Route path='/localJob' component={LocalJob}/>
                         <Route path='/news/:keyword' component={NewsPage}/>
+                        <Route path='/noUser' component={NoUser}/>
                         <Route component={Dashboard}/>
-
                     </Switch>
                 </div>
             </BrowserRouter>
