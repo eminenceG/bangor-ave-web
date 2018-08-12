@@ -3,6 +3,7 @@ import Logo from '../../components/logo/logo'
 import { connect } from 'react-redux'
 import * as actions from "../../actions";
 import { Redirect } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 
 class Login extends React.Component{
@@ -64,12 +65,18 @@ class Login extends React.Component{
 
                     <button
                         onClick={this.handleLogin}
-                        className="btn btn-primary" style={{marginRight: "5px"}}>Login</button>
+                        className="btn btn-success" style={{marginRight: 20}}>Login</button>
 
                     <button
                         onClick={this.register}
                         className="btn btn-primary"
-                        style={{marginRight: "5px"}}>Register</button>
+                        style={{marginRight: 20}}>Register</button>
+
+                    <Link to = {`/`} style={{color:'white'}}>
+                        <button style={{marginRight: 20}} className="btn btn-dark">
+                            Home
+                        </button>
+                    </Link>
                 </div>
             </div>
         )
@@ -79,12 +86,12 @@ class Login extends React.Component{
 
 const stateToPropertiesMapper = (state) =>(
     state
-)
+);
 
 const dispatcherToPropsMapper = dispatch =>({
     login: (userInfo) => actions.login(dispatch, userInfo)
 
-})
+});
 
 
 

@@ -20,6 +20,8 @@ import LocalJobContainer from "../../containers/local-job/localJob";
 import CompanyListContainer from '../../containers/companyList/companyList';
 import ApplicationContainer from '../../components/application/application';
 import SearchLocalJob from "../search-local-job/SearchLocalJob";
+import MessageListContainer from "../../containers/message-list/MessageList";
+import CustomerRepresentativeContainer from "../../containers/customer-representetive/CustomerRepresentative";
 
 
 
@@ -75,6 +77,14 @@ class Dashboard extends React.Component{
                 hide: user.status !== 'HR'
             },
             {
+                path:'/CustomerRepresentative',
+                text:'Customer Representative',
+                icon:'HR',
+                title:'Customer Representative',
+                component: CustomerRepresentativeContainer,
+                hide: false
+            },
+            {
                 path:'/applicant',
                 text:'HR',
                 icon:'job',
@@ -108,11 +118,11 @@ class Dashboard extends React.Component{
             },
             {
                 path: '/representative',
-                text: 'representative',
-                icon: 'representative',
-                title: 'Customer Representative',
+                text: 'All Users',
+                icon: 'user',
+                title: 'All Users',
                 component: RepresentativeContainer,
-                hide: true
+                hide: user.status !== 'representative'
             },
             {
                 path:'/friends',
@@ -152,7 +162,7 @@ class Dashboard extends React.Component{
                 icon:'applications',
                 title:'applications List',
                 component: ApplicationContainer,
-                hide: false
+                hide: user.status === 'representative'
             },
             {
                 path:'/search/localJob',
@@ -161,7 +171,18 @@ class Dashboard extends React.Component{
                 title:'Search job',
                 component: SearchLocalJob,
                 hide: false
-            }
+            },
+
+            {
+                path:'/messageList',
+                text:'MessageList',
+                icon:'messageList',
+                title:'MessageList',
+                component: MessageListContainer,
+                hide: user.status !== 'representative'
+            },
+
+
         ];
 
 

@@ -12,7 +12,8 @@ export default class SearchLocalJob extends React.Component {
 
         this.state = {
             jobs: [],
-            keyword: ''
+            keyword: '',
+            show: true
         };
 
         this.findJobByName = this.findJobByName.bind(this);
@@ -23,7 +24,25 @@ export default class SearchLocalJob extends React.Component {
 
     findJobByName() {
         this.jobService.findJobByName(this.state.keyword)
-            .then(jobs => this.setState({jobs}))
+            .then(jobs => this.setState({jobs}));
+        this.setState({show: true});
+    }
+
+
+    renderJobTitleList() {
+        return this.state.jobs.map(
+            job => (
+                <ul className="list-group">
+                    <li className="list-group-item">
+                        Job Name: {job.name}
+                        <button onClick={() => this.setState({show: false})} className="float-right btn btn-dark">
+                            Show Detail
+                        </button>
+                    </li>
+
+                </ul>
+            )
+        )
     }
 
     renderJobList() {
@@ -99,7 +118,22 @@ export default class SearchLocalJob extends React.Component {
                     </Link>
                 </div>
 
-                {this.renderJobList()}
+                <div hidden={this.state.jobs.length === 0}  style={{marginTop: 40 }}>
+                    <h3 style={{fontFamily: 'Comic Sans MS', textAlign: 'center'}}>
+                        Search result
+                    </h3>
+
+                    <div  hidden={this.state.show}>
+                        {this.renderJobList()}
+                    </div>
+
+
+                    <div hidden={!this.state.show}>
+                        {this.renderJobTitleList()}
+                    </div>
+                </div>
+
+
 
 
 
