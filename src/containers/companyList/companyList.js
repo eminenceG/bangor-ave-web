@@ -11,13 +11,26 @@ class CompanyRow extends React.Component {
     super(props);  
   }
   render () {
+    var imgStyle = {
+      display: 'block',
+      maxWidth: '460px',
+      maxHeight: '230px',
+      width: 'auto',
+      height: 'auto',
+      marginLeft: 'auto',
+      marginRight: 'auto'
+    };
     return (
-      <div 
+      <div
         style={{marginTop: 20, marginBottom: 20}}
         key={this.props.company._id}
         className="border border-dark card text-center">
         <img
-          class="card-img-top" src={this.props.company.companyImg} alt="Card image cap"/>
+
+          style={imgStyle}
+          class="card-img-top center" 
+          src={this.props.company.companyImg} 
+          alt="Card image cap"/>
         <div className="card-header">
           <h3 className="card-title">{this.props.company.companyName}</h3>
         </div>
