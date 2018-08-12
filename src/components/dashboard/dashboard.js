@@ -18,7 +18,10 @@ import RepresentativeContainer from "../representative/representative";
 import HrJobContainer from "../../containers/hr-job/hrJob";
 import LocalJobContainer from "../../containers/local-job/localJob";
 import CompanyListContainer from '../../containers/companyList/companyList';
+import ApplicationContainer from '../../components/application/application';
 import SearchLocalJob from "../search-local-job/SearchLocalJob";
+
+
 // function HR(){
 //     return <h2>HR front page</h2>
 // }
@@ -104,14 +107,6 @@ class Dashboard extends React.Component{
                 hide: user.status !== 'admin'
             },
             {
-                path:'/msg',
-                text:'message',
-                icon:'msg',
-                title:'message list',
-                component: Msg,
-                hide: false
-            },
-            {
                 path:'/me',
                 text:'me',
                 icon:'user',
@@ -168,15 +163,21 @@ class Dashboard extends React.Component{
                 hide: false
             },
             {
+                path:'/applications',
+                text:'applications',
+                icon:'applications',
+                title:'applications List',
+                component: ApplicationContainer,
+                hide: false
+            },
+            {
                 path:'/search/localJob',
                 text:'Search job',
                 icon:'Search',
                 title:'Search job',
                 component: SearchLocalJob,
                 hide: false
-            },
-
-
+            }
         ];
 
 

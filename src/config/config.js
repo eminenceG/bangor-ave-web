@@ -1,14 +1,17 @@
 import axios from 'axios'
-import { Toast } from 'antd-mobile'
+
+// loading feature currently is not working. will fix it later.
+export let loading = false;
 
 
 axios.interceptors.request.use(function(config){
-    Toast.loading('loading',0);
+    loading = true;
+    // console.log( loading)
     return config;
 });
 
-
 axios.interceptors.response.use(function(config){
-    Toast.hide();
+    loading = false;
+    // console.log( loading)
     return config;
 });

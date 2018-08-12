@@ -34,10 +34,10 @@ class Login extends React.Component{
         document.body.style = 'background: white;';
         let inputElemUser;
         let inputElemPassword;
-        console.log(this.props);
+        // console.log(this.props);
         return(
             <div>
-                {this.props.userReducer.redirectTo? <Redirect to={this.props.userReducer.redirectTo}/>:null}
+                {this.props.userReducer.redirectTo&&this.props.userReducer.redirectTo!==this.props.location.pathname? <Redirect to={this.props.userReducer.redirectTo}/>:null}
 
                 <Logo></Logo>
                 <div className="container">

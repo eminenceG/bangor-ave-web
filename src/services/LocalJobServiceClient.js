@@ -12,7 +12,7 @@ export default class LocalJobServiceClient {
     }
 
     createJob(job) {
-        console.log(job);
+        // console.log(job);
         return fetch(constants.HOST + '/api/job', {
             method: 'post',
             body: JSON.stringify(job),
@@ -31,7 +31,10 @@ export default class LocalJobServiceClient {
     }
 
     findAllJobs() {
-        return fetch(constants.HOST + '/api/job')
+        return fetch(constants.HOST + '/api/job',{
+            credentials: 'include'
+
+        })
             .then(response => response.json());
     }
 
