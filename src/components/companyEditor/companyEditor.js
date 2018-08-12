@@ -33,6 +33,7 @@ class CompanyEditor extends React.Component{
 
     this.onChange = this.onChange.bind(this);
     this.handleSubmitButton = this.handleSubmitButton.bind(this);
+    this.handleDeleteButton = this.handleDeleteButton.bind(this);
     this.companyService = CompanyServiceClient.instance;
 
   } 
@@ -51,6 +52,11 @@ class CompanyEditor extends React.Component{
     this.companyService
         .updateCompany(company)
         .then(() => alert("Update the company information successfully!"));
+  }
+
+  handleDeleteButton() {
+    console.log("delete");
+    this.companyService.
   }
 
   componentDidMount(){
@@ -157,11 +163,20 @@ class CompanyEditor extends React.Component{
               onChange={()=>this.onChange('companyDescription', inputElemCompanyDescription .value)}
             />
           </FormGroup>
+
           <Button
             block
             bsStyle="success"
             onClick={this.handleSubmitButton}
-            type="button">Submit</Button>
+            type="button">Submit
+          </Button>
+
+          <Button
+            block
+            bsStyle="danger"
+            onClick={this.handleDeleteButton}
+            type="button">Delete
+          </Button>
         </form>
       </div>
     // <div className="container">

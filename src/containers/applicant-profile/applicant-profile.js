@@ -63,7 +63,7 @@ class ApplicantProfile extends React.Component{
 
     handleSaveButton() {
       console.log("save");
-    //   this.props.update(this.state)
+      this.props.update(this.state)
     }
 
 
