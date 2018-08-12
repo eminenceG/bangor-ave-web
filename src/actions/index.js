@@ -254,3 +254,8 @@ export function findApplicationsForUserLoggedIn(dispatch){
     })
 
 }
+
+export function changeRedirectTo(dispatch, target){
+    return dispatch({type: constants.CHANGE_REDIRECT, payload: target});
+
+}

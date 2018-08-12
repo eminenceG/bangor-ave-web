@@ -6,6 +6,8 @@ import * as actions from "../../actions";
 import { Redirect } from 'react-router-dom';
 import AuthRouteContainer from '../../components/auth-route/auth-route'
 import {Link} from 'react-router-dom'
+import { confirmAlert } from 'react-confirm-alert';
+import browserCookie from 'browser-cookies';
 class HRProfile extends React.Component{
     constructor(props){
         super(props);
@@ -18,6 +20,7 @@ class HRProfile extends React.Component{
         };
         this.onChange = this.onChange.bind(this);
         this.selectAvatar = this.selectAvatar.bind(this);
+        this.logout = this.logout.bind(this);
     }
 
     componentDidMount(){
@@ -40,6 +43,26 @@ class HRProfile extends React.Component{
             posDesc: nextProps.userReducer.posDesc
         });
 
+    }
+
+    logout() {
+        confirmAlert({
+            title: 'Logout',
+            message: 'Are you sure to logout?',
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => {
+                        browserCookie.erase('userId');
+                        this.props.logoutSubmit()
+                    }
+                },
+                {
+                    label: 'No',
+                    onClick: () => console.log('cancel')
+                }
+            ]
+        })
     }
 
     onChange(key, val){
@@ -112,12 +135,19 @@ class HRProfile extends React.Component{
                             value={this.state.posDesc}
                             onChange={()=>this.onChange('posDesc',inputElemPosDesc.value)}
                             ref={node=> inputElemPosDesc = node}/>
-                        <button className="btn btn-primary"
+                        <button className="btn btn-success"
                                 onClick={()=>{
                                     this.props.update(this.state);
                                 }}>Save</button>
                                 &nbsp;
                         <Link to = {`/me`} className="btn btn-primary">Return to dashboard</Link>
+                        &nbsp;
+                        <button
+                            className="btn btn-danger"
+                            onClick={this.logout}
+                        >
+                            Logout
+                        </button>
                     </div>
                 </div>
             )

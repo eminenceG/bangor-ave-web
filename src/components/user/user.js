@@ -13,6 +13,8 @@ import {
 import { Link } from 'react-router-dom';
 import AuthRouteContainer from '../../components/auth-route/auth-route'
 import { Redirect } from 'react-router-dom';
+import * as actions from "../../actions";
+
 export class User extends Component {
 
   constructor(props) {
@@ -30,6 +32,62 @@ export class User extends Component {
     console.log('handleEditProfileButtonClick()');
     
   }
+
+  renderHR(){
+    return(
+        <div>
+            <h4 className="title">
+                {this.props.userReducer.user}
+                <br />
+                <small>{this.props.userReducer.status} from {this.props.userReducer.company}</small>
+                <br />
+                <small>Hiring position: {this.props.userReducer.title}</small>
+                <br />
+            </h4>
+            <p className="description text-center">{this.props.userReducer.desc}</p>
+            <button
+                className="btn btn-primary"
+                onClick={()=>{
+                    this.props.changeRedirectTo('/' + this.props.userReducer.status + '-profile');
+                    this.props.history.push('/' + this.props.userReducer.status + '-profile');
+                }}
+            >
+                Edit My Profile
+            </button>
+        </div>
+    )
+  }
+
+  renderApplicant(){
+      return(
+          <div>
+              <h4 className="title">
+                  {this.props.userReducer.user}
+                  <br />
+                  <small>{this.props.userReducer.status}</small>
+                  <br />
+                  <small>Applying position: {this.props.userReducer.title}</small>
+                  <br />
+              </h4>
+              <p className="description text-center">{this.props.userReducer.desc}</p>
+              <button
+                  className="btn btn-primary"
+                  onClick={()=>{
+                    this.props.changeRedirectTo('/' + this.props.userReducer.status + '-profile');
+                      this.props.history.push('/' + this.props.userReducer.status + '-profile');
+                  }}
+                  >
+                  Edit My Profile
+              </button>
+          </div>
+      )
+  }
+
+  renderRepresentative(){}
+
+  renderCompanyManager(){}
+
+
   render() {
     return (
       <div className="card container">
@@ -44,19 +102,10 @@ export class User extends Component {
                           src={require(`../img/${this.props.userReducer.avatar}.png`)}
                           alt="..."
                       />
-                      <h4 className="title">
-                          {this.props.userReducer.user}
-                          <br />
-                          <small>{this.props.userReducer.status} from {this.props.userReducer.company}</small>
-                          <br />
-                          <small>Hiring position: {this.props.userReducer.title}</small>
-                          <br />
-                      </h4>
-                      <p className="description text-center">{this.props.userReducer.desc}</p>
-                      <Link
-                          to={'/' + this.props.userReducer.status + '-profile'}>
-                          Edit My Profile
-                      </Link>
+                      {this.props.userReducer.status==='HR'?this.renderHR():null}
+                      {this.props.userReducer.status==='applicant'?this.renderApplicant():null}
+                      {this.props.userReducer.status==='representative'?this.renderRepresentative():null}
+                      {this.props.userReducer.status==='companyManager'?this.renderCompanyManager():null}
                   </center>
               </div>
           </div>:null}
@@ -86,6 +135,7 @@ const stateToPropertiesMapper = (state) =>(
 )
 
 const dispatcherToPropsMapper = dispatch =>({
+    changeRedirectTo: (target) => actions.changeRedirectTo(dispatch, target)
 })
 
 const UserContainer = connect(stateToPropertiesMapper,dispatcherToPropsMapper)(User)
