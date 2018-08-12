@@ -59,29 +59,30 @@ class CompanyEditor extends React.Component{
     console.log("delete");
     this.companyService
         .deleteCompanyByName(this.props.userReducer.company)
-        .then(() => {
-            // TODO: After delete the Company, redirect to the profile.
-          this.setState({redirectTo: '/CompanyManager-profile'})
-          this.forceUpdate()
-          }
-        )
+        .then(()=>{
+            window.location.reload();
+        })
   }
 
   componentDidMount(){
     //   this.props.getUserList('applicant');
-    console.log(this.props.userReducer.company); 
+    // console.log(this.props.userReducer.company);
     this.companyService
         .findCompanyByName(this.props.userReducer.company)
         .then(company => {
+            if(company === null){
+                this.props.history.push('/CompanyManager-profile');
+            return;}
           let newState = {
-            companyImg:         company.companyImg,
-            companyState:       company.companyState, 
-            companyCity:        company.companyCity,
-            companyAddress:     company.companyAddress,  
-            companyDescription: company.companyDescription,  
+            companyImg:         company.companyImg?company.companyImg:'',
+            companyState:       company.companyState?company.companyState:'',
+            companyCity:        company.companyCity?company.companyCity:'',
+            companyAddress:     company.companyAddress?company.companyAddress:'',
+            companyDescription: company.companyDescription?company.companyDescription:''
           }
-          this.setState(newState)
-          console.log(this.state)});
+            this.setState(newState)
+
+          });
   }
 
   componentWillReceiveProps(newProps) {
@@ -93,17 +94,21 @@ class CompanyEditor extends React.Component{
     // });
 
     this.companyService
-        .findCompanyByName(this.props.userReducer.company)
+        .findCompanyByName(newProps.userReducer.company)
         .then(company => {
+            if(company === null){
+                newProps.history.push('/CompanyManager-profile');
+                return;
+            }
           let newState = {
-            companyImg:         company.companyImg,
-            companyState:       company.companyState, 
-            companyCity:        company.companyCity,
-            companyAddress:     company.companyAddress,  
-            companyDescription: company.companyDescription,  
+            companyImg:         company.companyImg?company.companyImg:'',
+            companyState:       company.companyState?company.companyState:'',
+            companyCity:        company.companyCity?company.companyCity:'',
+            companyAddress:     company.companyAddress?company.companyAddress:'',
+            companyDescription: company.companyDescription?company.companyDescription:''
           }
           this.setState(newState)
-          console.log(this.state)});  
+          });
 
   }
 
@@ -122,7 +127,7 @@ class CompanyEditor extends React.Component{
     let inputElemCompanyDescription
     return (
       <div className="container">
-        {this.props.userReducer.redirectTo? <Redirect to = {this.props.userReducer.redirectTo}/>:null}
+        {this.props.userReducer.redirectTo&&this.props.userReducer.redirectTo!==this.props.location.pathname? <Redirect to = {this.props.userReducer.redirectTo}/>:null}
         <h2>{this.props.userReducer.company}</h2>
         <form>
           <FieldGroup
@@ -157,7 +162,7 @@ class CompanyEditor extends React.Component{
             type="text"
             label="Address"
             placeholder="Company Address"
-            value={this.state.company}
+            value={this.state.companyAddress}
             inputRef={input => inputElemCompanyAddress = input}
             onChange={()=>this.onChange('companyAddress', inputElemCompanyAddress.value)}
           />
