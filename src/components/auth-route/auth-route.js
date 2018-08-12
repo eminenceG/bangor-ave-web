@@ -22,10 +22,15 @@ class AuthRoute extends React.Component{
                     if(res.data.code===0){
                         //with login info
                         this.props.loadData(res.data.data);
+                        if(this.props.location.pathname==='/'){
+                            this.props.history.push('/me'); // without login info, force redirect to login page.
+                        }
                     }
                     else{
                         this.props.authFAIL();
-                        this.props.history.push('/login'); // without login info, force redirect to login page.
+                        if(this.props.location.pathname!=='/'){
+                            this.props.history.push('/login'); // without login info, force redirect to login page.
+                        }
                     }
 
 
