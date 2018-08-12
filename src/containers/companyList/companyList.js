@@ -4,11 +4,33 @@ import { Link } from 'react-router-dom';
 import * as actions from "../../actions";
 import CompanyServiceClient from "../../services/CompanyServiceClient";
 
+class JobList extends React.Component {
+  // get the company name
+  constructor(props) {
+    super(props);
+  }
+
+  render () {
+    return (
+      <div>
+        {this.props.hidden !== "true" ? 
+        <h1>Job List</h1>:null}
+      </div>
+    )
+  }
+}
 
 
 class CompanyRow extends React.Component {
   constructor(props) {
-    super(props);  
+    super(props);
+
+    this.handleSeeJobsButton = this.handleSeeJobsButton.bind(this);
+  }
+  handleSeeJobsButton() {
+    // TODO: Click this button to render job list for this company
+    alert("not supported now");
+    console.log("see jobs of " + this.props.company.companyName);
   }
   render () {
     var imgStyle = {
@@ -26,7 +48,6 @@ class CompanyRow extends React.Component {
         key={this.props.company._id}
         className="border border-dark card text-center">
         <img
-
           style={imgStyle}
           class="card-img-top center" 
           src={this.props.company.companyImg} 
@@ -41,8 +62,13 @@ class CompanyRow extends React.Component {
         </ul>
         <div class="card-body">
             <p class="card-text">{this.props.company.companyDescription}</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+          <button 
+            onClick={this.handleSeeJobsButton}
+            class='btn btn-primary'>See Jobs</button>
         </div>
+        <JobList
+          hidden="true"
+        />
      </div>
     )
   }
