@@ -22,22 +22,6 @@ import ApplicationContainer from '../../components/application/application';
 import SearchLocalJob from "../search-local-job/SearchLocalJob";
 
 
-// function HR(){
-//     return <h2>HR front page</h2>
-// }
-
-function applicant(){
-    return <h2>applicant front page</h2>
-}
-
-function Msg(){
-    return <h2>Msg front page</h2>
-}
-
-// function User(){
-//     return <h2>User front page</h2>
-// }
-
 
 class Dashboard extends React.Component{
     constructor(props){
