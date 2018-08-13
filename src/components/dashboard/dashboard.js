@@ -80,7 +80,7 @@ class Dashboard extends React.Component{
                 path:'/CustomerRepresentative',
                 text:'Customer Representative',
                 icon:'HR',
-                title:'Customer Representative',
+                title:'Support',
                 component: CustomerRepresentativeContainer,
                 hide: false
             },
@@ -187,8 +187,6 @@ class Dashboard extends React.Component{
 
 
 
-
-
         return (
             <div>
                 <AuthRouteContainer/>
@@ -198,13 +196,17 @@ class Dashboard extends React.Component{
                         <div className="navbar-header">
                             <a className="navbar-brand align-items-center d-flex" href="/me">MINILINKEDIN</a>
                         </div>
-                        <div className=" collapse navbar-collapse col-sm-9" id="myNavbar">
-                            <NavLinkBar data = {navList} />
-                            <button
-                                className="btn btn-primary"
-                                onClick={this.logout}>
-                                logout
-                            </button>
+                        <div className=" collapse navbar-collapse col-sm-11 row" id="myNavbar">
+                            <div className="col-11">
+                                <NavLinkBar data = {navList} />
+                            </div>
+                            <div className="col-1">
+                                <button
+                                    className="btn btn-primary float-right"
+                                    onClick={this.logout}>
+                                    logout
+                                </button>
+                            </div>
                         </div>
 
                         <button className="btn btn-link bd-search-docs-toggle d-md-none p-0 ml-2 collapsed"

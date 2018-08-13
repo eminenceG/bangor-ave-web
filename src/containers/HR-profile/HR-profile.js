@@ -16,7 +16,19 @@ class HRProfile extends React.Component{
             title: '',
             company: '',
             money: '',
-            posDesc: ''
+            posDesc: '',
+            email:'',
+            phone:'',
+            address:'',
+            dob:'',
+            cvLink:'',
+            education:'',
+            skills:'',
+            experience:'',
+            awards:'',
+            publications:'',
+            languages:'',
+            website:''
         };
         this.onChange = this.onChange.bind(this);
         this.selectAvatar = this.selectAvatar.bind(this);
@@ -29,7 +41,19 @@ class HRProfile extends React.Component{
             title: this.props.userReducer.title,
             company: this.props.userReducer.company,
             money: this.props.userReducer.money,
-            posDesc: this.props.userReducer.posDesc
+            posDesc: this.props.userReducer.posDesc,
+            email: this.props.userReducer.email,
+            phone: this.props.userReducer.phone,
+            address: this.props.userReducer.address,
+            dob: this.props.userReducer.dob,
+            cvLink: this.props.userReducer.cvLink,
+            education: this.props.userReducer.education,
+            skills: this.props.userReducer.skills,
+            experience: this.props.userReducer.experience,
+            awards: this.props.userReducer.awards,
+            publications: this.props.userReducer.publications,
+            languages: this.props.userReducer.languages,
+            website: this.props.userReducer.website,
         });
 
     }
@@ -40,7 +64,19 @@ class HRProfile extends React.Component{
             title: nextProps.userReducer.title,
             company: nextProps.userReducer.company,
             money: nextProps.userReducer.money,
-            posDesc: nextProps.userReducer.posDesc
+            posDesc: nextProps.userReducer.posDesc,
+            email: nextProps.userReducer.email,
+            phone: nextProps.userReducer.phone,
+            address: nextProps.userReducer.address,
+            dob: nextProps.userReducer.dob,
+            cvLink: nextProps.userReducer.cvLink,
+            education: nextProps.userReducer.education,
+            skills: nextProps.userReducer.skills,
+            experience: nextProps.userReducer.experience,
+            awards: nextProps.userReducer.awards,
+            publications: nextProps.userReducer.publications,
+            languages: nextProps.userReducer.languages,
+            website: nextProps.userReducer.website
         });
 
     }
@@ -83,6 +119,18 @@ class HRProfile extends React.Component{
         let inputElemCompany;
         let inputElemMoney;
         let inputElemPosDesc;
+        let inputEmail;
+        let inputPhone;
+        let inputAddress;
+        let inputDOB;
+        let inputCV;
+        let inputEdu;
+        let inputSkill;
+        let inputExp;
+        let inputAwards;
+        let inputPub;
+        let inputLanguages;
+        let inputWebsite;
         // console.log(this.props);
         // console.log(this.state);
         //this.props.redirectTo&&this.props.redirectTo!=this.props.location.pathname
@@ -135,6 +183,109 @@ class HRProfile extends React.Component{
                             value={this.state.posDesc}
                             onChange={()=>this.onChange('posDesc',inputElemPosDesc.value)}
                             ref={node=> inputElemPosDesc = node}/>
+
+                        <label htmlFor="name">Link to my Resume</label>
+                        <input
+                            placeholder="Link to my Resume"
+                            className="form-control mb-3"
+                            value={this.state.cvLink}
+                            onChange={()=>this.onChange('cvLink',inputCV.value)}
+                            ref={node=> inputCV = node}/>
+
+                        <label htmlFor="name">Link to my website</label>
+                        <input
+                            placeholder="Link to my website"
+                            className="form-control mb-3"
+                            value={this.state.website}
+                            onChange={()=>this.onChange('website',inputWebsite.value)}
+                            ref={node=> inputWebsite = node}/>
+                        <hr/>
+                        <h3>Background</h3>
+                        <label htmlFor="name">Education</label>
+                        <textarea
+                            placeholder="Self Description"
+                            className="form-control mb-3"
+                            value={this.state.education}
+                            onChange={()=>this.onChange('education',inputEdu.value)}
+                            ref={node=> inputEdu = node}/>
+
+                        <label htmlFor="name">Experience</label>
+                        <textarea
+                            placeholder="experience"
+                            className="form-control mb-3"
+                            value={this.state.experience}
+                            onChange={()=>this.onChange('experience',inputExp.value)}
+                            ref={node=> inputExp = node}/>
+
+                        <label htmlFor="name">Skills</label>
+                        <textarea
+                            placeholder="skills"
+                            className="form-control mb-3"
+                            value={this.state.skills}
+                            onChange={()=>this.onChange('skills',inputSkill.value)}
+                            ref={node=> inputSkill = node}/>
+
+
+                        <label htmlFor="name">Awards</label>
+                        <textarea
+                            placeholder="Awards"
+                            className="form-control mb-3"
+                            value={this.state.awards}
+                            onChange={()=>this.onChange('awards',inputAwards.value)}
+                            ref={node=> inputAwards = node}/>
+
+                        <label htmlFor="name">Publications</label>
+                        <textarea
+                            placeholder="Publications"
+                            className="form-control mb-3"
+                            value={this.state.publications}
+                            onChange={()=>this.onChange('publications',inputPub.value)}
+                            ref={node=> inputPub = node}/>
+
+
+                        <label htmlFor="name">Languages</label>
+                        <textarea
+                            placeholder="Languages"
+                            className="form-control mb-3"
+                            value={this.state.languages}
+                            onChange={()=>this.onChange('languages',inputLanguages.value)}
+                            ref={node=> inputLanguages = node}/>
+                        <hr/>
+
+                        <h3>Basic Information</h3>
+                        <label htmlFor="name">email</label>
+                        <input
+                            placeholder="email"
+                            className="form-control mb-3"
+                            value={this.state.email}
+                            onChange={()=>this.onChange('email',inputEmail.value)}
+                            ref={node=> inputEmail = node}/>
+
+                        <label htmlFor="name">phone</label>
+                        <input
+                            placeholder="phone"
+                            className="form-control mb-3"
+                            value={this.state.phone}
+                            onChange={()=>this.onChange('phone',inputPhone.value)}
+                            ref={node=> inputPhone = node}/>
+
+                        <label htmlFor="name">address</label>
+                        <input
+                            placeholder="address"
+                            className="form-control mb-3"
+                            value={this.state.address}
+                            onChange={()=>this.onChange('address',inputAddress.value)}
+                            ref={node=> inputAddress = node}/>
+
+                        <label htmlFor="name">Date of Birth</label>
+                        <input
+                            placeholder="Date of Birth"
+                            className="form-control mb-3"
+                            value={this.state.dob}
+                            onChange={()=>this.onChange('dob',inputDOB.value)}
+                            ref={node=> inputDOB = node}/>
+                        <hr/>
+
                         <button className="btn btn-success"
                                 onClick={()=>{
                                     this.props.update(this.state);
