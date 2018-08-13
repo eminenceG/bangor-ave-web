@@ -44,13 +44,13 @@ class FriendList extends React.Component{
                 {this.props.chatUser.userList&&this.props.userReducer.status!=='admin'?
                     <UserCard
                         userlist={this.props.chatUser.userList} page={'friendlist'} handleDisConnect={this.handleDisConnect}
-                    ></UserCard>:null}
+                    />:null}
 
                 {this.props.friendshipReducer.friendshipList&&this.props.userReducer.status==='admin'?
                     <div>
                         <RelationCard
                             friendshipList={this.props.friendshipReducer.friendshipList} page={'friendlist'} handleDisConnect={this.handleDisConnect} context={'friendshipAdmin'}
-                        ></RelationCard>
+                        />
                     </div>
                 :null}
             </div>

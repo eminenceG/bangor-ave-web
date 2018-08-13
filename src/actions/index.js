@@ -289,6 +289,21 @@ export function cancelApplication(dispatch, jobId){
 
 }
 
+export function cancelApplicationAdmin(dispatch, jobId, applicantId){
+    return axios(constants.HOST + '/api/admin/application',{
+        method:'delete',
+        withCredentials: true,
+        data: {jobId, applicantId}
+    }).then(res=>{
+        // console.log(res);
+        if(res.data.code === 0){
+            // console.log(res);
+            dispatch(userList(res.data.data));
+        }
+    })
+
+}
+
 export function applicationList(data) {
     // console.log(data);
     return {type: constants.APPLICATION_LIST, payload: data};
@@ -307,6 +322,20 @@ export function findApplicationsForUserLoggedIn(dispatch){
     })
 
 }
+
+export function findApplicationsAdmin(dispatch){
+    return axios(constants.HOST + '/api/admin/application',{
+        withCredentials: true
+    }).then(res=>{
+        // console.log(res);
+        if(res.data.code === 0){
+            // console.log(res);
+            dispatch(applicationList(res.data.data));
+        }
+    })
+
+}
+
 
 export function changeRedirectTo(dispatch, target){
     return dispatch({type: constants.CHANGE_REDIRECT, payload: target});

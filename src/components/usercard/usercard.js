@@ -88,7 +88,7 @@ class UserCard extends React.Component {
                                 <div className="card-text">{v.posDesc?v.posDesc.split('\n').map(d=>(<div key={d}>{d}</div>)):null}</div>
                                 {v.status=='HR'?<p className="card-text">Salary: {v.money}</p>:null}
                                 {v.status=='HR'?<p className="card-text">Company: {v.company}</p>:null}
-                                {this.props.userReducer.status==='HR'&&this.props.page==='applications'?
+                                {(this.props.userReducer.status==='HR'||this.props.userReducer.status==='admin')&&this.props.page==='applications'?
                                     <div>
                                         <h4>Applying job</h4>
                                         <p>{v.job.name}</p>
@@ -100,7 +100,7 @@ class UserCard extends React.Component {
                         </div>
 
                         <div className="col-2">
-                            {this.props.userReducer.status==='admin'?
+                            {this.props.userReducer.status==='admin'&&this.props.page!=='applications'?
                                 <div>
                                 <a className="btn btn-primary"
                                    href="#top"
@@ -128,6 +128,13 @@ class UserCard extends React.Component {
                                                                     <button className="btn btn-success"
                                                                      style={{color:"white", marginTop: 20}}
                                                                      onClick={()=>{this.setState({showDetail: v.user})}}>View Detail</button>}
+
+                            {this.props.userReducer.status==='admin'&&this.props.page==='applications'?
+                                <button className="btn btn-danger"
+                                        style={{color:"white", marginTop: 20}}
+                                        onClick={()=>(this.props.cancelApplicationAdmin(v.job._id, v._id))}
+                                        >Delete Application</button>
+                            :null}
                         </div>
 
                     </div>
