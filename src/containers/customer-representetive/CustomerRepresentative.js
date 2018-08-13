@@ -3,7 +3,6 @@ import {getMsgList, sendMsg} from "../../redux/chat.redux";
 import {connect} from "react-redux";
 import * as actions from "../../actions";
 import { Link } from 'react-router-dom'
-import UserCard from '../../components/usercard/usercard';
 
 
 
