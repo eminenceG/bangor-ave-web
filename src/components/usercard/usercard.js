@@ -49,11 +49,14 @@ class UserCard extends React.Component {
 
 
   render() {
+    let cnt = 0;
     return (
       <div>
         {this.props.userlist?this.props.userlist.map(v=>(
             v.avatar?
-                <div className="card"  key={v.job?(v.job.name+v.user):v.user}>
+            <div key={v.job?(v.job.name+" "+v.user+cnt++):v.user+" "+cnt++}>
+
+                <div className="card"  key={v.job?(v.job.name+v.user+cnt++):v.user+cnt++}>
                     <div className="row">
                         <div className="col-4">
                             <div>
@@ -62,14 +65,14 @@ class UserCard extends React.Component {
                                      src={require(`../img/${v.avatar}.png`)}
                                      alt="Card image cap"/>
                             </div>
-                            <div>
+                            {this.props.context!=='friendshipAdmin'?<div>
                                 <Link to={`/chat/${v._id}`} >
                                     <button style={{marginTop: 20, marginBottom: 20, width: '180px'}}
                                             className="btn btn-block btn-dark">
                                         Chat
                                     </button>
                                 </Link>
-                            </div>
+                            </div>:null}
 
                         </div>
                         <div className="col-6">
@@ -95,40 +98,44 @@ class UserCard extends React.Component {
                                 {this.state.showDetail===v.user?this.renderApplicant(v):null}
                             </div>
                         </div>
-                        {this.props.userReducer.status==='admin'?
+
                         <div className="col-2">
-                            <a className="btn btn-primary"
-                                    href="#top"
-                                    onClick={()=>{this.props.handleEdit(v)}}>edit</a>
-                            &nbsp;
-                            <a className="btn btn-danger"
+                            {this.props.userReducer.status==='admin'?
+                                <div>
+                                <a className="btn btn-primary"
+                                   href="#top"
+                                   onClick={()=>{this.props.handleEdit(v)}}>edit</a>
+                                &nbsp;
+                                <a className="btn btn-danger"
                                 style={{color:"white"}}
-                               onClick={()=>{this.props.handleDelete(v)}}>delete</a>
-                        </div>:null}
-                        <div className="col-2">
-                        {!v.isFriend&&this.props.page!=='friendlist'&&(this.props.userReducer.status==='applicant'||(this.props.userReducer.status==='HR'&&this.props.page!=='applications'))?
-                            <a className="btn btn-primary"
-                               style={{color:"white"}}
-                               onClick={()=>{this.props.handleConnect(v)}}>connect</a>
-                               :null}
-                        {v.isFriend&&(this.props.userReducer.status==='applicant'||this.props.userReducer.status==='HR')||this.props.page==='friendlist'?
-                            <a className="btn btn-danger"
-                                  style={{color:"white"}}
-                                  onClick={()=>{this.props.handleDisConnect(v)}}>disconnect</a>
-                                  :null}
-                        {this.state.showDetail===v.user?<button className="btn btn-primary"
-                                                                style={{color:"white", marginTop: 20}}
-                                                                onClick={()=>{this.setState({showDetail: null})}}>Hide Detail</button>
-                                                                :
-                                                                <button className="btn btn-success"
-                                                                 style={{color:"white", marginTop: 20}}
-                                                                 onClick={()=>{this.setState({showDetail: v.user})}}>View Detail</button>}
+                                onClick={()=>{this.props.handleDelete(v)}}>delete</a>
+                                </div>
+                                :null}
+                            {!v.isFriend&&this.props.page!=='friendlist'&&(this.props.userReducer.status==='applicant'||(this.props.userReducer.status==='HR'&&this.props.page!=='applications'))?
+                                <a className="btn btn-primary"
+                                   style={{color:"white"}}
+                                   onClick={()=>{this.props.handleConnect(v)}}>connect</a>
+                                   :null}
+                            {v.isFriend&&(this.props.userReducer.status==='applicant'||this.props.userReducer.status==='HR')||this.props.page==='friendlist'?
+                                <a className="btn btn-danger"
+                                      style={{color:"white"}}
+                                      onClick={()=>{this.props.handleDisConnect(v)}}>disconnect</a>
+                                      :null}
+                            {this.state.showDetail===v.user?<button className="btn btn-primary"
+                                                                    style={{color:"white", marginTop: 20}}
+                                                                    onClick={()=>{this.setState({showDetail: null})}}>Hide Detail</button>
+                                                                    :
+                                                                    <button className="btn btn-success"
+                                                                     style={{color:"white", marginTop: 20}}
+                                                                     onClick={()=>{this.setState({showDetail: v.user})}}>View Detail</button>}
                         </div>
 
                     </div>
-                </div>:null
+                </div>
+            </div>:null
         )):null}
       </div>
+
     )
   }
 }

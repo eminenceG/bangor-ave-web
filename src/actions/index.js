@@ -191,6 +191,32 @@ export function getFriendListForUserLoggedIn(dispatch){
     })
 }
 
+
+export function friendshipList(data) {
+    let filteredData = data.map(item => {
+        let {password:p1, ...d1} = item.me;
+        let {password:p2, ...d2} = item.friend;
+        const newData = {me:d1,friend:d2};
+        // console.log(newData);
+        return newData;
+    });
+    return {type: constants.FRIENDSHIP_LIST, payload: filteredData};
+}
+
+
+export function getFriendshipListAdmin(dispatch){
+    return axios(constants.HOST + '/api/admin/friendship',{
+        withCredentials: true
+    }).then(res=>{
+        // console.log(res);
+        if(res.data.code === 0){
+            // console.log(res);
+            // console.log(res.data.data);
+            dispatch(friendshipList(res.data.data));
+        }
+    })
+}
+
 export function makeFriend(dispatch, friendId){
     return axios(constants.HOST + '/api/friendship',{
         method:'post',
@@ -215,6 +241,20 @@ export function breakFriend(dispatch, friendId){
         if(res.data.code === 0){
             // console.log(res);
             dispatch(userList(res.data.data));
+        }
+    })
+}
+
+export function breakFriendAdmin(dispatch, friendship){
+    return axios(constants.HOST + '/api/admin/friendship',{
+        method:'delete',
+        withCredentials: true,
+        data: {friendship}
+    }).then(res=>{
+        // console.log(res);
+        if(res.data.code === 0){
+            // console.log(res);
+            dispatch(friendshipList(res.data.data));
         }
     })
 }
