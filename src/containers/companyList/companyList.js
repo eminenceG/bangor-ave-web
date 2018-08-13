@@ -3,18 +3,65 @@ import {connect} from "react-redux";
 import { Link } from 'react-router-dom';
 import * as actions from "../../actions";
 import CompanyServiceClient from "../../services/CompanyServiceClient";
+import LocalJobServiceClient from "../../services/LocalJobServiceClient"
 
 class JobList extends React.Component {
   // get the company name
   constructor(props) {
     super(props);
+
+    this.renderJobList = this.renderJobList.bind(this);
+  }
+
+  renderJobList() {
+    // console.log(this.state);
+    return this.props.jobs.map(
+        job => {
+            return (
+                <div style={{marginTop: 20, marginBottom: 20}}
+                     key={job._id}
+                     className="border border-dark card text-center">
+                    <div className="card-header">
+                        <h5 className="card-title">Job Position: {job.name}</h5>
+                    </div>
+                    <div className="card-header">
+                        <div>
+                            Company: {job.company.companyName}
+                        </div>
+                        <div>
+                            <Link to={'/news/' + job.company.companyName}>
+                                click to view news about this company
+                            </Link>
+                        </div>
+
+                    </div>
+                    <div className="card-header">
+                        Salary: {job.salary}
+                    </div>
+                    <div className="card-header">
+                        <div>
+                            Location: {job.location}
+                        </div>
+                        <div>
+                            <Link to={'/news/' + job.location}>
+                                click to view news about this location
+                            </Link>
+                        </div>
+
+                    </div>
+                    <div className="card-body">
+                        <p className="card-text">Job Description: {job.description}</p>
+                    </div>
+                </div>
+            )
+        }
+    )
   }
 
   render () {
     return (
-      <div>
-        {this.props.hidden !== "true" ? 
-        <h1>Job List</h1>:null}
+      <div hidden={this.props.hidden}>
+        {this.renderJobList()}
       </div>
     )
   }
@@ -24,13 +71,31 @@ class JobList extends React.Component {
 class CompanyRow extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      hideJobList: true,
+      jobs: []
+    }
 
     this.handleSeeJobsButton = this.handleSeeJobsButton.bind(this);
+    this.LocalJobServiceClient = LocalJobServiceClient.instance
+
   }
+
   handleSeeJobsButton() {
     // TODO: Click this button to render job list for this company
-    alert("not supported now");
+    // this.LocalJobServiceClient
+    //     .findJobsByCompany(this.props.company)
+    // alert("not supported now");
     console.log("see jobs of " + this.props.company.companyName);
+    // console.log(this.LocalJobServiceClient)
+    this.LocalJobServiceClient
+        .findJobByCompanyId(this.props.company._id)
+        .then( jobs => {
+          this.setState({hideJobList: !this.state.hideJobList})
+          this.setState({jobs: jobs})
+          console.log(this.state)
+        })
+
   }
   render () {
     var imgStyle = {
@@ -67,7 +132,8 @@ class CompanyRow extends React.Component {
             className='btn btn-primary'>See Jobs</button>
         </div>
         <JobList
-          hidden="true"
+          hidden={this.state.hideJobList}
+          jobs={this.state.jobs}
         />
      </div>
     )
@@ -106,7 +172,8 @@ class CompanyList extends React.Component {
         company => {
             return (
               <CompanyRow
-                company={company} key={company._id}/>
+                company={company} 
+                key={company._id}/>
             )
         }
       )

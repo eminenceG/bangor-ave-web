@@ -61,6 +61,13 @@ export default class LocalJobServiceClient {
             .then(response => response.json());
     }
 
+    findJobByCompanyId(companyId) {
+        return fetch(constants.HOST + '/api/job/company/' + companyId)
+            .then(response => response.json());
+    }
+
+
+
 
 
 
