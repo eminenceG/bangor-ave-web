@@ -107,7 +107,9 @@ class AdminJobList extends React.Component {
         return (
             <div className='container'>
 
-                <h3 style={{textAlign: 'center'}}>As an admin, you can delete and edit jobs posted by other users in this website</h3>
+                <h3 style={{fontFamily: 'Comic Sans MS', textAlign: 'center'}}>
+                    As an admin, you can delete and edit jobs posted by other users in this website
+                </h3>
                 <hr/>
                 <form style={{marginTop: 30}} hidden={this.state.hideEditor}>
 
