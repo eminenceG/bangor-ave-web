@@ -112,7 +112,7 @@ class Dashboard extends React.Component{
                 path:'/CompanyManager',
                 text:'CompanyManager',
                 icon:'CompanyManager',
-                title: 'Company Profile',
+                title: 'Company Manager Profile',
                 component: CompanyEditor,
                 hide: user.status !== 'CompanyManager'
             },
