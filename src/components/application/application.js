@@ -12,6 +12,7 @@ class Application extends React.Component{
             data:[]
 
         }
+        this.handleCancelApplicationAdmin=this.handleCancelApplicationAdmin.bind(this);
     }
 
     componentDidMount(){
@@ -20,9 +21,25 @@ class Application extends React.Component{
         } else {
             this.props.findApplicationsAdmin();
         }
-
-
     }
+
+    componentWillReceiveProps(newProps){
+        if(this.props.applicationReducer.applicationList.length !== 0) return;
+
+        if(this.props.userReducer.status!=='admin'){
+            newProps.findApplicationsForUserLoggedIn();
+        } else {
+            newProps.findApplicationsAdmin();
+        }
+    }
+
+
+
+    handleCancelApplicationAdmin(jobId, applicantId){
+        this.props.cancelApplicationAdmin(jobId, applicantId)
+            .then(()=>(this.props.findApplicationsAdmin()))
+    }
+
 
     renderApplicationsForApplicant(){
         return (
@@ -71,7 +88,7 @@ class Application extends React.Component{
                 <h2>Applicants applying to your jobs</h2>
                 {userList?
                     <UserCard
-                        userlist={userList} page={'applications'} cancelApplicationAdmin={this.props.cancelApplicationAdmin}
+                        userlist={userList} page={'applications'} cancelApplicationAdmin={this.handleCancelApplicationAdmin}
                     />:null}
             </div>
         )

@@ -22,6 +22,16 @@ class FriendList extends React.Component{
         }
     }
 
+    componentWillReceiveProps(newProps){
+        if(this.props.friendshipReducer.friendshipList.length !== 0 || this.props.chatUser.userList.length !== 0) return;
+
+        if(this.props.userReducer.status!=='admin'){
+            this.props.getFriendListForUserLoggedIn();
+        } else {
+            this.props.getFriendshipListAdmin();
+        }
+    }
+
 
     handleDisConnect(v){
         // console.log(v._id);
