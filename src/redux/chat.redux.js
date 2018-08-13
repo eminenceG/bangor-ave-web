@@ -27,7 +27,7 @@ export function chatReducer(state=initState, action) {
                 ).length
             };
         case MSG_RECEIVE:
-            console.log(action.payload);
+            // console.log(action.payload);
             const temp = state.chatmsg;
             for(let i = 0; i < temp.length; i++) {
                 if(action.payload === temp[i]) {
@@ -68,7 +68,7 @@ export function recvMsg(dispatch) {
 }
 
 export function sendMsg(dispatch, send) {
-    console.log(send);
+    // console.log(send);
     return socket.emit('sendmsg', send)
 }
 

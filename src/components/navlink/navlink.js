@@ -35,11 +35,16 @@ class NavLinkBar extends React.Component{
 
     renderListOfNavTabs(){
         let tabs = this.state.navList.map(tab => {
+            let selected=null;
+            // console.log(tab);
+            if(tab.path === window.location.pathname){
+                selected="active"
+            }
             return (
-                <li className={"nav-item"} style={{backgroundColor: "#666", marginRight: "5px"}} key={tab.title}>
-                    <span className={`nav-link ${tab.text}`} >
-                        <Link to = {`${tab.path}`} style={{color: "#FFF"}}>
-                            {tab.title}&nbsp;&nbsp;&nbsp;&nbsp;
+                <li className={"nav-item"} style={{backgroundColor: "#666", marginRight: "5px", fontSize:'12px'}} key={tab.title}>
+                    <span className={`nav-link ${selected}`} >
+                        <Link to = {`${tab.path}`} style={{color: selected==='active'?'black':"#FFF"}}>
+                            {tab.title}
                         </Link>
                     </span>
                 </li>
@@ -55,7 +60,7 @@ class NavLinkBar extends React.Component{
                 <div className="container">
                     <form className="input-group form-inline my-2 my-lg-0">
                         <ul className="list-group">
-                            <ul className="nav nav-tabs">
+                            <ul className="nav nav-tabs ">
                                 {this.renderListOfNavTabs()}
                             </ul>
                         </ul>

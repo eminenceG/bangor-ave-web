@@ -15,7 +15,19 @@ const initState={
     desc: '',
     posDesc:'',
     company:'',
-    money:''
+    money:'',
+    email:'',
+    phone:'',
+    address:'',
+    dob:'',
+    cvLink:'',
+    education:'',
+    skills:'',
+    experience:'',
+    awards:'',
+    publications:'',
+    languages:'',
+    website:''
 };
 
 

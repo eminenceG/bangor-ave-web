@@ -52,7 +52,7 @@ class Dashboard extends React.Component{
             label: 'Yes',
             onClick: () => {
               browserCookie.erase('userId');
-              this.props.logoutSubmit()
+              this.props.logoutSubmit();
             }
           },
           {
@@ -72,7 +72,7 @@ class Dashboard extends React.Component{
                 path:'/HR',
                 text:'applicant',
                 icon:'HR',
-                title:'Applicants list',
+                title:'Applicants',
                 component: HRContainer,
                 hide: user.status !== 'HR'
             },
@@ -80,7 +80,7 @@ class Dashboard extends React.Component{
                 path:'/CustomerRepresentative',
                 text:'Customer Representative',
                 icon:'HR',
-                title:'Customer Representative',
+                title:'Support',
                 component: CustomerRepresentativeContainer,
                 hide: false
             },
@@ -88,7 +88,7 @@ class Dashboard extends React.Component{
                 path:'/applicant',
                 text:'HR',
                 icon:'job',
-                title:'HR list',
+                title:'HRs',
                 component: ApplicantContainer,
                 hide: user.status !== 'applicant'
             },
@@ -112,7 +112,7 @@ class Dashboard extends React.Component{
                 path:'/CompanyManager',
                 text:'CompanyManager',
                 icon:'CompanyManager',
-                title: 'Company Profile',
+                title: 'Company Manager Profile',
                 component: CompanyEditor,
                 hide: user.status !== 'CompanyManager'
             },
@@ -136,7 +136,7 @@ class Dashboard extends React.Component{
                 path:'/myJobList/hr',
                 text:'My-Job-list',
                 icon:'job',
-                title:'My-Job-list',
+                title:'My Jobs',
                 component: HrJobContainer,
                 hide: user.status !== 'HR'
             },
@@ -144,7 +144,7 @@ class Dashboard extends React.Component{
                 path:'/jobList',
                 text:'Job-list',
                 icon:'job',
-                title:'Job-list',
+                title:'Jobs',
                 component: LocalJobContainer,
                 hide: false
             },
@@ -152,15 +152,15 @@ class Dashboard extends React.Component{
                 path:'/company',
                 text:'Company',
                 icon:'company',
-                title:'Company List',
+                title:'Companies',
                 component: CompanyListContainer,
                 hide: false
             },
             {
                 path:'/applications',
-                text:'applications',
+                text:'Applications',
                 icon:'applications',
-                title:'applications List',
+                title:'Applications',
                 component: ApplicationContainer,
                 hide: user.status === 'representative'
             },
@@ -187,8 +187,6 @@ class Dashboard extends React.Component{
 
 
 
-
-
         return (
             <div>
                 <AuthRouteContainer/>
@@ -196,15 +194,19 @@ class Dashboard extends React.Component{
                 <nav className="navbar navbar-expand-md fixed-header navbar-dark bg-dark fixed-top box-shadow">
                     <div className="container-fluid d-flex justify-content-between">
                         <div className="navbar-header">
-                            <a className="navbar-brand align-items-center d-flex" href="/">{navList.find(v=>v.path === pathname).title}</a>
+                            <a className="navbar-brand align-items-center d-flex" href="/me">MINILINKEDIN</a>
                         </div>
-                        <div className=" collapse navbar-collapse col-sm-9" id="myNavbar">
-                            <NavLinkBar data = {navList} />
-                            <button
-                                className="btn btn-primary"
-                                onClick={this.logout}>
-                                logout
-                            </button>
+                        <div className=" collapse navbar-collapse col-sm-11 row" id="myNavbar">
+                            <div className="col-11">
+                                <NavLinkBar data = {navList} />
+                            </div>
+                            <div className="col-1">
+                                <button
+                                    className="btn btn-primary float-right"
+                                    onClick={this.logout}>
+                                    logout
+                                </button>
+                            </div>
                         </div>
 
                         <button className="btn btn-link bd-search-docs-toggle d-md-none p-0 ml-2 collapsed"

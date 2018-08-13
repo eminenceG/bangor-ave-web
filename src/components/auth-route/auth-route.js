@@ -53,7 +53,8 @@ class AuthRoute extends React.Component{
 
 const dispatcherToPropsMapper = dispatch =>({
     loadData: (data) => actions.loadData(dispatch, data),
-    authFAIL: () => actions.authFAIL(dispatch)
+    authFAIL: () => actions.authFAIL(dispatch),
+    changeRedirectTo: (target) => actions.changeRedirectTo(dispatch, target)
 })
 
 const AuthRouteContainer = connect(null,dispatcherToPropsMapper)(AuthRoute)
