@@ -30,6 +30,8 @@ class AuthRoute extends React.Component{
                         this.props.authFAIL();
                         if(this.props.location.pathname!=='/'){
                             this.props.history.push('/login'); // without login info, force redirect to login page.
+                        } else{
+                            this.props.changeRedirectTo('/');
                         }
                     }
 
@@ -53,7 +55,8 @@ class AuthRoute extends React.Component{
 
 const dispatcherToPropsMapper = dispatch =>({
     loadData: (data) => actions.loadData(dispatch, data),
-    authFAIL: () => actions.authFAIL(dispatch)
+    authFAIL: () => actions.authFAIL(dispatch),
+    changeRedirectTo: (target) => actions.changeRedirectTo(dispatch, target)
 })
 
 const AuthRouteContainer = connect(null,dispatcherToPropsMapper)(AuthRoute)
