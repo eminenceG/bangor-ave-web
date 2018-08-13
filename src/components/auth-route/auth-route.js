@@ -30,8 +30,6 @@ class AuthRoute extends React.Component{
                         this.props.authFAIL();
                         if(this.props.location.pathname!=='/'){
                             this.props.history.push('/login'); // without login info, force redirect to login page.
-                        } else{
-                            this.props.changeRedirectTo('/');
                         }
                     }
 

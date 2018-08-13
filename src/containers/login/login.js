@@ -72,11 +72,11 @@ class Login extends React.Component{
                         className="btn btn-primary"
                         style={{marginRight: 20}}>Register</button>
 
-                    <Link to = {`/`} style={{color:'white'}}>
-                        <button style={{marginRight: 20}} className="btn btn-dark">
-                            Home
-                        </button>
-                    </Link>
+                    {/*<Link to = {`/`} style={{color:'white'}}>*/}
+                        {/*<button style={{marginRight: 20}} className="btn btn-dark">*/}
+                            {/*Home*/}
+                        {/*</button>*/}
+                    {/*</Link>*/}
                 </div>
             </div>
         )
