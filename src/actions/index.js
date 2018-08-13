@@ -21,7 +21,20 @@ export function loadData(dispatch, userinfo){
 }
 
 export function logoutSubmit(dispatch) {
-  return dispatch({type: constants.LOGOUT});
+    return axios(constants.HOST + '/user/logout',{
+        method:'delete',
+        withCredentials: true
+    })
+        .then(res=>{
+            if(res.status ===200&&res.data.code===0){
+                // console.log(res.data);
+                return dispatch({type: constants.LOGOUT});
+            }
+            else{
+                return dispatch(errorMsg(res.data.msg));
+                // the error message will be determined by backend.
+            }
+        });
 }
 
 export function updateProfile(dispatch, data){
