@@ -22,6 +22,7 @@ import ApplicationContainer from '../../components/application/application';
 import SearchLocalJob from "../search-local-job/SearchLocalJob";
 import MessageListContainer from "../../containers/message-list/MessageList";
 import CustomerRepresentativeContainer from "../../containers/customer-representetive/CustomerRepresentative";
+import AdminJobListContainer from "../../containers/admin-job-list/AdminJobList";
 
 
 
@@ -182,7 +183,14 @@ class Dashboard extends React.Component{
                 hide: user.status !== 'representative'
             },
 
-
+            {
+                path:'/JobEditor',
+                text:'JobEditor',
+                icon:'JobEditor',
+                title:'JobEditor',
+                component: AdminJobListContainer,
+                hide: user.status !== 'admin'
+            },
         ];
 
 
