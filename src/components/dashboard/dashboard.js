@@ -51,8 +51,8 @@ class Dashboard extends React.Component{
           {
             label: 'Yes',
             onClick: () => {
-              browserCookie.erase('userId')
-                  .then(()=>{this.props.logoutSubmit()});
+              browserCookie.erase('userId');
+              this.props.logoutSubmit();
             }
           },
           {
