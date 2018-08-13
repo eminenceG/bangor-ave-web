@@ -123,7 +123,7 @@ class CompanyManagerProfile extends React.Component{
                 <nav className="navbar navbar-expand-md bg-dark fixed-top">
                     <div className="container-fluid">
                         <div className="navbar-header">
-                            <a className="navbar-brand" href="/applicant-profile" style={{color : "#FFF"}}>Applicant-profile</a>
+                            <a className="navbar-brand" href="/me" style={{color : "#FFF"}}>MINILINKEDIN</a>
                         </div>
                     </div>
                 </nav>

@@ -53,22 +53,22 @@ export class User extends Component {
 
             <hr/>
             <h5 htmlFor="name">Education</h5>
-            <p>{this.props.userReducer.education?this.props.userReducer.education.split('\n').map(item=>(<li>{item}</li>)):null}</p>
+            <p>{this.props.userReducer.education?this.props.userReducer.education.split('\n').map(item=>(<li key={item}>{item}</li>)):null}</p>
             <hr/>
             <h5 htmlFor="name">Experience</h5>
-            <p>{this.props.userReducer.experience?this.props.userReducer.experience.split('\n').map(item=>(<li>{item}</li>)):null}</p>
+            <p>{this.props.userReducer.experience?this.props.userReducer.experience.split('\n').map(item=>(<li key={item}>{item}</li>)):null}</p>
             <hr/>
             <h5 htmlFor="name">Skills</h5>
-            <p>{this.props.userReducer.skills?this.props.userReducer.skills.split('\n').map(item=>(<li>{item}</li>)):null}</p>
+            <p>{this.props.userReducer.skills?this.props.userReducer.skills.split('\n').map(item=>(<li key={item}>{item}</li>)):null}</p>
             <hr/>
             <h5 htmlFor="name">Awards</h5>
-            <p>{this.props.userReducer.awards?this.props.userReducer.awards.split('\n').map(item=>(<li>{item}</li>)):null}</p>
+            <p>{this.props.userReducer.awards?this.props.userReducer.awards.split('\n').map(item=>(<li key={item}>{item}</li>)):null}</p>
             <hr/>
             <h5 htmlFor="name">Publications</h5>
-            <p>{this.props.userReducer.publications?this.props.userReducer.publications.split('\n').map(item=>(<li>{item}</li>)):null}</p>
+            <p>{this.props.userReducer.publications?this.props.userReducer.publications.split('\n').map(item=>(<li key={item}>{item}</li>)):null}</p>
             <hr/>
             <h5 htmlFor="name">Languages</h5>
-            <p>{this.props.userReducer.languages?this.props.userReducer.languages.split('\n').map(item=>(<li>{item}</li>)):null}</p>
+            <p>{this.props.userReducer.languages?this.props.userReducer.languages.split('\n').map(item=>(<li key={item}>{item}</li>)):null}</p>
             <hr/>
 
 
@@ -106,22 +106,22 @@ export class User extends Component {
 
               <hr/>
               <h5 htmlFor="name">Education</h5>
-              <p>{this.props.userReducer.education?this.props.userReducer.education.split('\n').map(item=>(<li>{item}</li>)):null}</p>
+              <p>{this.props.userReducer.education?this.props.userReducer.education.split('\n').map(item=>(<li key={item}>{item}</li>)):null}</p>
               <hr/>
               <h5 htmlFor="name">Experience</h5>
-              <p>{this.props.userReducer.experience?this.props.userReducer.experience.split('\n').map(item=>(<li>{item}</li>)):null}</p>
+              <p>{this.props.userReducer.experience?this.props.userReducer.experience.split('\n').map(item=>(<li key={item}>{item}</li>)):null}</p>
               <hr/>
               <h5 htmlFor="name">Skills</h5>
-              <p>{this.props.userReducer.skills?this.props.userReducer.skills.split('\n').map(item=>(<li>{item}</li>)):null}</p>
+              <p>{this.props.userReducer.skills?this.props.userReducer.skills.split('\n').map(item=>(<li key={item}>{item}</li>)):null}</p>
               <hr/>
               <h5 htmlFor="name">Awards</h5>
-              <p>{this.props.userReducer.awards?this.props.userReducer.awards.split('\n').map(item=>(<li>{item}</li>)):null}</p>
+              <p>{this.props.userReducer.awards?this.props.userReducer.awards.split('\n').map(item=>(<li key={item}>{item}</li>)):null}</p>
               <hr/>
               <h5 htmlFor="name">Publications</h5>
-              <p>{this.props.userReducer.publications?this.props.userReducer.publications.split('\n').map(item=>(<li>{item}</li>)):null}</p>
+              <p>{this.props.userReducer.publications?this.props.userReducer.publications.split('\n').map(item=>(<li key={item}>{item}</li>)):null}</p>
               <hr/>
               <h5 htmlFor="name">Languages</h5>
-              <p>{this.props.userReducer.languages?this.props.userReducer.languages.split('\n').map(item=>(<li>{item}</li>)):null}</p>
+              <p>{this.props.userReducer.languages?this.props.userReducer.languages.split('\n').map(item=>(<li key={item}>{item}</li>)):null}</p>
               <hr/>
 
               <button

@@ -36,7 +36,7 @@ class NavLinkBar extends React.Component{
     renderListOfNavTabs(){
         let tabs = this.state.navList.map(tab => {
             let selected=null;
-            console.log(tab);
+            // console.log(tab);
             if(tab.path === window.location.pathname){
                 selected="active"
             }
