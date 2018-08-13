@@ -3,7 +3,6 @@ import {getMsgList, sendMsg} from "../../redux/chat.redux";
 import {connect} from "react-redux";
 import * as actions from "../../actions";
 import { Link } from 'react-router-dom'
-import UserCard from '../../components/usercard/usercard';
 
 
 
@@ -38,7 +37,7 @@ class CustomerRepresentative extends React.Component {
     renderUsers() {
         return this.state.users.map(
             v => (
-                <li className="list-group-item">
+                <li key={v._id} className="list-group-item">
                     <div className="row">
                         <div className="col-4">
                             <div>

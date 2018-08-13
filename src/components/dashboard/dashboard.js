@@ -166,9 +166,9 @@ class Dashboard extends React.Component{
             },
             {
                 path:'/search/localJob',
-                text:'Search job',
+                text:'Search Job',
                 icon:'Search',
-                title:'Search job',
+                title:'Search Job',
                 component: SearchLocalJob,
                 hide: false
             },
