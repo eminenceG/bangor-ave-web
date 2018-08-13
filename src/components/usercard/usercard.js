@@ -26,22 +26,22 @@ class UserCard extends React.Component {
 
                 <hr/>
                 <h5 htmlFor="name">Education</h5>
-                <p>{user.education?user.education.split('\n').map(item=>(<li>{item}</li>)):null}</p>
+                <p>{user.education?user.education.split('\n').map(item=>(<li key={item}>{item}</li>)):null}</p>
                 <hr/>
                 <h5 htmlFor="name">Experience</h5>
-                <p>{user.experience?user.experience.split('\n').map(item=>(<li>{item}</li>)):null}</p>
+                <p>{user.experience?user.experience.split('\n').map(item=>(<li key={item}>{item}</li>)):null}</p>
                 <hr/>
                 <h5 htmlFor="name">Skills</h5>
-                <p>{user.skills?user.skills.split('\n').map(item=>(<li>{item}</li>)):null}</p>
+                <p>{user.skills?user.skills.split('\n').map(item=>(<li key={item}>{item}</li>)):null}</p>
                 <hr/>
                 <h5 htmlFor="name">Awards</h5>
-                <p>{user.awards?user.awards.split('\n').map(item=>(<li>{item}</li>)):null}</p>
+                <p>{user.awards?user.awards.split('\n').map(item=>(<li key={item}>{item}</li>)):null}</p>
                 <hr/>
                 <h5 htmlFor="name">Publications</h5>
-                <p>{user.publications?user.publications.split('\n').map(item=>(<li>{item}</li>)):null}</p>
+                <p>{user.publications?user.publications.split('\n').map(item=>(<li key={item}>{item}</li>)):null}</p>
                 <hr/>
                 <h5 htmlFor="name">Languages</h5>
-                <p>{user.languages?user.languages.split('\n').map(item=>(<li>{item}</li>)):null}</p>
+                <p>{user.languages?user.languages.split('\n').map(item=>(<li key={item}>{item}</li>)):null}</p>
                 <hr/>
             </div>
         )
@@ -78,7 +78,7 @@ class UserCard extends React.Component {
                                 {!this.props.userReducer.status==='HR'&&this.props.page==='applications'?<p className="card-text">{v.title}</p>:null}
                                 {v.status==='applicant'?<div>
                                     <p>Target position: {v.title}</p>
-                                    <p>{v.desc?v.desc.split('\n').map(item=>(<li>{item}</li>)):null}</p>
+                                    <p>{v.desc?v.desc.split('\n').map(item=>(<li key={item}>{item}</li>)):null}</p>
 
 
                                 </div>:null}
