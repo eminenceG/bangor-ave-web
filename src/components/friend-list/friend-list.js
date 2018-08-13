@@ -22,6 +22,16 @@ class FriendList extends React.Component{
         }
     }
 
+    componentWillReceiveProps(newProps){
+        if(this.props.friendshipReducer.friendshipList.length !== 0 || this.props.chatUser.userList.length !== 0) return;
+
+        if(this.props.userReducer.status!=='admin'){
+            this.props.getFriendListForUserLoggedIn();
+        } else {
+            this.props.getFriendshipListAdmin();
+        }
+    }
+
 
     handleDisConnect(v){
         // console.log(v._id);
@@ -44,13 +54,13 @@ class FriendList extends React.Component{
                 {this.props.chatUser.userList&&this.props.userReducer.status!=='admin'?
                     <UserCard
                         userlist={this.props.chatUser.userList} page={'friendlist'} handleDisConnect={this.handleDisConnect}
-                    ></UserCard>:null}
+                    />:null}
 
                 {this.props.friendshipReducer.friendshipList&&this.props.userReducer.status==='admin'?
                     <div>
                         <RelationCard
                             friendshipList={this.props.friendshipReducer.friendshipList} page={'friendlist'} handleDisConnect={this.handleDisConnect} context={'friendshipAdmin'}
-                        ></RelationCard>
+                        />
                     </div>
                 :null}
             </div>
