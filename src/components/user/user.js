@@ -151,6 +151,20 @@ export class User extends Component {
       )
   }
 
+    renderAdmin(){
+        return(
+            <div>
+                <h4 className="title description text-center">
+                    {/*{this.props.userReducer.user}*/}
+                    <br />
+                    <small>Admin</small>
+                    <br />
+                </h4>
+                {/*<p className="description text-center">{this.props.userReducer.desc}</p>*/}
+            </div>
+        )
+    }
+
   renderCompanyManager(){
       return(
           <div>
@@ -194,6 +208,7 @@ export class User extends Component {
                       {this.props.userReducer.status==='applicant'?this.renderApplicant():null}
                       {this.props.userReducer.status==='representative'?this.renderRepresentative():null}
                       {this.props.userReducer.status==='CompanyManager'?this.renderCompanyManager():null}
+                      {this.props.userReducer.status==='admin'?this.renderAdmin():null}
 
               </div>
           </div>:null}
