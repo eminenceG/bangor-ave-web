@@ -182,12 +182,12 @@ class CompanyEditor extends React.Component{
             type="button">Submit
           </Button>
 
-          <Button
-            block
-            bsStyle="danger"
-            onClick={this.handleDeleteButton}
-            type="button">Delete
-          </Button>
+          {/*<Button*/}
+            {/*block*/}
+            {/*bsStyle="danger"*/}
+            {/*onClick={this.handleDeleteButton}*/}
+            {/*type="button">Delete*/}
+          {/*</Button>*/}
         </form>
       </div>
     // <div className="container">
