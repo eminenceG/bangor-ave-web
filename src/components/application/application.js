@@ -9,7 +9,8 @@ class Application extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            data:[]
+            data:[],
+            cnt: 0
 
         }
         this.handleCancelApplicationAdmin=this.handleCancelApplicationAdmin.bind(this);
@@ -24,6 +25,10 @@ class Application extends React.Component{
     }
 
     componentWillReceiveProps(newProps){
+        if(this.state.cnt > 10){
+            return;
+        }
+        this.setState({cnt: this.state.cnt+1});
         if(this.props.applicationReducer.applicationList.length !== 0) return;
 
         if(this.props.userReducer.status!=='admin'){
@@ -85,7 +90,7 @@ class Application extends React.Component{
 
         return (
             <div>
-                <h2>Applicants applying to your jobs</h2>
+                <h2>All Applications</h2>
                 {userList?
                     <UserCard
                         userlist={userList} page={'applications'} cancelApplicationAdmin={this.handleCancelApplicationAdmin}

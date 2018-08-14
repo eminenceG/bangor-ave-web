@@ -9,7 +9,8 @@ class FriendList extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            data:[]
+            data:[],
+            cnt: 0
         }
         this.handleDisConnect = this.handleDisConnect.bind(this);
     }
@@ -23,6 +24,11 @@ class FriendList extends React.Component{
     }
 
     componentWillReceiveProps(newProps){
+        if(this.state.cnt > 10){
+            return;
+        }
+        this.setState({cnt: this.state.cnt+1});
+        // if(this.props.userReducer.status!=='admin'){return;}
         if(this.props.friendshipReducer.friendshipList.length !== 0 || this.props.chatUser.userList.length !== 0) return;
 
         if(this.props.userReducer.status!=='admin'){

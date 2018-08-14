@@ -53,7 +53,7 @@ class UserCard extends React.Component {
     return (
       <div>
         {this.props.userlist?this.props.userlist.map(v=>(
-            v.avatar?
+            v.avatar&&(v.status!=='CompanyManager'&&v.status!=='admin')?
             <div key={v.job?(v.job.name+" "+v.user+cnt++):v.user+" "+cnt++}>
 
                 <div className="card"  key={v.job?(v.job.name+v.user+cnt++):v.user+cnt++}>
