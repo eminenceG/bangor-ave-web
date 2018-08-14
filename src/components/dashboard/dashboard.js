@@ -147,7 +147,7 @@ class Dashboard extends React.Component{
                 icon:'job',
                 title:'Jobs',
                 component: LocalJobContainer,
-                hide: false
+                hide: user.status === 'admin'
             },
             {
                 path:'/company',
@@ -185,9 +185,9 @@ class Dashboard extends React.Component{
 
             {
                 path:'/JobEditor',
-                text:'JobEditor',
-                icon:'JobEditor',
-                title:'JobEditor',
+                text:'Job Editor',
+                icon:'Job Editor',
+                title:'Job Editor',
                 component: AdminJobListContainer,
                 hide: user.status !== 'admin'
             },
