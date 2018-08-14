@@ -131,7 +131,7 @@ class Dashboard extends React.Component{
                 icon:'Friends',
                 title:'Friends',
                 component: FriendListContainer,
-                hide: false
+                hide: user.status === 'CompanyManager' || user.status === 'representative'
             },
             {
                 path:'/myJobList/hr',
